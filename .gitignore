@@ -1,3 +1,8 @@
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
 venv/
 .venv/
 
@@ -8,3 +13,5 @@ __pycache__/
 .DS_store
 
 *.csv
+
+genai-copilot-enterprisedata.json

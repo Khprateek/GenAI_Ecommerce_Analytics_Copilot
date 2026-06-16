@@ -6,7 +6,7 @@ fake = Faker()
 
 # Config
 NUM_CUSTOMERS = 20000
-NUM_PRODUCTS = 500
+NUM_PRODUCTS = 5000
 NUM_ORDERS = 50000
 NUM_ORDER_ITEMS = 200000
 
@@ -113,3 +113,35 @@ order_items_df = pd.DataFrame(order_items)
 order_items_df.to_csv("data/order_items.csv", index=False)
 
 print("order_items.csv created")
+
+# -------------------------
+# EVENTS
+# -------------------------
+events = []
+
+event_types = [
+    "page_view",
+    "add_to_cart",
+    "checkout",
+    "purchase"
+]
+
+for event_id in range(1, 100001):
+    events.append({
+        "event_id": event_id,
+        "customer_id": random.randint(1, NUM_CUSTOMERS),
+        "event_type": random.choice(event_types),
+        "event_timestamp": fake.date_time_between(
+            start_date="-1y",
+            end_date="now"
+        )
+    })
+
+events_df = pd.DataFrame(events)
+
+events_df.to_csv(
+    f"data/events.csv",
+    index=False
+)
+
+print("events.csv created")
