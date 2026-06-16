@@ -1,7 +1,7 @@
 **/.terraform/*
 *.tfstate
 *.tfstate.*
-.terraform.lock.hcl
+infra/.terraform.lock.hcl
 
 venv/
 .venv/
@@ -15,3 +15,5 @@ __pycache__/
 *.csv
 
 genai-copilot-enterprisedata.json
+
+GCPCredentials.txt

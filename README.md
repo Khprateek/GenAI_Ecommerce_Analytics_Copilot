@@ -8,12 +8,8 @@ E-commerce analytics pipeline using:
 - dbt
 - Streamlit
 
-Export : 
-export GCP_PROJECT_ID="genai-copilot-enterprisedata"
-export GOOGLE_APPLICATION_CREDENTIALS="D:/JOB/Work/GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing/genai-copilot-enterprisedata.json"
 
-
-# data Flow
+# data flow
 Local CSV Files
       │
       ▼
@@ -33,3 +29,5 @@ mart_ecommerce
       │
       ▼
 metrics_ecommerce
+
+

@@ -1,0 +1,6 @@
+apache-airflow
+google-cloud-bigquery
+dbt-bigquery 
+streamlit 
+pandas 
+faker

@@ -26,7 +26,7 @@ for customer_id in range(1, NUM_CUSTOMERS +1):
         })
 
 customers_df = pd.DataFrame(customers)
-customers_df.to_csv("data/customers.csv", index=False)
+customers_df.to_csv("raw/customers.csv", index=False)
 
 print("customers.csv created")
 
@@ -50,7 +50,7 @@ for product_id in range(1, NUM_PRODUCTS + 1):
         })
 
 products_df = pd.DataFrame(products)
-products_df.to_csv("data/products.csv", index=False)
+products_df.to_csv("raw/products.csv", index=False)
 
 print("product.csv created")
 
@@ -90,7 +90,7 @@ for order_id in range(1, NUM_ORDERS + 1):
         })
 
 orders_df = pd.DataFrame(orders)
-orders_df.to_csv("data/orders.csv", index=False)
+orders_df.to_csv("raw/orders.csv", index=False)
 
 print("orders.csv created")
 
@@ -110,7 +110,7 @@ for item_id in range(1, NUM_ORDER_ITEMS + 1):
         })
 
 order_items_df = pd.DataFrame(order_items)
-order_items_df.to_csv("data/order_items.csv", index=False)
+order_items_df.to_csv("raw/order_items.csv", index=False)
 
 print("order_items.csv created")
 
@@ -140,7 +140,7 @@ for event_id in range(1, 100001):
 events_df = pd.DataFrame(events)
 
 events_df.to_csv(
-    f"data/events.csv",
+    f"raw/events.csv",
     index=False
 )
 
