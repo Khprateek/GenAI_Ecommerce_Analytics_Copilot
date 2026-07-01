@@ -17,10 +17,12 @@ RAW_DATASET = "raw"
 
 TABLES = [
     "customers",
+    "marketing_spend",
     "products",
     "orders",
     "order_items",
-    "events"
+    "events",
+    "returns"
 ]
 
 DATA_DIR = Path("data/raw")

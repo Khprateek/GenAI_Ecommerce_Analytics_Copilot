@@ -1,0 +1,50 @@
+version: 2
+
+sources:
+  - name: raw
+    database: "{{ env_var('GCP_PROJECT_ID') }}"
+    dataset: raw
+    description: "Raw data loaded directly from CSVs via Python ingestion scripts"
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+    loaded_at_field: _loaded_at
+
+    tables:
+      - name: orders
+        description: "Raw orders from e-commerce platform"
+        columns:
+          - name: order_id
+            tests: [not_null, unique]
+          - name: customer_id
+            tests: [not_null]
+          - name: order_date
+            tests: [not_null]
+
+      - name: order_items
+        description: "Line items within each order"
+        columns:
+          - name: order_item_id
+            tests: [not_null, unique]
+          - name: order_id
+            tests: [not_null]
+          - name: product_id
+            tests: [not_null]
+
+      - name: products
+        description: "Product catalog"
+        columns:
+          - name: product_id
+            tests: [not_null, unique]
+
+      - name: customers
+        description: "Customer profiles"
+        columns:
+          - name: customers_id
+            tests: [not_null, unique]
+
+      - name: events
+        description: "Web/app clickstream events"
+        columns:
+          - name: event_id
+            tests: [not_null, unique]

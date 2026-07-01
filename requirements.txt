@@ -1,6 +1,7 @@
 apache-airflow
 google-cloud-bigquery
 dbt-bigquery 
-streamlit 
+streamlit
+plotly>=6.0.0 
 pandas 
 faker

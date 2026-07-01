@@ -1,0 +1,67 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: "Central fact table — one row per order with FK to all dims"
+    columns:
+      - name: order_sk
+        tests: [not_null, unique]
+      - name: order_id
+        tests: [not_null, unique]
+      - name: customer_sk
+        tests: [not_null]
+      - name: order_date_key
+        tests: [not_null]
+      - name: revenue_usd
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              min_value: 0
+      - name: order_status
+        tests:
+          - accepted_values:
+              values: ['COMPLETED', 'CANCELLED', 'PENDING', 'REFUNDED']
+
+  - name: dim_customers
+    description: "Customer dimension with RFM segments and value tiers"
+    columns:
+      - name: customer_sk
+        tests: [not_null, unique]
+      - name: customer_id
+        tests: [not_null, unique]
+      - name: email
+        tests: [not_null, unique]
+      - name: rfm_segment
+        tests:
+          - accepted_values:
+              values: ['Champions','Loyal Customers','New Customers',
+                       'At Risk','Lost','Potential Loyalists','No Purchases']
+
+  - name: dim_products
+    description: "Product dimension with category hierarchy and performance labels"
+    columns:
+      - name: product_sk
+        tests: [not_null, unique]
+      - name: product_id
+        tests: [not_null, unique]
+      - name: margin_pct
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: -100
+              max_value: 100
+
+  - name: dim_date
+    description: "Date spine 2022–2027"
+    columns:
+      - name: date_key
+        tests: [not_null, unique]
+      - name: full_date
+        tests: [not_null, unique]
+
+  - name: dim_channels
+    description: "Sales channel reference"
+    columns:
+      - name: channel_sk
+        tests: [not_null, unique]
+      - name: channel_code
+        tests: [not_null, unique]

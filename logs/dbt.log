@@ -92,3 +92,63 @@ Happy modeling!
 [0m02:10:02.158837 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002922F8048F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000029251AFCE90>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000292524B4470>]}
 [0m02:10:02.158837 [debug] [MainThread]: Flushing usage events
 [0m02:10:03.775420 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:48:06.516980 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0F9806060>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0FD482300>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0FD480D70>]}
+
+
+============================== 14:48:06.546598 | 94e4dbb8-5c52-4260-b8d6-a5fc8786b4e2 ==============================
+[0m14:48:06.546598 [info ] [MainThread]: Running with dbt=1.11.11
+[0m14:48:06.549224 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\jai kharwar\\.dbt', 'use_colors': 'True', 'invocation_command': 'dbt deps', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m14:48:06.549224 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m14:48:06.549224 [debug] [MainThread]: Command `dbt deps` failed at 14:48:06.549224 after 0.18 seconds
+[0m14:48:06.549224 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0FD648E60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0FC082B10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C0FD8C0FB0>]}
+[0m14:48:06.549224 [debug] [MainThread]: Flushing usage events
+[0m14:48:08.732381 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:48:11.556358 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CEB82BD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CEB82B10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CEB81DF0>]}
+
+
+============================== 14:48:11.572305 | 7baa2cea-19d6-488d-a1b8-c87c8fb763fa ==============================
+[0m14:48:11.572305 [info ] [MainThread]: Running with dbt=1.11.11
+[0m14:48:11.572305 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'C:\\Users\\jai kharwar\\.dbt', 'use_colors': 'True', 'indirect_selection': 'eager', 'invocation_command': 'dbt seed', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m14:48:11.576941 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m14:48:11.576941 [debug] [MainThread]: Command `dbt seed` failed at 14:48:11.576941 after 0.12 seconds
+[0m14:48:11.576941 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CE7F62A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CE4493D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000282CE971340>]}
+[0m14:48:11.576941 [debug] [MainThread]: Flushing usage events
+[0m14:48:13.074941 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:48:15.811347 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D319FDD8B0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D31B93ABD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D31B93B2C0>]}
+
+
+============================== 14:48:15.811347 | 435aa18a-eb63-43b3-8e90-ce077783e03c ==============================
+[0m14:48:15.811347 [info ] [MainThread]: Running with dbt=1.11.11
+[0m14:48:15.811347 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\jai kharwar\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt run', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m14:48:15.811347 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m14:48:15.811347 [debug] [MainThread]: Command `dbt run` failed at 14:48:15.811347 after 0.13 seconds
+[0m14:48:15.811347 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D319F20260>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D31E716B70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D31CEF5F10>]}
+[0m14:48:15.811347 [debug] [MainThread]: Flushing usage events
+[0m14:48:17.904038 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m14:48:20.688794 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B648ED80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B832D520>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B65AACF0>]}
+
+
+============================== 14:48:20.700539 | 2c201592-10a9-46b1-9758-ec5e156b222a ==============================
+[0m14:48:20.700539 [info ] [MainThread]: Running with dbt=1.11.11
+[0m14:48:20.700539 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'no_print': 'None', 'static_parser': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'empty': 'None', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\jai kharwar\\.dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt test', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'logs'}
+[0m14:48:20.702021 [error] [MainThread]: Encountered an error:
+Runtime Error
+  No dbt_project.yml found at expected path D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt_project.yml
+  Verify that each entry within packages.yml (and their transitive dependencies) contains a file named dbt_project.yml
+  
+[0m14:48:20.702021 [debug] [MainThread]: Command `dbt test` failed at 14:48:20.702021 after 0.12 seconds
+[0m14:48:20.702021 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B5E46D80>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B6960A70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000205B6705E20>]}
+[0m14:48:20.702021 [debug] [MainThread]: Flushing usage events
+[0m14:48:22.348877 [debug] [MainThread]: An error was encountered while trying to flush usage events
