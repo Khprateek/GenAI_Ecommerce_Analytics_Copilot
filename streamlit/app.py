@@ -17,12 +17,17 @@ from components.charts import (
     category_pie_chart,
     segment_bar_chart,
     conversion_funnel_chart,
+    returns_bar_chart, 
+    margin_by_category_chart,
+    marketing_roi_chart, 
+    marketing_spend_trend_chart,
 )
 
 st.set_page_config(
     page_title="E-Commerce Analytics",
     page_icon="📊",
     layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 st.title("📊 E-Commerce Analytics Dashboard")
@@ -47,7 +52,7 @@ start_date, end_date = date_range
 granularity = st.sidebar.selectbox("Revenue trend granularity", ["Daily", "Weekly", "Monthly"])
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Data refreshes every 5 minutes (cached).")
+st.sidebar.caption("Data refreshes every 5 minutes.")
 
 # ── KPI Row ───────────────────────────────────────────────────────────────────
 kpi_sql = q.KPI_SUMMARY.format(start=start_date, end=end_date)
@@ -82,61 +87,87 @@ with col2:
 st.markdown("---")
 
 # ── Products + Categories ────────────────────────────────────────────────────
-col3, col4 = st.columns([1.3, 1])
+# ── Products + Categories ────────────────────────────────────────────────────
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    ["📈 Overview", "🏆 Products & Margin", "👥 Customers", "↩️ Returns", "📣 Marketing", "🔻 Funnel"]
+)
 
-with col3:
-    st.subheader("🏆 Top 20 Products")
-    products_df = run_query(q.TOP_PRODUCTS)
-    st.dataframe(
-        products_df,
-        use_container_width=True,
-        hide_index=True,
-        column_config={
-            "revenue": st.column_config.NumberColumn("Revenue", format="$%.0f"),
-            "margin_pct": st.column_config.NumberColumn("Margin %", format="%.1f%%"),
-        }
+with tab1:
+    st.info(
+        "The Revenue Trend and Revenue by Channel charts are already displayed "
+        "at the top of the dashboard. Use the tabs below for deeper analysis."
     )
 
-with col4:
-    category_df = run_query(q.CATEGORY_BREAKDOWN)
-    if not category_df.empty:
-        category_pie_chart(category_df)
+with tab2:
+    c3, c4 = st.columns([1.3,1])
+    with c3:
+        st.subheader("Top 20 Products")
+        df = run_query(q.TOP_PRODUCTS)
+        st.dataframe(df, use_container_width=True, hide_index=True, column_config={
+            "revenue": st.column_config.NumberColumn("Revenue", format="$%.0f"),
+            "profit": st.column_config.NumberColumn("Profit", format="$%.0f"),
+            "margin_pct": st.column_config.NumberColumn("Margin %", format="%.1f%%"),
+        })
+    with c4:
+        df = run_query(q.CATEGORY_BREAKDOWN)
+        if not df.empty: category_pie_chart(df)
+    st.markdown("---")
+    df = run_query(q.MARGIN_BY_CATEGORY)
+    if not df.empty: margin_by_category_chart(df)
 
-st.markdown("---")
-
-# ── Customer Segments ────────────────────────────────────────────────────────
-st.subheader("👥 Customer Segments (RFM)")
-col5, col6 = st.columns([1, 1])
-
-with col5:
-    segments_df = run_query(q.CUSTOMER_SEGMENTS)
-    if not segments_df.empty:
-        segment_bar_chart(segments_df)
-
-with col6:
-    if not segments_df.empty:
-        st.dataframe(
-            segments_df,
-            use_container_width=True,
-            hide_index=True,
-            column_config={
+with tab3:
+    c5, c6 = st.columns([1,1])
+    seg_df = run_query(q.CUSTOMER_SEGMENTS)
+    with c5:
+        if not seg_df.empty: segment_bar_chart(seg_df)
+    with c6:
+        if not seg_df.empty:
+            st.dataframe(seg_df, use_container_width=True, hide_index=True, column_config={
                 "total_ltv": st.column_config.NumberColumn("Total LTV", format="$%.0f"),
                 "avg_ltv": st.column_config.NumberColumn("Avg LTV", format="$%.2f"),
                 "avg_orders": st.column_config.NumberColumn("Avg Orders", format="%.1f"),
-            }
-        )
+            })
+
+with tab4:
+    ret_df = run_query(q.RETURNS_SUMMARY)
+    if not ret_df.empty:
+        r = ret_df.iloc[0]
+        r1, r2, r3 = st.columns(3)
+        r1.metric("Total Returns", f"{int(r['total_returns']):,}" if pd.notna(r['total_returns']) else "0")
+        r2.metric("Total Refunded", f"${r['total_refunded']:,.0f}" if pd.notna(r['total_refunded']) else "$0")
+        r3.metric("Avg Return Rate", f"{r['avg_return_rate']:.1f}%" if pd.notna(r['avg_return_rate']) else "0%")
+    st.markdown("---")
+    df = run_query(q.TOP_RETURNED_PRODUCTS)
+    if not df.empty:
+        returns_bar_chart(df)
+        st.dataframe(df, use_container_width=True, hide_index=True)
+    else:
+        st.info("No return data.")
+
+with tab5:
+    roi_df = run_query(q.MARKETING_ROI.format(start=start_date,end=end_date))
+    if not roi_df.empty:
+        c7, c8 = st.columns([1,1])
+        with c7: marketing_roi_chart(roi_df)
+        with c8:
+            st.dataframe(roi_df, use_container_width=True, hide_index=True, column_config={
+                "total_spend": st.column_config.NumberColumn("Spend", format="$%.0f"),
+                "total_revenue": st.column_config.NumberColumn("Revenue", format="$%.0f"),
+                "avg_roas": st.column_config.NumberColumn("ROAS", format="%.2f"),
+                "avg_ctr": st.column_config.NumberColumn("CTR %", format="%.2f%%"),
+            })
+        st.markdown("---")
+        df = run_query(q.MARKETING_TREND.format(start=start_date,end=end_date))
+        if not df.empty: marketing_spend_trend_chart(df)
+    else:
+        st.info("No marketing data for this period.")
+
+with tab6:
+    funnel_df = run_query(q.CONVERSION_FUNNEL.format(start=start_date,end=end_date))
+    if not funnel_df.empty and funnel_df.iloc[0]["sessions"]:
+        conversion_funnel_chart(funnel_df)
+    else:
+        st.info("No funnel data for this period.")
 
 st.markdown("---")
-
-# ── Conversion Funnel ────────────────────────────────────────────────────────
-st.subheader("🔻 Conversion Funnel")
-funnel_sql = q.CONVERSION_FUNNEL.format(start=start_date, end=end_date)
-funnel_df = run_query(funnel_sql)
-
-if not funnel_df.empty and funnel_df.iloc[0]["sessions"]:
-    conversion_funnel_chart(funnel_df)
-else:
-    st.info("No event/funnel data for this period.")
-
-st.markdown("---")
-st.caption("Phase 2 will add: Gemini-powered natural-language SQL querying and AI-generated insights.")
+st.caption("Phase 2: Gemini-powered natural-language SQL querying and AI-generated insights · coming soon")

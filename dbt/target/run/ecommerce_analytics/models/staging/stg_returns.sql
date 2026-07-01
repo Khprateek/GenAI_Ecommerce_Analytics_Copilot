@@ -1,5 +1,9 @@
-with source as (
-    select * from {{ source('raw', 'returns') }}
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`returns`
 ),
 
 cleaned as (
@@ -12,4 +16,5 @@ cleaned as (
         cast(refund_amount as numeric) as refund_amount_usd,
         current_timestamp() as _dbt_loaded_at
     from source where return_id is not null and order_id is not null)
-select * from cleaned
+select * from cleaned;
+

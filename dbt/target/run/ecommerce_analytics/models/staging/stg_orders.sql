@@ -22,7 +22,6 @@ cleaned as (
         -- attributes
         case upper(trim(status)) when 'RETURNED' then 'REFUNDED' else upper(trim(status)) end as order_status,   -- COMPLETED, CANCELLED etc.
         lower(trim(channel))              as channel,        -- web, mobile, store
-        upper(trim(country))              as country_code,
 
         -- amounts (ensure non-negative)
         cast(revenue        as numeric)   as revenue_usd,

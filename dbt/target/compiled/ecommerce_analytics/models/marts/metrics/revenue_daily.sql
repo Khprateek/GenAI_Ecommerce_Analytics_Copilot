@@ -33,7 +33,7 @@ daily as (
 
     from fact
     left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk
-    group by 1,2,3,4,5,6,7,8
+    group by 1, 2, 3, 4, 5, 6, 7, 8
 )
 
 select * from daily

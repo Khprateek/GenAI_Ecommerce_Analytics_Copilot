@@ -40,7 +40,7 @@ enriched as (
         -- order attributes
         o.order_status,
         o.channel,
-        o.country_code,
+        c.customer_country              as country_code,
 
         -- financials
         o.revenue_usd,

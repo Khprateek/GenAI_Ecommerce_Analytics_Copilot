@@ -3,6 +3,7 @@ import os
 PROJECT = os.environ.get("GCP_PROJECT_ID", "your-project")
 METRICS = f"`{PROJECT}.metrics`"
 MARTS   = f"`{PROJECT}.marts`"
+STAGING = f"`{PROJECT}.staging`"
 
 
 # ── KPI SUMMARY ────────────────────────────────────────────────────────────────
@@ -109,4 +110,74 @@ from {METRICS}.conversion_rate
 where event_date between date('{{start}}') and date('{{end}}')
 group by event_date
 order by event_date
+"""
+
+# ── MARGIN BY CATEGORY ─────────────────────────────────────────────────────────
+MARGIN_BY_CATEGORY = f"""
+select
+    category,
+    round(avg(margin_pct), 1)           as avg_margin_pct,
+    sum(gross_profit_usd)               as total_profit,
+    sum(total_revenue_usd)              as total_revenue
+from {METRICS}.product_performance
+group by category
+order by avg_margin_pct desc
+"""
+
+# ── RETURNS ────────────────────────────────────────────────────────────────────
+RETURNS_SUMMARY = f"""
+with returns as (
+    select * from {STAGING}.stg_returns
+),
+completed_orders as (
+    select count(distinct order_id) as order_count
+    from {MARTS}.fact_orders
+    where is_completed = 1
+)
+select
+    count(distinct r.return_id)                             as total_returns,
+    sum(r.refund_amount_usd)                                as total_refunded,
+    round(safe_divide(
+        count(distinct r.return_id),
+        (select order_count from completed_orders)
+    ) * 100, 2)                                             as avg_return_rate
+from returns r
+"""
+
+TOP_RETURNED_PRODUCTS = f"""
+select
+    p.product_name,
+    p.category,
+    count(*)                        as return_count,
+    sum(r.refund_amount_usd)        as total_refunded
+from {STAGING}.stg_returns r
+inner join {MARTS}.dim_products p on r.product_id = p.product_id
+group by p.product_name, p.category
+order by return_count desc
+limit 15
+"""
+
+# ── MARKETING ──────────────────────────────────────────────────────────────────
+MARKETING_ROI = f"""
+select
+    channel,
+    sum(spend_usd)                  as total_spend,
+    sum(attributed_revenue_usd)     as total_revenue,
+    round(avg(roas), 2)             as avg_roas,
+    round(avg(ctr_pct), 2)            as avg_ctr
+from {METRICS}.marketing_performance
+where spend_date between date('{{start}}') and date('{{end}}')
+group by channel
+order by total_revenue desc
+"""
+
+MARKETING_TREND = f"""
+select
+    spend_date,
+    sum(spend_usd)                  as spend,
+    sum(attributed_revenue_usd)     as revenue
+from {METRICS}.marketing_performance
+where spend_date between date('{{start}}') and date('{{end}}')
+group by spend_date
+order by spend_date
 """

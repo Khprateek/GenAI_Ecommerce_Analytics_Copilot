@@ -48,3 +48,21 @@ sources:
         columns:
           - name: event_id
             tests: [not_null, unique]
+
+      - name: returns
+        description: "Product returns and refunds"
+        columns:
+          - name: return_id
+            tests: [not_null, unique]
+          - name: order_id
+            tests: [not_null]
+
+      - name: marketing_spend
+        description: "Daily marketing spend by channel"
+        columns:
+          - name: spend_id
+            tests: [not_null, unique]
+          - name: date
+            tests: [not_null]
+          - name: channel
+            tests: [not_null]

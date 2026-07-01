@@ -10,7 +10,12 @@ cleaned as (
 
         lower(trim(event_type))             as event_type,   -- page_view, add_to_cart, purchase
         case when lower(trim(event_type)) = 'page_view' then '/product/details' else null end as page,
-        case mod(customer_id, 3) when 0 then 'desktop' when 1 then 'mobile' else 'tablet' end as device_type,  -- desktop, mobile, tablet
+        case
+            when customer_id is null or trim(cast(customer_id as string)) = '' then 'unknown'
+            else case mod(abs(farm_fingerprint(cast(customer_id as string))), 3)
+                when 0 then 'desktop' when 1 then 'mobile' else 'tablet'
+            end
+        end as device_type,
 
         cast(event_timestamp as timestamp)  as event_timestamp,
         cast(cast(event_timestamp as timestamp) as date) as event_date,

@@ -1,5 +1,9 @@
-with source as (
-    select * from {{ source('raw', 'marketing_spend') }}
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_marketing_spend`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`marketing_spend`
 ),
 
 cleaned as (
@@ -14,4 +18,5 @@ cleaned as (
         round(safe_divide(cast(clicks as numeric),cast(impressions as numeric))*100,4) as ctr_pct,
         current_timestamp() as _dbt_loaded_at
     from source where spend_id is not null)
-select * from cleaned
+select * from cleaned;
+

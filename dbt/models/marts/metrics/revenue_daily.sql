@@ -30,14 +30,10 @@ daily as (
         sum(total_items)                as total_items_sold,
         avg(revenue_usd)                as avg_order_value_usd,
         sum(is_cancelled)               as cancelled_orders
-        coalesce(rd.refunds_usd,0)      as refunds_usd,
-        coalesce(rd.return_count,0)     as return_count,
-        sum(f.revenue_usd) - coalesce(rd.refunds_usd,0) as revenue_after_returns_usd
 
     from fact
     left join {{ ref('dim_channels') }} dch on fact.channel_sk = dch.channel_sk
-    left join rd on f.order_date = rd.return_date
-    group by 1,2,3,4,5,6,7,16,17
+    group by 1, 2, 3, 4, 5, 6, 7, 8
 )
 
 select * from daily
