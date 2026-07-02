@@ -1,5 +1,20 @@
 import streamlit as st
+import pandas as pd
 
+from ai.ai_sql_generator import SQLGenerator
+from ai.ai_sql_validator import SQLValidator
+from ai.insight_generator import InsightGenerator
+from utils.bq_client import run_query
+
+# -----------------------------
+# AI Objects
+# -----------------------------
+sql_generator = SQLGenerator()
+insight_generator = InsightGenerator()
+
+# -----------------------------
+# Page Config
+# -----------------------------
 st.set_page_config(
     page_title="Analytics Copilot",
     page_icon="🤖",
@@ -7,113 +22,214 @@ st.set_page_config(
 )
 
 st.title("🤖 Analytics Copilot")
-st.caption(
-    "Ask questions about your e-commerce business using natural language."
-)
+st.caption("Ask questions about your business using natural language.")
 
 # -----------------------------
 # Session State
 # -----------------------------
-
 if "messages" not in st.session_state:
-    st.session_state.messages = [
-        {
-            "role": "assistant",
-            "content": (
-                "Hello! I'm your Analytics Copilot.\n\n"
-                "Currently I'm running in Chat Mode.\n\n"
-                "Soon I'll be able to generate SQL, query BigQuery, "
-                "build charts and explain business trends."
-            ),
-        }
-    ]
-
+    st.session_state.messages = []
 
 # -----------------------------
 # Sidebar
 # -----------------------------
+examples = [
+    "Show monthly revenue",
+    "Top selling products",
+    "Revenue by category",
+    "Customer lifetime value",
+    "Highest margin products",
+    "Marketing ROI",
+    "Customer segments",
+    "Orders by country",
+]
 
 with st.sidebar:
 
     st.header("Analytics Copilot")
 
-    st.write("Example Questions")
+    st.subheader("Try asking")
 
-    st.button("📈 Show revenue by category")
-    st.button("🏆 Top selling products")
-    st.button("📣 Marketing ROI")
-    st.button("👥 Customer segments")
+    for q in examples:
+        if st.button(q):
+            st.session_state["prefill"] = q
 
     st.divider()
 
     if st.button("🗑 Clear Conversation"):
-
-        st.session_state.messages = [
-            {
-                "role": "assistant",
-                "content": "Conversation cleared. How can I help you today?"
-            }
-        ]
-
+        st.session_state.messages = []
         st.rerun()
 
-
 # -----------------------------
-# Chat History
+# Display Chat History
 # -----------------------------
-
 for message in st.session_state.messages:
 
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
 
+        if message["role"] == "assistant":
+
+            if "sql" in message:
+                with st.expander("Generated SQL"):
+                    st.code(message["sql"], language="sql")
+
+            if "data" in message:
+                st.subheader("Results")
+                st.dataframe(
+                    message["data"],
+                    use_container_width=True
+                )
+
+                df = message["data"]
+
+                if not df.empty and len(df.columns) >= 2:
+
+                    x = df.columns[0]
+                    y = df.columns[1]
+
+                    try:
+
+                        if (
+                            "date" in x.lower()
+                            or "month" in x.lower()
+                            or pd.api.types.is_datetime64_any_dtype(df[x])
+                        ) and pd.api.types.is_numeric_dtype(df[y]):
+
+                            st.subheader("📈 Trend")
+                            st.line_chart(
+                                df.set_index(x)[y],
+                                use_container_width=True
+                            )
+
+                        elif pd.api.types.is_numeric_dtype(df[y]):
+
+                            st.subheader("📊 Chart")
+                            st.bar_chart(
+                                df.set_index(x)[y],
+                                use_container_width=True
+                            )
+
+                    except Exception:
+                        pass
+
+            st.subheader("AI Insights")
+            st.markdown(message["content"])
+
+        else:
+            st.markdown(message["content"])
 
 # -----------------------------
-# User Input
+# Chat Input
 # -----------------------------
+prompt = st.chat_input("Ask a business question...")
 
-prompt = st.chat_input(
-    "Ask a business question..."
-)
+if prompt is None:
+    prompt = st.session_state.pop("prefill", None)
 
+# -----------------------------
+# Pipeline
+# -----------------------------
 if prompt:
 
     st.session_state.messages.append(
         {
             "role": "user",
-            "content": prompt,
+            "content": prompt
         }
     )
 
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Temporary response (Phase 1)
-
-    response = f"""
-You asked:
-
-> **{prompt}**
-
-I'm currently operating in **Chat Mode**.
-
-In the next phase I'll:
-
-- Understand your business question
-- Generate SQL
-- Query BigQuery
-- Create charts
-- Explain the results
-
-Stay tuned!
-"""
-
-    st.session_state.messages.append(
-        {
-            "role": "assistant",
-            "content": response,
-        }
-    )
-
     with st.chat_message("assistant"):
-        st.markdown(response)
+
+        with st.spinner("Thinking..."):
+
+            # -----------------------------
+            # Generate SQL
+            # -----------------------------
+            try:
+                sql = sql_generator.generate(prompt)
+                valid, reason = SQLValidator.validate(sql)
+
+                if not valid:
+                    st.error(reason)
+                    st.stop()
+                with st.expander("Generated SQL"):
+                    st.code(sql, language="sql")
+                df = run_query(sql)
+            except Exception as e:
+                st.error(str(e))
+                st.session_state.messages.append(
+                    {
+                        "role": "assistant",
+                        "content": str(e)
+                    }
+                )
+
+                st.stop()
+
+            st.subheader("Results")
+
+            st.dataframe(
+                df,
+                use_container_width=True
+            )
+
+            # -----------------------------
+            # Auto Charts
+            # -----------------------------
+            if not df.empty and len(df.columns) >= 2:
+
+                x = df.columns[0]
+                y = df.columns[1]
+
+                try:
+
+                    if (
+                        "date" in x.lower()
+                        or "month" in x.lower()
+                        or pd.api.types.is_datetime64_any_dtype(df[x])
+                    ) and pd.api.types.is_numeric_dtype(df[y]):
+
+                        st.subheader("📈 Trend")
+
+                        st.line_chart(
+                            df.set_index(x)[y],
+                            use_container_width=True
+                        )
+
+                    elif pd.api.types.is_numeric_dtype(df[y]):
+
+                        st.subheader("📊 Chart")
+
+                        st.bar_chart(
+                            df.set_index(x)[y],
+                            use_container_width=True
+                        )
+
+                except Exception:
+                    pass
+
+            # -----------------------------
+            # Generate Insights
+            # -----------------------------
+            summary = insight_generator.generate(
+                prompt,
+                df
+            )
+
+            st.subheader("AI Insights")
+            st.markdown(summary)
+
+            # -----------------------------
+            # Save Conversation
+            # -----------------------------
+            st.session_state.messages.append(
+                {
+                    "role": "assistant",
+                    "content": summary,
+                    "sql": sql,
+                    "data": df,
+                }
+            )

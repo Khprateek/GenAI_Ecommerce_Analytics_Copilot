@@ -13,7 +13,7 @@ Project:
 genai-copilot-enterprisedata
 
 Dataset:
-analytics
+marts
 
 The warehouse follows a Kimball Star Schema.
 
@@ -21,7 +21,7 @@ The warehouse follows a Kimball Star Schema.
 CENTRAL FACT TABLE
 ==========================================================
 
-analytics.fact_orders
+marts.fact_orders
 
 Grain
 
@@ -74,7 +74,7 @@ is_cancelled
 DIMENSIONS
 ==========================================================
 
-analytics.dim_customers
+marts.dim_customers
 
 Primary Key
 
@@ -111,7 +111,7 @@ value_tier
 
 ----------------------------------------------------------
 
-analytics.dim_products
+marts.dim_products
 
 Primary Key
 
@@ -143,7 +143,7 @@ sales_performance
 
 ----------------------------------------------------------
 
-analytics.dim_channels
+marts.dim_channels
 
 Primary Key
 
@@ -159,7 +159,7 @@ is_digital
 
 ----------------------------------------------------------
 
-analytics.dim_date
+marts.dim_date
 
 Primary Key
 

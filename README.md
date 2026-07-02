@@ -1,8 +1,8 @@
 # GenAI-Powered Cloud Analytics Copilot for E-Commerce
 
-A production-grade, end-to-end analytics platform built on a modern data stack.
-Combines cloud-native warehousing, transformation pipelines, and AI-powered querying to deliver real business intelligence on e-commerce data.
+AI Analytics Copilot | Google Cloud • BigQuery • dbt • Airflow • Streamlit • Gemini
 
+Built an end-to-end AI-powered analytics platform combining modern data engineering with Generative AI. The project automates data ingestion, transformation, and warehousing while allowing users to ask business questions in plain English. The copilot generates SQL using Gemini, validates and executes queries on BigQuery, visualizes results automatically, and produces executive-ready business insights in real time.
 ---
 
 ## Architecture
@@ -40,6 +40,43 @@ Gemini API (Phase 2)           ← AI Copilot Layer
   Natural-language → SQL · Automated insights · Anomaly detection
 ```
 
+
+# USER Architecture
+                    User
+                      │
+                      ▼
+            Streamlit Chat Interface
+                      │
+                      ▼
+              Prompt Builder
+                      │
+                      ▼
+                 Gemini API
+                      │
+                      ▼
+              Generated SQL
+                      │
+                      ▼
+              SQL Validator
+                      │
+            ┌─────────┴─────────┐
+            │                   │
+         Invalid             Valid SQL
+            │                   │
+            ▼                   ▼
+      Show Error          BigQuery Query
+                                │
+                                ▼
+                          Pandas DataFrame
+                                │
+               ┌────────────────┴──────────────┐
+               │                               │
+               ▼                               ▼
+        Streamlit Table                Gemini Insights
+               │                               │
+               └──────────────┬────────────────┘
+                              ▼
+                     Optional Plotly Chart
 ---
 
 ## Tech Stack
