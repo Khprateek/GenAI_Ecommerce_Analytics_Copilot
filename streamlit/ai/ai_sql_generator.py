@@ -1,23 +1,14 @@
-from ai.prompts import SYSTEM_PROMPT
 from ai.gemini_client import GeminiClient
+from ai.prompt_builder import PromptBuilder
 
 
 class SQLGenerator:
 
     def __init__(self):
-
         self.client = GeminiClient()
 
-    def generate(self, question: str):
+    def generate(self, question: str) -> str:
 
-        prompt = f"""
-{SYSTEM_PROMPT}
-
-User Question
-
-{question}
-
-Return SQL only.
-"""
+        prompt = PromptBuilder.build_sql_prompt(question)
 
         return self.client.generate_sql(prompt)

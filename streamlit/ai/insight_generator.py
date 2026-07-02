@@ -1,30 +1,17 @@
 from ai.gemini_client import GeminiClient
+from ai.prompt_builder import PromptBuilder
 
 
 class InsightGenerator:
 
     def __init__(self):
-
         self.client = GeminiClient()
 
-    def generate(self, dataframe_text):
+    def generate(self, question, dataframe):
 
-        prompt = f"""
-You are a Senior Business Analyst.
-
-Analyze this dataset.
-
-{dataframe_text}
-
-Provide:
-
-1. Key insights
-
-2. Trends
-
-3. Risks
-
-4. Recommendations
-"""
+        prompt = PromptBuilder.build_insight_prompt(
+            question,
+            dataframe.to_markdown(index=False)
+        )
 
         return self.client.generate_insights(prompt)
