@@ -5,3 +5,4 @@ streamlit
 plotly>=6.0.0 
 pandas 
 faker
+google-genai
