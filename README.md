@@ -41,7 +41,7 @@ Gemini API (Phase 2)           ← AI Copilot Layer
 ```
 
 
-# USER Architecture
+# Copilot Architecture
                     User
                       │
                       ▼
@@ -290,21 +290,28 @@ dim_channels                                  marketing_performance
 
 ---
 
-## Phase 2 — AI Copilot (Upcoming)
+## AI Copilot
 
-See [AI Implementation Roadmap](#ai-roadmap) below.
+The GenAI Analytics Copilot is fully implemented and integrated directly into the Streamlit application!
 
-Planned additions:
-- `streamlit/pages/ai_query.py` — natural-language to SQL via Gemini
-- `streamlit/pages/ai_insights.py` — automated business commentary
-- `ai/nl2sql.py` — prompt engineering for BigQuery SQL generation
-- `ai/insights.py` — trend detection and anomaly summarisation
+**Key Features:**
+* **Natural Language to BigQuery SQL**: Accepts plain English questions (e.g., *"Show monthly revenue"* or *"Top selling products"*), generates valid, schema-aware BigQuery SQL queries using the Gemini API, and runs them.
+* **Automated Data Visualizations**: Scans query output schemas to automatically render line charts for temporal trends or bar charts for categorical breakdowns.
+* **Automated Executive Insights**: Feeds query dataframes back to Gemini to synthesize short, executive-ready textual business insights and trend summaries.
+* **dbt Schema Contextualization**: Dynamically compiles the dbt project metadata (schema descriptions, column tests) to ground Gemini prompts in correct relational schemas.
+
+**Code Structure:**
+- [Analytics_copilot.py] — Chat UI supporting conversations, raw dataframes, auto-charts, and insight blocks.
+- [gemini_client.py] — Orchestrator for sending prompts and handling API returns from Gemini.
+- [schema_context.py] — Dynamically extracts project schema mappings from DBT documentation configs.
+- [ai_sql_generator.py] & [ai_sql_validator.py] — Translates requests to query syntax and validates it before execution on BigQuery.
+- [insight_generator.py] — Transforms tabular query results into key executive takeaway highlights.
 
 ---
 
 ## AI Roadmap
 
-### Phase 2A — Natural Language to SQL (4–6 weeks)
+### Phase 2A — Natural Language to SQL [Completed]
 
 Enable users to ask questions in plain English and get BigQuery SQL + results back.
 
@@ -315,20 +322,22 @@ Enable users to ask questions in plain English and get BigQuery SQL + results ba
 4. App runs SQL against BigQuery → shows table + chart
 5. Gemini explains the result in 2–3 sentences
 
-**Files to build:**
+**Implemented Files:**
 ```
-ai/
-├── nl2sql.py            # Prompt template + Gemini API call
-├── schema_context.py    # Extracts schema from dbt docs for the prompt
-└── sql_validator.py     # Validates generated SQL before running it
-
-streamlit/pages/
-└── ai_query.py          # Chat-style UI: question → SQL → results → explanation
+streamlit/
+├── pages/
+│   └── Analytics_copilot.py   # Interactive chat UI: question → SQL → results → chart → insights
+└── ai/
+    ├── gemini_client.py       # Client for Gemini API
+    ├── schema_context.py      # Dynamic dbt schema context compiler
+    ├── ai_sql_generator.py    # SQL prompt and generator logic
+    ├── ai_sql_validator.py    # SQL query validation logic
+    └── insight_generator.py   # AI insight extraction logic
 ```
 
-### Phase 2B — Automated Business Insights (2–3 weeks)
+### Phase 2B — Automated Business Insights [Completed]
 
-Gemini reads from `metrics.*` tables and writes weekly commentary automatically.
+Gemini reads from metrics tables and writes business commentary automatically on query result sets.
 
 Examples it would generate:
 - *"Revenue dropped 14% week-over-week, driven by a 32% decline in mobile channel orders."*
@@ -402,4 +411,4 @@ dbt · BigQuery · Airflow · Streamlit · Gemini API · Python
 ---
 
 *Phase 1: Analytics Foundation — complete*
-*Phase 2: AI Copilot — in progress*
+*Phase 2: AI Copilot — complete*
