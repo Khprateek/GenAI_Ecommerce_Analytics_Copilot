@@ -1,414 +1,197 @@
-# GenAI-Powered Cloud Analytics Copilot for E-Commerce
+# 📊 GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing
 
-AI Analytics Copilot | Google Cloud • BigQuery • dbt • Airflow • Streamlit • Gemini
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
+[![Google Cloud](https://img.shields.io/badge/Google%20Cloud-BigQuery-orange.svg)](https://cloud.google.com/bigquery)
+[![dbt](https://img.shields.io/badge/dbt-1.11%2B-orange.svg)](https://www.getdbt.com/)
+[![Airflow](https://img.shields.io/badge/Apache%20Airflow-Orchestration-red.svg)](https://airflow.apache.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red.svg)](https://streamlit.io/)
+[![Gemini](https://img.shields.io/badge/Gemini%20AI-Copilot-blue.svg)](https://deepmind.google/technologies/gemini/)
 
-Built an end-to-end AI-powered analytics platform combining modern data engineering with Generative AI. The project automates data ingestion, transformation, and warehousing while allowing users to ask business questions in plain English. The copilot generates SQL using Gemini, validates and executes queries on BigQuery, visualizes results automatically, and produces executive-ready business insights in real time.
+An end-to-end modern data stack (MDS) analytics platform and AI assistant. This system automates ingestion of large scale e-commerce datasets into Google BigQuery, builds structured star-schema and metrics tables using dbt core, serves an executive-ready business intelligence dashboard with custom machine learning models (churn prediction), and embeds a schema-grounded natural language SQL copilot using the Gemini API.
+
 ---
 
-## Architecture
+## 🏗️ Architecture Overview
 
 ```
-Local CSV Files (7 tables, 500k+ rows)
-        │
-        ▼
-Python Ingestion (pandas + BigQuery client)    ← no GCS bucket needed
-        │
-        ▼
-BigQuery — dataset: raw
-  raw.orders · raw.order_items · raw.products
-  raw.customers · raw.events · raw.returns · raw.marketing_spend
-        │
-        ▼
-dbt Transformation Pipeline
-  ├── Layer 1: staging/        (type casting, renaming, filtering)
-  ├── Layer 2: intermediate/   (joins, RFM scoring, enrichment)
-  └── Layer 3: marts/
-        ├── core/              (Star Schema: fact + 5 dims)
-        └── metrics/           (pre-aggregated KPI tables)
-        │
-        ▼
-BigQuery — dataset: metrics
-  revenue_daily · customer_ltv · product_performance
-  conversion_rate · marketing_performance
-        │
-        ▼
-Streamlit Dashboard            ← Phase 1
-  Overview · Products · Customers · Returns · Marketing · Funnel
-        │
-        ▼
-Gemini API (Phase 2)           ← AI Copilot Layer
-  Natural-language → SQL · Automated insights · Anomaly detection
+Raw CSV Source Files (7 Tables, 500k+ rows)
+         │
+         ▼
+Ingestion Script (Python + BigQuery Client API)
+         │
+         ▼
+Google BigQuery Data Warehouse [raw dataset]
+  ├── raw.orders         ├── raw.order_items   ├── raw.products
+  ├── raw.customers      ├── raw.events        ├── raw.returns
+  └── raw.marketing_spend
+         │
+         ▼
+dbt (Data Build Tool) Transformation Pipeline
+  ├── Layer 1 (Staging):       Type casting, renaming, schema consistency
+  ├── Layer 2 (Intermediate):  Fact enrichment, RFM scoring, Churn feature engineering
+  └── Layer 3 (Marts):         Star schema dimensions and fact tables, Aggregated metrics
+         │
+         ▼
+Google BigQuery Data Warehouse [marts & metrics datasets]
+  ├── marts.fact_orders        ├── marts.dim_customers
+  ├── marts.dim_products       ├── metrics.revenue_daily
+  ├── metrics.customer_ltv     ├── metrics.conversion_rate
+  └── metrics.marketing_performance
+         │
+         ├────────────────────────────────────────┐
+         ▼                                        ▼
+Streamlit Interactive UI                  Gemini Analytics Copilot
+  ├── 📈 Overview & KPIs                   ├── Grounded Schema Prompts (via dbt docs)
+  ├── 🏆 Products & Margins                ├── Text-to-SQL query generation
+  ├── 👥 Customers & Churn ML              ├── Real-time SQL validation and run
+  ├── ↩️ Return Analytics                  └── Executive business insights
+  ├── 📣 Marketing Performance
+  └── 🔻 Clickstream Funnel
 ```
 
-
-# Copilot Architecture
-                    User
-                      │
-                      ▼
-            Streamlit Chat Interface
-                      │
-                      ▼
-              Prompt Builder
-                      │
-                      ▼
-                 Gemini API
-                      │
-                      ▼
-              Generated SQL
-                      │
-                      ▼
-              SQL Validator
-                      │
-            ┌─────────┴─────────┐
-            │                   │
-         Invalid             Valid SQL
-            │                   │
-            ▼                   ▼
-      Show Error          BigQuery Query
-                                │
-                                ▼
-                          Pandas DataFrame
-                                │
-               ┌────────────────┴──────────────┐
-               │                               │
-               ▼                               ▼
-        Streamlit Table                Gemini Insights
-               │                               │
-               └──────────────┬────────────────┘
-                              ▼
-                     Optional Plotly Chart
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack & Roles
 
-| Layer | Technology | Purpose |
+| Component | Technology | Purpose |
 |---|---|---|
-| Data Generation | Python (Faker) | Realistic synthetic e-commerce data |
-| Ingestion | Python + BigQuery Client | CSV → BigQuery without GCS |
-| Orchestration | Apache Airflow | DAG scheduling, dependency management |
-| Warehouse | Google BigQuery | Cloud-native SQL analytics engine |
-| Transformation | dbt-bigquery | Modular SQL models, tests, lineage |
-| Dashboard | Streamlit + Plotly | Interactive analytics frontend |
-| AI Copilot | Gemini 1.5 Pro | Natural-language SQL, insight generation |
-| Infrastructure | Terraform (optional) | Dataset and IAM provisioning |
+| **Data Generation** | Python (`Faker`) | Simulates realistic e-commerce operational logs |
+| **Ingestion** | Python (`google-cloud-bigquery`) | Batch imports files directly into BigQuery `raw` dataset |
+| **Orchestration** | Apache Airflow | Schedules daily ingestion and dbt runs via DAG pipelines |
+| **Data Warehouse** | Google BigQuery | Highly scalable serverless warehouse |
+| **Data Modeling** | dbt (Data Build Tool) | Implements staging, intermediate modeling, star schema, and aggregations |
+| **Machine Learning** | Python (`scikit-learn`) | Logistic Regression model predicting customer churn |
+| **Visualizations** | Plotly & Streamlit | Displays analytical metrics and interactive charts |
+| **Generative AI** | Gemini 1.5 Pro (Google GenAI) | Schema-grounded SQL generation and data explanation |
 
 ---
 
-## Project Structure
+## 📂 Project Repository Structure
 
 ```
-ecommerce-analytics/
-│
-├── credentials/
-│   └── gcp-key.json                  # Service account key (git-ignored)
-│
-├── data/
-│   ├── generate_data.py              # Generates 7 CSVs via Faker
-│   ├── orders.csv                    # 50,000 orders
-│   ├── order_items.csv               # ~150,000 line items
-│   ├── products.csv                  # 5,000 products with brand + cost
-│   ├── customers.csv                 # 20,000 customers
-│   ├── events.csv                    # 300,000 clickstream events
-│   ├── returns.csv                   # ~2,500 return records
-│   └── marketing_spend.csv           # ~6,000 daily spend rows by channel
+├── .env.example                      # Template for GCP and directory configurations
+├── requirements.txt                  # Python dependencies
+├── README.md                         # Project documentation
 │
 ├── bigquery/
-│   └── setup_datasets.py             # Creates raw/staging/marts/metrics datasets
+│   └── setup_datasets.py             # Provisioning script for BigQuery schemas
 │
-├── ingestion/
-│   └── load_raw.py                   # Loads all CSVs → BigQuery raw (direct, no bucket)
-│
-├── dbt/
-│   ├── dbt_project.yml
-│   ├── profiles.yml                  # BigQuery connection via service account
-│   ├── packages.yml                  # dbt-utils
-│   │
-│   ├── models/
-│   │   ├── staging/                  # Layer 1: type-safe views over raw tables
-│   │   │   ├── _sources.yml          # Source declarations + freshness tests
-│   │   │   ├── stg_orders.sql
-│   │   │   ├── stg_order_items.sql
-│   │   │   ├── stg_products.sql      # Includes brand, cost_price, margin_pct
-│   │   │   ├── stg_customers.sql
-│   │   │   ├── stg_events.sql
-│   │   │   ├── stg_returns.sql
-│   │   │   └── stg_marketing_spend.sql
-│   │   │
-│   │   ├── intermediate/             # Layer 2: business logic + joins
-│   │   │   ├── int_orders_enriched.sql     # Orders + items + customer context
-│   │   │   ├── int_customer_orders.sql     # RFM scoring (recency/frequency/monetary)
-│   │   │   └── int_product_revenue.sql     # Revenue + margin + return rate per product
-│   │   │
-│   │   └── marts/
-│   │       ├── core/                 # Layer 3: Star schema (materialized tables)
-│   │       │   ├── fact_orders.sql
-│   │       │   ├── dim_customers.sql  # With RFM segments + value tiers
-│   │       │   ├── dim_products.sql   # With margin, profit, return risk labels
-│   │       │   ├── dim_date.sql       # Full date spine 2022–2027
-│   │       │   ├── dim_channels.sql
-│   │       │   └── _core_models.yml   # Column tests + documentation
-│   │       │
-│   │       └── metrics/              # Layer 4: Pre-aggregated KPIs
-│   │           ├── revenue_daily.sql          # Net of returns + discounts
-│   │           ├── customer_ltv.sql
-│   │           ├── product_performance.sql
-│   │           ├── conversion_rate.sql        # Daily event funnel
-│   │           └── marketing_performance.sql  # ROAS, CAC, CTR by channel
-│   │
-│   ├── tests/
-│   │   ├── assert_positive_revenue.sql
-│   │   └── assert_no_orphan_orders.sql
-│   │
-│   └── macros/
-│       └── safe_divide.sql
-│
-├── streamlit/
-│   ├── app.py                        # Main dashboard (6 tabs)
-│   ├── components/
-│   │   ├── kpi_cards.py              # Gross revenue, net revenue, orders, AOV, returns
-│   │   └── charts.py                 # Revenue, channel, margin, funnel, ROAS charts
-│   └── utils/
-│       ├── bq_client.py              # Cached BigQuery connection
-│       └── queries.py                # All SQL strings (parameterised by date range)
+├── loaders/
+│   ├── load_to_bigquery.py           # Ingestion logic to stream CSVs → BigQuery
+│   └── setup_datasets.py             # Setup script helper
 │
 ├── airflow/
-│   ├── docker-compose.yml            # Local Airflow via Docker
 │   └── dags/
-│       ├── ingestion_dag.py          # Schedules load_raw.py daily
-│       └── dbt_dag.py                # Runs dbt run → dbt test → dbt docs
+│       ├── ingestion_dag.py          # Schedules raw data sync
+│       └── dbt_dag.py                # Runs dbt transformation sequences
 │
-├── .env.example                      # Required environment variables
-├── requirements.txt
-└── README.md
+├── dbt/                              # dbt project configurations
+│   ├── dbt_project.yml
+│   ├── profiles.yml
+│   ├── packages.yml                  # Third-party utilities (dbt_utils)
+│   └── models/
+│       ├── staging/                  # Layer 1: Schema alignment and cleaning
+│       ├── intermediate/             # Layer 2: RFM scoring, churn feature compilation
+│       └── marts/
+│           ├── core/                 # Star schema (fact_orders, dim_customers, dim_products)
+│           └── metrics/              # Structured aggregations for dashboard queries
+│
+└── streamlit/                        # Application frontend
+    ├── app.py                        # Main Multi-tab Streamlit dashboard
+    ├── components/
+    │   ├── charts.py                 # Plotly configurations for business KPIs
+    │   └── kpi_cards.py              # Custom indicators for executive summaries
+    ├── utils/
+    │   ├── bq_client.py              # BigQuery connection wrapper (caching enabled)
+    │   ├── queries.py                # SQL library for business intelligence tabs
+    │   └── churn_model.py            # Logistic regression training and inference
+    └── ai/                           # AI Copilot engine
+        ├── gemini_client.py          # Gemini API wrapper
+        ├── schema_context.py         # Pulls schema definitions from dbt
+        ├── ai_sql_generator.py       # Direct question-to-SQL translation
+        ├── ai_sql_validator.py       # SQL validator (protects against runtime errors)
+        └── insight_generator.py      # Generates executive-ready analysis
 ```
 
 ---
 
-## Quickstart
+## 🚀 Getting Started
 
-### Prerequisites
+### 📋 Prerequisites
+- Python **3.11+** installed
+- A Google Cloud Platform (GCP) project with the **BigQuery API** enabled
+- A service account credentials JSON file with `BigQuery Admin` permissions
 
-- Python 3.11+
-- A Google Cloud project with BigQuery API enabled
-- A service account with `BigQuery Admin` role → download JSON key
-- (Optional) Docker Desktop for Airflow
-
-### 1. Clone and install
-
+### 1️⃣ Installation & Virtual Environment Setup
+Clone the repository and install the requirements:
 ```bash
-git clone <your-repo>
+git clone <repository_url>
 cd ecommerce-analytics
-python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate   # Mac/Linux: source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Set environment variables
-
+### 2️⃣ Environment Configuration
+Create a `.env` file from the template and configure your paths:
 ```bash
-cp .env.example .env
-# Edit .env with your GCP_PROJECT_ID and GOOGLE_APPLICATION_CREDENTIALS path
-export $(cat .env | xargs)
+copy .env.example .env   # Mac/Linux: cp .env.example .env
+# Edit .env with your GCP project details and service account JSON path
 ```
 
-### 3. Generate synthetic data
+### 3️⃣ Ingest and Model Data
+1. Generate data:
+   ```bash
+   python data/generate_data.py
+   ```
+2. Provision BigQuery datasets and load raw tables:
+   ```bash
+   python loaders/setup_datasets.py
+   python loaders/load_to_bigquery.py
+   ```
+3. Run the dbt transformation pipeline:
+   ```bash
+   cd dbt
+   dbt deps
+   dbt run
+   dbt test
+   cd ..
+   ```
 
-```bash
-cd data
-python generate_data.py
-# Produces 7 CSVs: 500k+ rows total
-cd ..
-```
-
-### 4. Create BigQuery datasets
-
-```bash
-python bigquery/setup_datasets.py
-# Creates: raw, staging, marts, metrics datasets in BigQuery
-```
-
-### 5. Load raw data into BigQuery
-
-```bash
-python ingestion/load_raw.py
-# Direct CSV → BigQuery. No GCS bucket required.
-```
-
-### 6. Run dbt pipeline
-
-```bash
-cd dbt
-dbt deps                  # installs dbt-utils
-dbt run                   # 19 models: staging → intermediate → marts → metrics
-dbt test                  # 40+ data quality tests
-dbt docs generate && dbt docs serve   # browse lineage in browser
-cd ..
-```
-
-### 7. Launch Streamlit dashboard
-
+### 4️⃣ Start Streamlit Analytics Dashboard
+Run the dashboard interface locally:
 ```bash
 cd streamlit
 streamlit run app.py
-# Opens at http://localhost:8501
 ```
+- Open `http://localhost:8501` to access the dashboard tabs and the **AI Copilot**!
 
 ---
 
-## Dashboard Tabs
+## 💡 Key Features Implemented
 
-| Tab | What you see |
-|---|---|
-| 📈 Overview | Revenue trend (daily/weekly/monthly), breakdown by channel |
-| 🏆 Products & Margin | Top 20 products, profit vs revenue by category, price tier |
-| 👥 Customers | RFM segments (Champions → Lost), LTV distribution |
-| ↩️ Returns | Return rate by product, refund amounts, high-risk items |
-| 📣 Marketing | ROAS by channel, spend vs attributed revenue trend |
-| 🔻 Funnel | Event-based conversion funnel (page view → cart → purchase) |
+### 1. Multi-Tab Executive Dashboard
+- **Overview**: Real-time sales velocity, revenue trends, and acquisition channel breakdowns.
+- **Products & Margins**: Dynamic categorization showing the top-performing inventory alongside unit profitability.
+- **Customers**: RFM (Recency, Frequency, Monetary) segmentation maps client bases into categories like *Champions* and *At Risk*.
+- **Returns**: Outlines refund trends, returns rates, and identifies high-risk products.
+- **Marketing Performance**: Live CAC, Spend, Revenue, and ROAS trend lines per acquisition channel.
+- **Funnel**: Interactive clickstream visualizer tracking user drop-offs from homepages to final checkouts.
 
----
+### 2. Predictive Churn Modeling (Machine Learning Integration)
+- **Feature Engineering**: Standardized dbt models compute order frequency in the last 30 days, average order value trends, and days since last purchase.
+- **Model Training**: A `scikit-learn` Logistic Regression model with feature scaling (`StandardScaler`) is trained with a historical snapshot (using a 90-day cutoff to prevent data leakage).
+- **Interactive Classification**: Assigns real-time, quantile-based risk probabilities, sorting customers into *Low*, *Medium*, and *High* risk categories.
+- **Executive Metrics**: Summarizes total at-risk Lifetime Value (LTV) and lists the top 25 high-risk profiles directly in the Customers dashboard tab.
 
-## dbt Model Lineage
-
-```
-raw sources (7 tables)
-    │
-    ▼
-staging (7 views)          ← type-safe, renamed, filtered
-    │
-    ▼
-intermediate (3 views)     ← RFM scoring, enrichment, aggregation
-    │
-    ├──────────────────────────────────────────────────┐
-    ▼                                                  ▼
-marts/core (5 tables)                         marts/metrics (5 tables)
-fact_orders                                   revenue_daily
-dim_customers                                 customer_ltv
-dim_products                                  product_performance
-dim_date                                      conversion_rate
-dim_channels                                  marketing_performance
-```
+### 3. Schema-Grounded AI Analytics Copilot
+- **Plain English to SQL**: Translate complex analytical requests (e.g., *"Which marketing channel had the best ROAS last month?"*) into BigQuery SQL.
+- **Context Injection**: Reads dbt schemas and model descriptions dynamically so the LLM is fully grounded in the database structure.
+- **Visual & Insight Generation**: Executes queries on BigQuery, renders tabular outputs, selects appropriate Plotly configurations (lines/bars) based on query schemas, and uses Gemini to summarize key takeaways.
 
 ---
 
-## AI Copilot
+## 📝 Resume Bullet Point Highlight
+Here is a single, impact-focused resume bullet point summarizing the churn analysis and machine learning implementation in this project:
 
-The GenAI Analytics Copilot is fully implemented and integrated directly into the Streamlit application!
-
-**Key Features:**
-* **Natural Language to BigQuery SQL**: Accepts plain English questions (e.g., *"Show monthly revenue"* or *"Top selling products"*), generates valid, schema-aware BigQuery SQL queries using the Gemini API, and runs them.
-* **Automated Data Visualizations**: Scans query output schemas to automatically render line charts for temporal trends or bar charts for categorical breakdowns.
-* **Automated Executive Insights**: Feeds query dataframes back to Gemini to synthesize short, executive-ready textual business insights and trend summaries.
-* **dbt Schema Contextualization**: Dynamically compiles the dbt project metadata (schema descriptions, column tests) to ground Gemini prompts in correct relational schemas.
-
-**Code Structure:**
-- [Analytics_copilot.py] — Chat UI supporting conversations, raw dataframes, auto-charts, and insight blocks.
-- [gemini_client.py] — Orchestrator for sending prompts and handling API returns from Gemini.
-- [schema_context.py] — Dynamically extracts project schema mappings from DBT documentation configs.
-- [ai_sql_generator.py] & [ai_sql_validator.py] — Translates requests to query syntax and validates it before execution on BigQuery.
-- [insight_generator.py] — Transforms tabular query results into key executive takeaway highlights.
-
----
-
-## AI Roadmap
-
-### Phase 2A — Natural Language to SQL [Completed]
-
-Enable users to ask questions in plain English and get BigQuery SQL + results back.
-
-**How it works:**
-1. User types: *"Which product category had the highest return rate last month?"*
-2. Gemini receives the question + your full schema (table names, column names, descriptions from `_core_models.yml`)
-3. Gemini generates valid BigQuery SQL
-4. App runs SQL against BigQuery → shows table + chart
-5. Gemini explains the result in 2–3 sentences
-
-**Implemented Files:**
-```
-streamlit/
-├── pages/
-│   └── Analytics_copilot.py   # Interactive chat UI: question → SQL → results → chart → insights
-└── ai/
-    ├── gemini_client.py       # Client for Gemini API
-    ├── schema_context.py      # Dynamic dbt schema context compiler
-    ├── ai_sql_generator.py    # SQL prompt and generator logic
-    ├── ai_sql_validator.py    # SQL query validation logic
-    └── insight_generator.py   # AI insight extraction logic
-```
-
-### Phase 2B — Automated Business Insights [Completed]
-
-Gemini reads from metrics tables and writes business commentary automatically on query result sets.
-
-Examples it would generate:
-- *"Revenue dropped 14% week-over-week, driven by a 32% decline in mobile channel orders."*
-- *"Electronics category margin fell from 41% to 34% — likely due to increased returns from brand Voltix."*
-- *"Customer acquisition cost on social rose to $18.40 vs $11.20 last month — ROAS below breakeven."*
-
-### Phase 2C — Anomaly Detection (2–3 weeks)
-
-Statistical alerts surfaced in the dashboard when KPIs deviate from normal ranges.
-
-- Revenue anomalies (Z-score > 2.5 from 30-day rolling average)
-- Sudden return rate spikes on specific products
-- Conversion rate drops by channel
-- Marketing spend efficiency degradation
-
-### Phase 2D — Scheduled Report Generation (1–2 weeks)
-
-Airflow DAG that runs every Monday morning:
-1. Queries `metrics.*` for the past week
-2. Sends data to Gemini with a "write an executive summary" prompt
-3. Posts output to Slack / emails as HTML report
-
----
-
-## Refinement Tasks (Build These to Deepen the Project)
-
-### Data Engineering
-1. **Incremental dbt models** — change `+materialized: table` to `incremental` for `fact_orders` and `revenue_daily`. Use `order_date` as the incremental key. This is how production pipelines work — full refresh doesn't scale.
-2. **dbt snapshots** — add `snapshots/snap_customers.sql` to track slowly changing dimensions (customer segment changes over time).
-3. **dbt source freshness** — add `loaded_at_field` and `freshness` thresholds to `_sources.yml` so `dbt source freshness` alerts you if raw data is stale.
-4. **Schema tests on metrics** — add `dbt_utils.accepted_range` tests on `revenue_daily` (no negative revenue, no future dates).
-5. **Airflow DAG hardening** — add retries, `on_failure_callback` (Slack alert), and SLA misses to both DAGs.
-
-### Analytics & Modelling
-6. **Cohort retention model** — build `marts/metrics/cohort_retention.sql` that shows what % of customers from each signup month are still ordering 1/3/6 months later.
-7. **Product affinity model** — find products frequently bought together using `order_items`. Build `int_product_pairs.sql` and surface it as a "Frequently Bought Together" table.
-8. **Customer churn prediction features** — build a feature table in dbt: `days_since_last_order`, `order_frequency_30d`, `avg_order_value_trend`. Feed this into a simple logistic regression in Python.
-9. **Price elasticity analysis** — since `unit_price` drifts ±10% in the data generator, you can model how quantity sold changes with price.
-10. **Seasonal decomposition** — run `statsmodels` seasonal decomposition on `revenue_daily` and surface trend vs seasonality components in a new Streamlit page.
-
-### Dashboard
-11. **Drill-down filters** — add `category`, `brand`, and `channel` multiselects to the sidebar so every chart responds to all filters simultaneously.
-12. **Period-over-period comparison** — add a toggle to compare current period vs same period last year/last month. Show delta % on every chart.
-13. **Export button** — add `st.download_button` to every dataframe so analysts can export to CSV with one click.
-14. **Dark mode toggle** — Streamlit supports `.streamlit/config.toml` theming. Add a dark/light toggle in the sidebar.
-
-### Infrastructure & Production
-15. **Terraform for BigQuery** — write `infra/bigquery_datasets.tf` to provision datasets and IAM bindings as code.
-16. **GitHub Actions CI** — add `.github/workflows/dbt_ci.yml` that runs `dbt compile` and `dbt test` on every pull request against a dev BigQuery dataset.
-17. **Secrets via Secret Manager** — replace hardcoded service account file path with GCP Secret Manager lookups in `load_raw.py` and `bq_client.py`.
-18. **Partitioned BigQuery tables** — add `partition_by` config to `fact_orders` dbt model so BigQuery partitions by `order_date`. Massive query cost reduction.
-
----
-
-## Environment Variables
-
-| Variable | Description | Example |
-|---|---|---|
-| `GCP_PROJECT_ID` | Your GCP project ID | `my-ecom-project-123` |
-| `GOOGLE_APPLICATION_CREDENTIALS` | Path to service account JSON | `/home/user/creds/key.json` |
-| `BQ_LOCATION` | BigQuery dataset location | `US` (default) |
-| `DATA_DIR` | Path to CSV files | `../data` (default) |
-
----
-
-## Acknowledgements
-
-Built as a learning project to demonstrate modern data stack skills:
-dbt · BigQuery · Airflow · Streamlit · Gemini API · Python
-
----
-
-*Phase 1: Analytics Foundation — complete*
-*Phase 2: AI Copilot — complete*
+* **Machine Learning & Analytics Integration:** Engineered a dbt intermediate feature pipeline (recency, 30d frequency, and AOV trend) feeding a scikit-learn Logistic Regression model; integrated risk probability predictions directly into a Streamlit dashboard with quantile-based risk tiers, surfacing at-risk lifetime value (LTV) and identifying actionable customer retention targets.

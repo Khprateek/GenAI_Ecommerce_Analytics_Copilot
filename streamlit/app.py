@@ -10,6 +10,7 @@ sys.path.append(os.path.dirname(__file__))
 
 from utils.bq_client import run_query
 from utils import queries as q
+from utils.churn_model import get_churn_predictions
 from components.kpi_cards import render_kpi_cards
 from components.charts import (
     revenue_trend_chart,
@@ -128,6 +129,69 @@ with tab3:
                 "avg_orders": st.column_config.NumberColumn("Avg Orders", format="%.1f"),
             })
 
+    st.markdown("---")
+    st.subheader("🚨 Churn Risk Prediction")
+    st.caption("Logistic Regression model trained on order recency, 30-day frequency, and AOV trend (scikit-learn)")
+
+    with st.spinner("Training churn model on BigQuery data..."):
+        churn_df = get_churn_predictions()
+
+    if not churn_df.empty:
+        # KPI row
+        high_risk = churn_df[churn_df['risk_tier'] == 'High']
+        med_risk  = churn_df[churn_df['risk_tier'] == 'Medium']
+        low_risk  = churn_df[churn_df['risk_tier'] == 'Low']
+        k1, k2, k3, k4 = st.columns(4)
+        k1.metric("🔴 High Risk",   f"{len(high_risk):,}",  f"{len(high_risk)/len(churn_df)*100:.1f}% of customers")
+        k2.metric("🟡 Medium Risk", f"{len(med_risk):,}",   f"{len(med_risk)/len(churn_df)*100:.1f}% of customers")
+        k3.metric("🟢 Low Risk",    f"{len(low_risk):,}",   f"{len(low_risk)/len(churn_df)*100:.1f}% of customers")
+        k4.metric("💰 At-Risk LTV", f"${high_risk['lifetime_value_usd'].sum():,.0f}")
+
+        st.markdown("")
+
+        # Risk tier distribution bar
+        import plotly.express as px
+        tier_counts = churn_df['risk_tier'].value_counts().reset_index()
+        tier_counts.columns = ['Risk Tier', 'Customers']
+        tier_order = ['High', 'Medium', 'Low']
+        tier_counts['Risk Tier'] = pd.Categorical(tier_counts['Risk Tier'], categories=tier_order, ordered=True)
+        tier_counts = tier_counts.sort_values('Risk Tier')
+        color_map = {'High': '#ef4444', 'Medium': '#f59e0b', 'Low': '#22c55e'}
+        fig_tier = px.bar(
+            tier_counts, x='Risk Tier', y='Customers',
+            color='Risk Tier', color_discrete_map=color_map,
+            title='Customer Churn Risk Distribution',
+            text='Customers'
+        )
+        fig_tier.update_traces(textposition='outside')
+        fig_tier.update_layout(showlegend=False, height=350)
+        st.plotly_chart(fig_tier, use_container_width=True)
+
+        # Top at-risk customers table
+        st.subheader("Top 25 High-Risk Customers")
+        display_cols = ['full_name', 'email', 'rfm_segment', 'country_code',
+                        'days_since_last_order', 'order_frequency_30d',
+                        'lifetime_value_usd', 'churn_probability']
+        st.dataframe(
+            high_risk[display_cols].head(25).reset_index(drop=True),
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "full_name":             st.column_config.TextColumn("Name"),
+                "email":                 st.column_config.TextColumn("Email"),
+                "rfm_segment":           st.column_config.TextColumn("RFM Segment"),
+                "country_code":          st.column_config.TextColumn("Country"),
+                "days_since_last_order": st.column_config.NumberColumn("Days Since Order", format="%d"),
+                "order_frequency_30d":   st.column_config.NumberColumn("Orders (30d)", format="%d"),
+                "lifetime_value_usd":    st.column_config.NumberColumn("LTV", format="$%.0f"),
+                "churn_probability":     st.column_config.ProgressColumn(
+                    "Churn Risk", format="%.0f%%", min_value=0, max_value=1
+                ),
+            }
+        )
+    else:
+        st.warning("Churn model could not be loaded. Check BigQuery connectivity.")
+
 with tab4:
     ret_df = run_query(q.RETURNS_SUMMARY)
     if not ret_df.empty:
@@ -170,4 +234,4 @@ with tab6:
         st.info("No funnel data for this period.")
 
 st.markdown("---")
-st.caption("Phase 2: Gemini-powered natural-language SQL querying and AI-generated insights · coming soon")
+st.caption("Phase 1 + Phase 2 complete: Analytics Foundation · BigQuery + dbt + Streamlit + Gemini AI Copilot")

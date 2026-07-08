@@ -17900,3 +17900,115 @@ parsing.
 [0m20:41:43.360099 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BD38C53800>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BD37F5FA70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001BD5D73C170>]}
 [0m20:41:43.360099 [debug] [MainThread]: Flushing usage events
 [0m20:41:45.969184 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m01:09:19.173889 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3010019A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3010026F0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D301003830>]}
+
+
+============================== 01:09:19.193121 | d78b1611-3d96-45cd-aef0-f983057b0fcc ==============================
+[0m01:09:19.193121 [info ] [MainThread]: Running with dbt=1.11.11
+[0m01:09:19.194544 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'target_path': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt', 'invocation_command': 'dbt run --select int_customer_churn_features', 'indirect_selection': 'eager', 'use_colors': 'True', 'use_experimental_parser': 'False', 'log_path': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt\\logs'}
+[0m01:09:23.085935 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3025CB0B0>]}
+[0m01:09:23.141270 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D37E2AB320>]}
+[0m01:09:23.142272 [info ] [MainThread]: Registered adapter: bigquery=1.11.1
+[0m01:09:23.754372 [debug] [MainThread]: checksum: 30a8cc8fdcbf66701b0944d4ccce3fa46dd04b61e5df68b9f16d57b2e0e3f0be, vars: {}, profile: , target: , version: 1.11.11
+[0m01:09:24.188165 [warn ] [MainThread]: [[33mWARNING[0m][PropertyMovedToConfigDeprecation]: Deprecated functionality
+Found `freshness` as a top-level property of `sources[0]` in file
+`models\staging\_sources.yml`. The `freshness` top-level property should be
+moved into the `config` of `sources[0]`.
+[0m01:09:24.189165 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'deprecation', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'property_': 'warn', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3240B4470>]}
+[0m01:09:26.730255 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 0 files changed.
+[0m01:09:26.730255 [debug] [MainThread]: Partial parsing: added file: ecommerce_analytics://models\intermediate\int_customer_churn_features.sql
+[0m01:09:27.010712 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3244FEC90>]}
+[0m01:09:27.123063 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m01:09:27.148162 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m01:09:27.194624 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3244EA750>]}
+[0m01:09:27.195620 [info ] [MainThread]: Found 21 models, 50 data tests, 7 sources, 667 macros
+[0m01:09:27.196328 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3244D68A0>]}
+[0m01:09:27.199097 [info ] [MainThread]: 
+[0m01:09:27.199641 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m01:09:27.199641 [info ] [MainThread]: 
+[0m01:09:27.200708 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m01:09:27.202326 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m01:09:27.202874 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:09:28.869806 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_metrics'
+[0m01:09:28.869806 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:09:28.870802 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_staging'
+[0m01:09:28.870802 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:09:28.872112 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_marts'
+[0m01:09:28.873132 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m01:09:30.425104 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D3243C3830>]}
+[0m01:09:30.426249 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m01:09:30.487062 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.int_customer_churn_features
+[0m01:09:30.488173 [info ] [Thread-1 (]: 1 of 1 START sql view model staging.int_customer_churn_features ................ [RUN]
+[0m01:09:30.488685 [debug] [Thread-1 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.int_customer_churn_features'
+[0m01:09:30.489190 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.int_customer_churn_features
+[0m01:09:30.497393 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m01:09:30.498454 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.int_customer_churn_features
+[0m01:09:30.526715 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m01:09:30.527735 [debug] [Thread-1 (]: On model.ecommerce_analytics.int_customer_churn_features: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_customer_churn_features"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_customer_churn_features`
+  OPTIONS()
+  as with customers as (
+    select customer_id from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+order_metrics as (
+    select
+        customer_id,
+        date_diff(current_date(), max(order_date), day) as days_since_last_order,
+        count(distinct case when order_date >= date_add(current_date(), interval -30 day) then order_id end) as order_frequency_30d,
+        avg(revenue_usd) as avg_order_value_lifetime,
+        avg(case when order_date >= date_add(current_date(), interval -30 day) then revenue_usd end) as avg_order_value_30d
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+    group by customer_id
+),
+
+final as (
+    select
+        c.customer_id,
+        coalesce(om.days_since_last_order, 999) as days_since_last_order,
+        coalesce(om.order_frequency_30d, 0) as order_frequency_30d,
+        coalesce(om.avg_order_value_30d, 0) - coalesce(om.avg_order_value_lifetime, 0) as avg_order_value_trend
+    from customers c
+    left join order_metrics om on c.customer_id = om.customer_id
+)
+
+select * from final;
+
+
+[0m01:09:30.527735 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m01:09:32.643053 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:73d5515e-451d-4a02-9eee-dd79baf18923&page=queryresults
+[0m01:09:33.560421 [debug] [Thread-1 (]: SQL status: OK in 0.917 seconds
+[0m01:09:36.916542 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'd78b1611-3d96-45cd-aef0-f983057b0fcc', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D323B75220>]}
+[0m01:09:36.916542 [info ] [Thread-1 (]: 1 of 1 OK created sql view model staging.int_customer_churn_features ........... [[32mCREATE VIEW (0 processed)[0m in 6.43s]
+[0m01:09:36.918132 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.int_customer_churn_features
+[0m01:09:36.919685 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m01:09:36.949470 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m01:09:36.950483 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m01:09:36.950483 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_metrics' was properly closed.
+[0m01:09:36.950483 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_staging' was properly closed.
+[0m01:09:36.950483 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_marts' was properly closed.
+[0m01:09:36.951668 [debug] [MainThread]: Connection 'model.ecommerce_analytics.int_customer_churn_features' was properly closed.
+[0m01:09:36.951668 [info ] [MainThread]: 
+[0m01:09:36.952371 [info ] [MainThread]: Finished running 1 view model in 0 hours 0 minutes and 9.75 seconds (9.75s).
+[0m01:09:36.952875 [debug] [MainThread]: Command end result
+[0m01:09:36.996116 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m01:09:36.998271 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m01:09:37.004615 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\run_results.json
+[0m01:09:37.004615 [info ] [MainThread]: 
+[0m01:09:37.005931 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m01:09:37.006436 [info ] [MainThread]: 
+[0m01:09:37.006436 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=1
+[0m01:09:37.007536 [warn ] [MainThread]: [[33mWARNING[0m][DeprecationsSummary]: Deprecated functionality
+Summary of encountered deprecations:
+- PropertyMovedToConfigDeprecation: 2 occurrences
+To see all deprecation instances instead of just the first occurrence of each,
+run command again with the `--show-all-deprecations` flag. You may also need to
+run with `--no-partial-parse` as some deprecations are only encountered during
+parsing.
+[0m01:09:37.008617 [debug] [MainThread]: Command `dbt run` succeeded at 01:09:37.008079 after 18.01 seconds
+[0m01:09:37.008617 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D300E43FB0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D323DFFD10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D324136930>]}
+[0m01:09:37.009148 [debug] [MainThread]: Flushing usage events
+[0m01:09:38.660878 [debug] [MainThread]: An error was encountered while trying to flush usage events
