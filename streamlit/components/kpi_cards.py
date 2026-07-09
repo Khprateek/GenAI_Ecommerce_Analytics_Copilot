@@ -2,10 +2,10 @@ import streamlit as st
 import pandas as pd
 
 def render_kpi_cards(df: pd.DataFrame):
-    """Renders 4 KPI metric cards in a row."""
+    """Renders 5 KPI metric cards in a row."""
     row = df.iloc[0]
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
         st.metric(
@@ -24,6 +24,11 @@ def render_kpi_cards(df: pd.DataFrame):
         )
     with col4:
         st.metric(
-            label="👥 Unique Customers",
-            value=f"{int(row['unique_customers']):,}",
+            label="👥 Todays New customer",
+            value=f"{int(row['today_new_customer']):,}",
+        )
+    with col5:
+        st.metric(
+            label="Total Items sold",
+            value=f"{int(row['total_items_sold']):,}",
         )

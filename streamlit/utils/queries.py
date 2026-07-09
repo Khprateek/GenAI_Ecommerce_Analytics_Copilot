@@ -8,13 +8,36 @@ STAGING = f"`{PROJECT}.staging`"
 
 # ── KPI SUMMARY ────────────────────────────────────────────────────────────────
 KPI_SUMMARY = f"""
-select
-    sum(gross_revenue_usd)              as total_revenue,
-    sum(total_orders)                   as total_orders,
-    avg(avg_order_value_usd)            as avg_order_value,
-    count(distinct unique_customers)    as unique_customers
-from {METRICS}.revenue_daily
-where order_date between date('{{start}}') and date('{{end}}')
+WITH revenue AS (
+    SELECT
+        SUM(gross_revenue_usd) AS total_revenue,
+        SUM(total_orders) AS total_orders,
+        AVG(avg_order_value_usd) AS avg_order_value,
+        SUM(total_items_sold) AS total_items_sold,
+        COUNT(DISTINCT unique_customers) AS today_new_customer
+    FROM {METRICS}.revenue_daily
+    WHERE order_date BETWEEN DATE('{{start}}') AND DATE('{{end}}')
+),
+
+customers AS (
+    SELECT
+        COUNT(*) AS total_customers,
+        AVG(lifetime_value_usd) AS avg_ltv,
+        SUM(lifetime_value_usd) AS total_ltv
+    FROM {METRICS}.customer_ltv
+),
+
+conversion AS (
+    SELECT
+        AVG(purchase_rate_pct) AS conversion_rate
+    FROM {METRICS}.conversion_rate
+    WHERE event_date BETWEEN DATE('{{start}}') AND DATE('{{end}}')
+)
+
+SELECT *
+FROM revenue
+CROSS JOIN customers
+CROSS JOIN conversion
 """
 
 # ── REVENUE TREND ──────────────────────────────────────────────────────────────

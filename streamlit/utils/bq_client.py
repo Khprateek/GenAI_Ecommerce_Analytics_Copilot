@@ -3,6 +3,10 @@ import streamlit as st
 from google.cloud import bigquery
 from google.oauth2 import service_account
 import pandas as pd
+from dotenv import load_dotenv
+
+# Load environmental variables
+load_dotenv()
 
 @st.cache_resource   # runs once, reuses across all reruns
 def get_client() -> bigquery.Client:
