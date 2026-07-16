@@ -86,11 +86,29 @@ Streamlit Interactive UI                  Gemini Analytics Copilot
 │       └── dbt_dag.py                # Runs dbt transformation sequences
 │
 ├── dbt/                              # dbt project configurations
+│   ├── dbt_packages/
+│   ├── logs/
+│   │   └── dbt.log
+│   ├── macros/
+│   │   ├── generate_schema_name.sql
+│   │   └── safe_divide.sql
+│   ├── seeds/
+│   ├── target/
+│   ├── tests/
+│   ├── .user.yml
 │   ├── dbt_project.yml
 │   ├── profiles.yml
 │   ├── packages.yml                  # Third-party utilities (dbt_utils)
 │   └── models/
-│       ├── staging/                  # Layer 1: Schema alignment and cleaning
+│       ├── staging/
+│       │   ├── _sources.yml          # Layer 1: Schema alignment and cleaning
+│       │   ├── stg_customers.sql
+│       │   ├── stg_events.sql
+│       │   ├── stg_marketing_spend.sql
+│       │   ├── stg_order_items.sql
+│       │   ├── stg_orders.sql
+│       │   ├── stg_products.sql
+│       │   └── stg_returns.sql
 │       ├── intermediate/             # Layer 2: RFM scoring, churn feature compilation
 │       └── marts/
 │           ├── core/                 # Star schema (fact_orders, dim_customers, dim_products)

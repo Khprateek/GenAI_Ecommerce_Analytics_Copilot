@@ -10,4 +10,4 @@ ecommerce_analytics:
       location: US
       threads: 4
       timeout_seconds: 300
-      priority: interactive
+      priority: interactive                     # batch Free resources milenge tab run karo (Ye large ETL jobs ke liye best hoga)
