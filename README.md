@@ -65,7 +65,7 @@ graph LR
     %% Flow Connections
     Faker -->|Simulates Data| RawCSV
     RawCSV -->|Read by| IngestScript
-    IngestScript -->|Load (WRITE_TRUNCATE)| RawSchema
+    IngestScript -->|"Load (WRITE_TRUNCATE)"| RawSchema
 
     %% dbt Internal Flow
     RawSchema --> Staging
