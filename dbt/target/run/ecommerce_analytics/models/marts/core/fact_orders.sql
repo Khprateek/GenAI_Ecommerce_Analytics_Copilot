@@ -71,6 +71,7 @@ final as (
         -- MEASURES (all additive)
         o.revenue_usd,
         o.discount_usd,
+        o.refund_usd,
         o.shipping_cost_usd,
         o.net_revenue_usd,
         o.total_items,

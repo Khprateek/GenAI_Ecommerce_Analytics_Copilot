@@ -3,7 +3,6 @@
 
 with fact as (
     select * from `genai-copilot-enterprisedata`.`marts`.`fact_orders`
-    where is_completed = 1
 ),
 
 daily as (
@@ -22,14 +21,14 @@ daily as (
         dch.channel_type,
 
         -- measures
-        count(distinct order_id)        as total_orders,
-        count(distinct customer_sk)     as unique_customers,
-        sum(revenue_usd)                as gross_revenue_usd,
-        sum(discount_usd)               as total_discounts_usd,
-        sum(net_revenue_usd)            as net_revenue_usd,
-        sum(total_items)                as total_items_sold,
-        avg(revenue_usd)                as avg_order_value_usd,
-        sum(is_cancelled)               as cancelled_orders
+        count(distinct order_id)                                                    as total_orders,
+        count(distinct customer_sk)                                                 as unique_customers,
+        sum(case when is_completed = 1 then revenue_usd else 0 end)                 as gross_revenue_usd,
+        sum(case when is_completed = 1 then discount_usd else 0 end)                as total_discounts_usd,
+        sum(case when is_completed = 1 then net_revenue_usd else 0 end)             as net_revenue_usd,
+        sum(total_items)                                                            as total_items_sold,
+        avg(revenue_usd)                                                            as avg_order_value_usd,
+        sum(is_cancelled)                                                           as cancelled_orders
 
     from fact
     left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk

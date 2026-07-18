@@ -29,6 +29,14 @@ customers as (
     from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
 ),
 
+returns_agg as (
+    select
+        order_id,
+        sum(refund_amount_usd) as total_refund_usd
+    from `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+    group by order_id
+),
+
 enriched as (
     select
         -- order keys
@@ -50,7 +58,8 @@ enriched as (
         o.revenue_usd,
         o.discount_usd,
         o.shipping_cost_usd,
-        coalesce(oi.items_revenue_usd, o.revenue_usd) as net_revenue_usd,
+        coalesce(r.total_refund_usd, 0) as refund_usd,
+        o.revenue_usd - coalesce(o.discount_usd, 0) - coalesce(r.total_refund_usd, 0) as net_revenue_usd,
 
         -- items
         coalesce(oi.total_items, 0)       as total_items,
@@ -67,6 +76,7 @@ enriched as (
     from orders o
     left join order_items_agg oi on o.order_id = oi.order_id
     left join customers c on o.customer_id = c.customer_id
+    left join returns_agg r on o.order_id = r.order_id
 )
 
 select * from enriched;

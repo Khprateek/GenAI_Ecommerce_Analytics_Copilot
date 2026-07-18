@@ -37,7 +37,7 @@ cleaned as (
         order_id     is not null
         and customer_id is not null
         and order_date  is not null
-        and revenue     >= 0              -- drop corrupted negative revenue rows
+        and ( revenue >= 0 OR revenue is NULL)             -- drop corrupted negative revenue rows
 )
 
 select * from cleaned;
