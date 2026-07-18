@@ -4,9 +4,9 @@ ecommerce_analytics:
     dev:
       type: bigquery
       method: service-account
-      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      project: "{{ env_var('GCP_PROJECT_ID', 'genai-copilot-enterprisedata') }}"
       dataset: staging                          # default dataset (overridden per model)
-      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS', 'D:/JOB/Work/GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing/genai-copilot-enterprisedata.json') }}"
       location: US
       threads: 4
       timeout_seconds: 300

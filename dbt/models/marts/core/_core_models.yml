@@ -16,11 +16,13 @@ models:
         tests:
           - not_null
           - dbt_utils.accepted_range:
-              min_value: 0
+              arguments:
+                min_value: 0
       - name: order_status
         tests:
           - accepted_values:
-              values: ['COMPLETED', 'CANCELLED', 'PENDING', 'REFUNDED']
+              arguments:
+                values: ['COMPLETED', 'CANCELLED', 'PENDING', 'REFUNDED']
 
   - name: dim_customers
     description: "Customer dimension with RFM segments and value tiers"
@@ -34,8 +36,9 @@ models:
       - name: rfm_segment
         tests:
           - accepted_values:
-              values: ['Champions','Loyal Customers','New Customers',
-                       'At Risk','Lost','Potential Loyalists','No Purchases']
+              arguments:
+                values: ['Champions','Loyal Customers','New Customers',
+                         'At Risk','Lost','Potential Loyalists','No Purchases']
 
   - name: dim_products
     description: "Product dimension with category hierarchy and performance labels"
@@ -47,8 +50,9 @@ models:
       - name: margin_pct
         tests:
           - dbt_utils.accepted_range:
-              min_value: -100
-              max_value: 100
+              arguments:
+                min_value: -100
+                max_value: 100
 
   - name: dim_date
     description: "Date spine 2022–2027"

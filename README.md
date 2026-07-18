@@ -13,40 +13,119 @@ An end-to-end modern data stack (MDS) analytics platform and AI assistant. This 
 
 ## 🏗️ Architecture Overview
 
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#2a2a2a', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+graph LR
+    %% Main Components
+    subgraph INGEST ["1. Data Ingestion (Python)"]
+        direction TB
+        Faker[Python Faker Script]
+        RawCSV[Raw CSV Files]
+        IngestScript[load_to_bigquery.py]
+    end
+
+    subgraph DWH ["2. Data Warehouse (Google BigQuery)"]
+        direction TB
+        
+        subgraph RawSchema ["raw schema"]
+            R_Ord[orders]
+            R_Cust[customers]
+            R_Prod[products]
+            R_Item[order_items]
+            R_Ev[events]
+            R_Ret[returns]
+            R_Mkt[marketing_spend]
+        end
+
+        subgraph dbt_T ["dbt Transformation Layers"]
+            Staging[dbt Staging Layer:<br/>Type Casting & Validation]
+            Intermediate[dbt Intermediate Layer:<br/>RFM Metrics, Churn Features]
+            Marts[dbt Marts Layer:<br/>fact_orders, dim_customers, dim_products]
+        end
+        
+        subgraph MetricsLayer ["Metrics Layer"]
+            M_Rev[revenue_daily]
+            M_Perf[product_performance]
+            M_LTV[customer_ltv]
+        end
+    end
+
+    subgraph SERVING ["3. Serving & Analytics Layer"]
+        direction TB
+        subgraph APPS ["Applications"]
+            Streamlit[Streamlit Application:<br/>Interactive BI Tabs]
+        end
+        
+        subgraph AI_ML ["AI & Machine Learning"]
+            SKLearn[scikit-learn Churn Model:<br/>Logistic Regression]
+            Gemini[AI Analytics Copilot:<br/>Schema-grounded Gemini API]
+        end
+    end
+
+    %% Flow Connections
+    Faker -->|Simulates Data| RawCSV
+    RawCSV -->|Read by| IngestScript
+    IngestScript -->|Load (WRITE_TRUNCATE)| RawSchema
+
+    %% dbt Internal Flow
+    RawSchema --> Staging
+    Staging --> Intermediate
+    Intermediate --> Marts
+    Marts --> MetricsLayer
+
+    %% Serving Connections
+    Marts -.->|Query| Streamlit
+    MetricsLayer -.->|Query| Streamlit
+    Intermediate -.->|Input Features| SKLearn
+    Marts -.->|Grounding Context| Gemini
+    SKLearn -->|Churn Probabilities| Streamlit
+    Gemini <-->|Interactive Querying| Streamlit
+
+    %% Styling classes
+    classDef ingestion fill:#a5d6a7,stroke:#2e7d32,stroke-width:1px,color:black;
+    classDef storage fill:#e0e0e0,stroke:#616161,stroke-width:1px,color:black;
+    classDef dbt fill:#ffcc80,stroke:#ef6c00,stroke-width:1px,color:black;
+    classDef serving fill:#90caf9,stroke:#1565c0,stroke-width:1px,color:black;
+
+    %% Apply styles
+    class Faker,RawCSV,IngestScript ingestion;
+    class R_Ord,R_Cust,R_Prod,R_Item,R_Ev,R_Ret,R_Mkt storage;
+    class Staging,Intermediate,Marts,MetricsLayer dbt;
+    class Streamlit,SKLearn,Gemini serving;
 ```
-Raw CSV Source Files (7 Tables, 500k+ rows)
-         │
-         ▼
-Ingestion Script (Python + BigQuery Client API)
-         │
-         ▼
-Google BigQuery Data Warehouse [raw dataset]
-  ├── raw.orders         ├── raw.order_items   ├── raw.products
-  ├── raw.customers      ├── raw.events        ├── raw.returns
-  └── raw.marketing_spend
-         │
-         ▼
-dbt (Data Build Tool) Transformation Pipeline
-  ├── Layer 1 (Staging):       Type casting, renaming, schema consistency
-  ├── Layer 2 (Intermediate):  Fact enrichment, RFM scoring, Churn feature engineering
-  └── Layer 3 (Marts):         Star schema dimensions and fact tables, Aggregated metrics
-         │
-         ▼
-Google BigQuery Data Warehouse [marts & metrics datasets]
-  ├── marts.fact_orders        ├── marts.dim_customers
-  ├── marts.dim_products       ├── metrics.revenue_daily
-  ├── metrics.customer_ltv     ├── metrics.conversion_rate
-  └── metrics.marketing_performance
-         │
-         ├────────────────────────────────────────┐
-         ▼                                        ▼
-Streamlit Interactive UI                  Gemini Analytics Copilot
-  ├── 📈 Overview & KPIs                   ├── Grounded Schema Prompts (via dbt docs)
-  ├── 🏆 Products & Margins                ├── Text-to-SQL query generation
-  ├── 👥 Customers & Churn ML              ├── Real-time SQL validation and run
-  ├── ↩️ Return Analytics                  └── Executive business insights
-  ├── 📣 Marketing Performance
-  └── 🔻 Clickstream Funnel
+
+### ⏱️ Airflow & dbt Orchestration Flow
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#2a2a2a', 'edgeLabelBackground':'#ffffff', 'tertiaryColor': '#fff'}}}%%
+graph LR
+    %% Airflow Node Style (matching native UI feel)
+    classDef airflowTask fill:#ffcc80,stroke:#ef6c00,stroke-width:1.5px,color:black,rx:5,ry:5;
+    classDef airflowDAG fill:#eee,stroke:#333,stroke-width:1px,stroke-dasharray: 5 5,color:black;
+
+    subgraph DAG1 ["DAG 1: Ingestion_DAG"]
+        direction LR
+        t1_gen[generate_data]
+        t1_load[load_raw_to_bigquery]
+        
+        t1_gen --> t1_load
+    end
+
+    %% Trigger relationship
+    t1_load -->|Trigger| DAG2
+
+    subgraph DAG2 ["DAG 2: ecommerce_dbt"]
+        direction LR
+        t2_run[dbt_run]
+        t2_test[dbt_test]
+        t2_docs[dbt_docs]
+
+        t2_run --> t2_test
+        t2_test --> t2_docs
+    end
+
+    %% Apply Styles
+    class DAG1,DAG2 airflowDAG;
+    class t1_gen,t1_load,t2_run,t2_test,t2_docs airflowTask;
 ```
 
 ---
@@ -206,3 +285,49 @@ streamlit run app.py
 - **Plain English to SQL**: Translate complex analytical requests (e.g., *"Which marketing channel had the best ROAS last month?"*) into BigQuery SQL.
 - **Context Injection**: Reads dbt schemas and model descriptions dynamically so the LLM is fully grounded in the database structure.
 - **Visual & Insight Generation**: Executes queries on BigQuery, renders tabular outputs, selects appropriate Plotly configurations (lines/bars) based on query schemas, and uses Gemini to summarize key takeaways.
+
+#### 🤖 AI Copilot Query Execution Sequence
+```mermaid
+%%{init: {'theme': 'dark'}}%%
+sequenceDiagram
+    autonumber
+    actor User
+    participant App as Streamlit UI
+    participant Gemini as Gemini AI Client
+    participant BigQuery as Google BigQuery
+
+    Note over User, App: Query Phase
+
+    User->>App: Submits Natural Language Question<br/>(e.g., "What was the conversion rate trend last month?")
+    
+    activate App
+    App->>App: Compiles dbt Schema Metadata<br/>(Tables, Columns, Relationships)
+    
+    App->>Gemini: Requests SQL Generation<br/>[User Question + Schema Context]
+    activate Gemini
+    Gemini-->>App: Returns Generated BigQuery SQL Query
+    deactivate Gemini
+
+    App->>App: Runs sql_validator.py<br/>(Prevents injection & syntax errors)
+    Note right of App: Validated?
+
+    alt SQL is Valid
+        App->>BigQuery: Executes Validated SQL
+        activate BigQuery
+        BigQuery-->>App: Returns Data Result (Pandas DataFrame)
+        deactivate BigQuery
+    else SQL is Invalid
+        App-->>User: Displays Error Message
+    end
+
+    Note over User, App: Insights Phase
+
+    App->>Gemini: Requests Executive Summary<br/>[User Question + Raw DataFrame]
+    activate Gemini
+    Gemini-->>App: Returns Plain English Business Insights
+    deactivate Gemini
+
+    App->>App: Renders Interactive Plotly Chart
+    App-->>User: Displays Chart & Insights Summary
+    deactivate App
+```
