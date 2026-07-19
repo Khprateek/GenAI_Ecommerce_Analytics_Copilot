@@ -11,7 +11,7 @@ sys.path.append(os.path.dirname(__file__))
 from utils.bq_client import run_query
 from utils import queries as q
 from utils.churn_model import get_churn_predictions
-from components.kpi_cards import render_kpi_cards
+from components.kpi_cards import render_monthly_kpi_cards, render_business_kpi_cards
 from components.charts import (
     revenue_trend_chart,
     channel_bar_chart,
@@ -55,49 +55,52 @@ granularity = st.sidebar.selectbox("Revenue trend granularity", ["Daily", "Weekl
 st.sidebar.markdown("---")
 st.sidebar.caption("Data refreshes every 5 minutes.")
 
-# ── KPI Row ───────────────────────────────────────────────────────────────────
-kpi_sql = q.KPI_SUMMARY.format(start=start_date, end=end_date)
-kpi_df = run_query(kpi_sql)
-
-if kpi_df.empty or kpi_df.iloc[0]["total_revenue"] is None:
-    st.warning("No data found for the selected date range.")
-else:
-    render_kpi_cards(kpi_df)
-
-st.markdown("---")
-
-# ── Revenue Trend + Channel ──────────────────────────────────────────────────
-col1, col2 = st.columns([2, 1])
-
-with col1:
-    trend_sql = q.REVENUE_TREND.format(start=start_date, end=end_date)
-    trend_df = run_query(trend_sql)
-    if not trend_df.empty:
-        revenue_trend_chart(trend_df, granularity)
-    else:
-        st.info("No revenue trend data for this period.")
-
-with col2:
-    channel_sql = q.REVENUE_BY_CHANNEL.format(start=start_date, end=end_date)
-    channel_df = run_query(channel_sql)
-    if not channel_df.empty:
-        channel_bar_chart(channel_df)
-    else:
-        st.info("No channel data for this period.")
-
-st.markdown("---")
-
-# ── Products + Categories ────────────────────────────────────────────────────
-# ── Products + Categories ────────────────────────────────────────────────────
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
-    ["📈 Overview", "🏆 Products & Margin", "👥 Customers", "↩️ Returns", "📣 Marketing", "🔻 Funnel"]
+# ── MAIN TABS ─────────────────────────────────────────────────────────────────
+tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
+    ["🗓️ Monthly Dashboard", "📈 Overview", "🏆 Products & Margin", "👥 Customers", "↩️ Returns", "📣 Marketing", "🔻 Funnel"]
 )
 
+with tab0:
+    st.subheader(f"Monthly Dashboard for {end_date.strftime('%B %Y')}")
+    monthly_sql = q.MONTHLY_KPI_SUMMARY.format(date=end_date)
+    monthly_df = run_query(monthly_sql)
+    
+    if monthly_df.empty or monthly_df.iloc[0]["month_revenue"] is None:
+        st.warning("No monthly data found for the selected month.")
+    else:
+        render_monthly_kpi_cards(monthly_df)
+    
+    st.markdown("---")
+    st.info("Select a different end date in the sidebar to view its monthly dashboard.")
+
 with tab1:
-    st.info(
-        "The Revenue Trend and Revenue by Channel charts are already displayed "
-        "at the top of the dashboard. Use the tabs below for deeper analysis."
-    )
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        trend_sql = q.REVENUE_TREND.format(start=start_date, end=end_date)
+        trend_df = run_query(trend_sql)
+        if not trend_df.empty:
+            revenue_trend_chart(trend_df, granularity)
+        else:
+            st.info("No revenue trend data for this period.")
+
+    with col2:
+        channel_sql = q.REVENUE_BY_CHANNEL.format(start=start_date, end=end_date)
+        channel_df = run_query(channel_sql)
+        if not channel_df.empty:
+            channel_bar_chart(channel_df)
+        else:
+            st.info("No channel data for this period.")
+
+    st.markdown("---")
+    st.subheader("Business KPIs (Selected Period)")
+    biz_sql = q.BUSINESS_KPI_SUMMARY.format(start=start_date, end=end_date)
+    biz_df = run_query(biz_sql)
+    
+    if biz_df.empty or pd.isna(biz_df.iloc[0]["gmv"]):
+        st.warning("No business KPI data found for the selected date range.")
+    else:
+        render_business_kpi_cards(biz_df)
 
 with tab2:
     c3, c4 = st.columns([1.3,1])

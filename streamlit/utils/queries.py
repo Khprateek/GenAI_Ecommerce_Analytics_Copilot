@@ -6,38 +6,37 @@ MARTS   = f"`{PROJECT}.marts`"
 STAGING = f"`{PROJECT}.staging`"
 
 
-# ── KPI SUMMARY ────────────────────────────────────────────────────────────────
-KPI_SUMMARY = f"""
+# ── MONTHLY DASHBOARD METRICS ─────────────────────────────────────────────────
+MONTHLY_KPI_SUMMARY = f"""
+SELECT
+    SUM(gross_revenue_usd) AS month_revenue,
+    SUM(total_orders) AS month_orders,
+    AVG(avg_order_value_usd) AS month_aov,
+    SUM(unique_customers) AS month_customers,
+    SUM(total_items_sold) AS month_items_sold
+FROM {METRICS}.revenue_daily
+WHERE order_year = EXTRACT(YEAR FROM DATE('{{date}}'))
+  AND order_month = EXTRACT(MONTH FROM DATE('{{date}}'))
+"""
+
+# ── BUSINESS KPIs (OVERVIEW) ───────────────────────────────────────────────────
+BUSINESS_KPI_SUMMARY = f"""
 WITH revenue AS (
     SELECT
-        SUM(gross_revenue_usd) AS total_revenue,
+        SUM(gross_revenue_usd) AS gmv,
+        SUM(net_revenue_usd) AS net_revenue,
+        SUM(total_discounts_usd) AS total_discounts,
         SUM(total_orders) AS total_orders,
-        AVG(avg_order_value_usd) AS avg_order_value,
-        SUM(total_items_sold) AS total_items_sold,
-        COUNT(DISTINCT unique_customers) AS today_new_customer
+        SUM(cancelled_orders) AS cancelled_orders
     FROM {METRICS}.revenue_daily
     WHERE order_date BETWEEN DATE('{{start}}') AND DATE('{{end}}')
-),
-
-customers AS (
-    SELECT
-        COUNT(*) AS total_customers,
-        AVG(lifetime_value_usd) AS avg_ltv,
-        SUM(lifetime_value_usd) AS total_ltv
-    FROM {METRICS}.customer_ltv
-),
-
-conversion AS (
-    SELECT
-        AVG(purchase_rate_pct) AS conversion_rate
-    FROM {METRICS}.conversion_rate
-    WHERE event_date BETWEEN DATE('{{start}}') AND DATE('{{end}}')
 )
-
-SELECT *
+SELECT
+    gmv,
+    net_revenue,
+    total_discounts / NULLIF(gmv, 0) AS discount_drag_rate,
+    (total_orders - cancelled_orders) / NULLIF(total_orders, 0) AS order_fulfillment_rate
 FROM revenue
-CROSS JOIN customers
-CROSS JOIN conversion
 """
 
 # ── REVENUE TREND ──────────────────────────────────────────────────────────────

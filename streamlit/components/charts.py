@@ -8,6 +8,12 @@ PALETTE = px.colors.qualitative.Set2
 
 def revenue_trend_chart(df: pd.DataFrame, granularity: str = "Daily", key="revenue_trend"):
     """Line chart of revenue over time."""
+    # Ensure columns are float to avoid being dropped by numeric_only=True during resample
+    if "revenue" in df.columns:
+        df["revenue"] = df["revenue"].astype(float)
+    if "orders" in df.columns:
+        df["orders"] = df["orders"].astype(float)
+
     if granularity == "Weekly":
         df = df.copy()
         df["order_date"] = pd.to_datetime(df["order_date"])
