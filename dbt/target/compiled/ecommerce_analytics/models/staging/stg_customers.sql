@@ -8,8 +8,8 @@ cleaned as (
         trim(split(name, ' ')[safe_offset(0)]) as first_name,
         trim(split(name, ' ')[safe_offset(1)]) as last_name,
         lower(concat(split(email, '@')[safe_offset(0)], '_', cast(customers_id as string), '@', split(email, '@')[safe_offset(1)])) as email,
-        upper(trim(country))            as country_code,
-        cast(null as string)            as city,
+        upper(trim(state_name))            as state_name,
+        upper(trim(city_name))             as city_name,
 
         cast(signup_date    as date)    as signup_date,
         cast(null as date)              as birth_date,

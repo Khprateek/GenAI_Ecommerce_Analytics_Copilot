@@ -13,7 +13,8 @@ daily as (
         order_week,
 
         -- breakdowns
-        country_code,
+        state_name,
+        city_name,
         customer_type,
 
         -- channel (join back to get name)
@@ -32,7 +33,7 @@ daily as (
 
     from fact
     left join {{ ref('dim_channels') }} dch on fact.channel_sk = dch.channel_sk
-    group by 1, 2, 3, 4, 5, 6, 7, 8
+    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
 )
 
 select * from daily

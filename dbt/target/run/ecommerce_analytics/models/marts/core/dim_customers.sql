@@ -31,8 +31,8 @@ final as (
         c.last_name,
         concat(c.first_name, ' ', c.last_name)  as full_name,
         c.email,
-        c.country_code,
-        c.city,
+        c.state_name,
+        c.city_name,
 
         -- signup info
         c.signup_date,

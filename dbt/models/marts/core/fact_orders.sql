@@ -47,7 +47,8 @@ final as (
 
         -- degenerate dimensions (attributes that don't need their own dim)
         o.order_status,
-        o.country_code,
+        o.state_name,
+        o.city_name,
         o.customer_type,                                -- new vs returning
 
         -- DATE (also store raw date for easy filtering)

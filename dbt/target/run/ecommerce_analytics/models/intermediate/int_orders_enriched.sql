@@ -22,7 +22,8 @@ order_items_agg as (
 customers as (
     select
         customer_id,
-        country_code            as customer_country,
+        state_name            as customer_state,
+        city_name             as customer_city,
         acquisition_channel,
         signup_date,
         days_since_signup
@@ -52,7 +53,8 @@ enriched as (
         -- order attributes
         o.order_status,
         o.channel,
-        c.customer_country              as country_code,
+        c.customer_state              as state_name,
+        c.customer_city               as city_name,
 
         -- financials
         o.revenue_usd,
