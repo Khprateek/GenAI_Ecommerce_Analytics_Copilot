@@ -109,7 +109,7 @@ def get_churn_predictions():
 
     # Load customer attributes from dim_customers
     dim_cust_sql = """
-        select customer_id, full_name, email, country_code, rfm_segment, lifetime_value_usd
+        select customer_id, full_name, email, state_name, city_name, rfm_segment, lifetime_value_usd
         from `genai-copilot-enterprisedata.marts.dim_customers`
     """
     dim_cust_df = run_query(dim_cust_sql)

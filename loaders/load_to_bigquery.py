@@ -87,7 +87,7 @@ def load_table(table_name: str) -> None:
 
     logger.info(f"Reading {csv_path}")
 
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, encoding='utf-8', encoding_errors='replace')
 
     logger.info(
         f"{table_name}: {len(df):,} rows loaded from CSV"

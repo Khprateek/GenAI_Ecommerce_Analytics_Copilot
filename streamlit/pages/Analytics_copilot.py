@@ -41,7 +41,7 @@ examples = [
     "Highest margin products",
     "Marketing ROI",
     "Customer segments",
-    "Orders by country",
+    "Orders by state and city",
 ]
 
 with st.sidebar:

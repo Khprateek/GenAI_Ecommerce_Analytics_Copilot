@@ -27,7 +27,8 @@ product_sk
 channel_sk
 order_date_key
 order_status
-country_code
+state_name
+city_name
 customer_type
 order_date
 order_year
@@ -50,8 +51,8 @@ first_name
 last_name
 full_name
 email
-country_code
-city
+state_name
+city_name
 signup_date
 acquisition_channel
 days_since_signup

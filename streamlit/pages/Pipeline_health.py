@@ -263,7 +263,8 @@ with st.expander("👤 customers (staging.stg_customers)") as exp:
       - `first_name` (STRING)
       - `last_name` (STRING)
       - `email` (STRING)
-      - `country_code` (STRING)
+      - `state_name` (STRING)
+      - `city_name` (STRING)
       - `signup_date` (DATE)
       - `days_since_signup` (INT64) - Calculated dynamically
     - **Active Validation Rules**:
@@ -304,4 +305,4 @@ with st.expander("↩️ returns (staging.stg_returns)") as exp:
       - `return_id` must be unique.
       - `return_id`, `order_id` must not be null.
       - *Note: Warning status generated due to simulation of incomplete return reasons in raw files.*
-    """)
+    """)

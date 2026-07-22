@@ -45,7 +45,8 @@ order_date_key
 Degenerate Dimensions
 
 order_status
-country_code
+state_name
+city_name
 customer_type
 
 Date Attributes
@@ -85,8 +86,8 @@ Columns
 customer_id
 full_name
 email
-country_code
-city
+state_name
+city_name
 signup_date
 acquisition_channel
 days_since_signup

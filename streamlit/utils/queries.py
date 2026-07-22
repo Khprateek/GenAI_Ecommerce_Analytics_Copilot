@@ -9,7 +9,7 @@ STAGING = f"`{PROJECT}.staging`"
 # ── MONTHLY DASHBOARD METRICS ─────────────────────────────────────────────────
 MONTHLY_KPI_SUMMARY = f"""
 SELECT
-    SUM(gross_revenue_usd) AS month_revenue,
+    SUM(net_revenue_usd) AS month_revenue,
     SUM(total_orders) AS month_orders,
     AVG(avg_order_value_usd) AS month_aov,
     SUM(unique_customers) AS month_customers,

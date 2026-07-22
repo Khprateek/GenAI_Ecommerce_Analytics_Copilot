@@ -28,8 +28,11 @@ daily as (
         sum(case when is_completed = 1 then discount_usd else 0 end)                as total_discounts_usd,
         sum(case when is_completed = 1 then net_revenue_usd else 0 end)             as net_revenue_usd,
         sum(total_items)                                                            as total_items_sold,
-        avg(revenue_usd)                                                            as avg_order_value_usd,
-        sum(is_cancelled)                                                           as cancelled_orders
+        sum(is_cancelled)                                                           as cancelled_orders,
+        SAFE_DIVIDE(COUNT(DISTINCT order_id) - SUM(is_cancelled),COUNT(DISTINCT order_id)) AS order_fullfillment_rate,
+        SAFE_DIVIDE(SUM(total_items), COUNT(DISTINCT order_id)) AS basket_depth,
+        SAFE_DIVIDE(SUM(CASE WHEN is_completed = 1 THEN revenue_usd ELSE 0 END), COUNT(CASE WHEN is_completed = 1 THEN 1 END)) AS avg_order_value
+
 
     from fact
     left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk

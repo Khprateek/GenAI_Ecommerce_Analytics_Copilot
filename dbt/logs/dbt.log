@@ -33042,3 +33042,2844 @@ select * from daily
 [0m23:59:29.047681 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D2C6B660C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D2C73E5220>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001D2EA9B5160>]}
 [0m23:59:29.047681 [debug] [MainThread]: Flushing usage events
 [0m23:59:30.926856 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m15:33:03.592370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06B651A30>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06C890A10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06CAB4740>]}
+
+
+============================== 15:33:03.615927 | 1927e100-f955-4462-999f-3db8a4fd6a3a ==============================
+[0m15:33:03.615927 [info ] [MainThread]: Running with dbt=1.11.11
+[0m15:33:03.615927 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'introspect': 'True', 'log_cache_events': 'False', 'empty': 'False', 'cache_selected_only': 'False', 'fail_fast': 'False', 'debug': 'False', 'log_format': 'default', 'partial_parse': 'True', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'profiles_dir': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt', 'use_colors': 'True', 'invocation_command': 'dbt run', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt\\logs'}
+[0m15:33:08.238844 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0106092B0>]}
+[0m15:33:08.330621 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06B6A7950>]}
+[0m15:33:08.332372 [info ] [MainThread]: Registered adapter: bigquery=1.11.1
+[0m15:33:09.300540 [debug] [MainThread]: checksum: 30a8cc8fdcbf66701b0944d4ccce3fa46dd04b61e5df68b9f16d57b2e0e3f0be, vars: {}, profile: , target: , version: 1.11.11
+[0m15:33:12.851574 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 1 files added, 2 files changed.
+[0m15:33:12.851574 [debug] [MainThread]: Partial parsing: added file: ecommerce_analytics://models\marts\metrics\funnel_stages.sql
+[0m15:33:12.851574 [debug] [MainThread]: Partial parsing: updated file: ecommerce_analytics://models\staging\_sources.yml
+[0m15:33:12.851574 [debug] [MainThread]: Partial parsing: updated file: ecommerce_analytics://models\marts\metrics\revenue_daily.sql
+[0m15:33:14.096207 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A010E08F80>]}
+[0m15:33:14.455815 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m15:33:14.500109 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m15:33:14.571023 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A010DFF3B0>]}
+[0m15:33:14.571023 [info ] [MainThread]: Found 22 models, 50 data tests, 7 sources, 667 macros
+[0m15:33:14.572811 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012501EB0>]}
+[0m15:33:14.578419 [info ] [MainThread]: 
+[0m15:33:14.578419 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m15:33:14.578419 [info ] [MainThread]: 
+[0m15:33:14.585322 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m15:33:14.593359 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:33:14.593359 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:14.593359 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:33:14.597783 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:14.597783 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:33:14.599794 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:17.622900 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_staging'
+[0m15:33:17.625177 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:17.625177 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_metrics'
+[0m15:33:17.627001 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:17.628266 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_marts'
+[0m15:33:17.628266 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:33:19.990885 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012500FE0>]}
+[0m15:33:19.992934 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m15:33:20.143315 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.dim_channels
+[0m15:33:20.145385 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.dim_date
+[0m15:33:20.145385 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.stg_customers
+[0m15:33:20.147189 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.stg_events
+[0m15:33:20.145385 [info ] [Thread-1 (]: 1 of 22 START sql table model marts.dim_channels ............................... [RUN]
+[0m15:33:20.147189 [info ] [Thread-2 (]: 2 of 22 START sql table model marts.dim_date ................................... [RUN]
+[0m15:33:20.147189 [info ] [Thread-3 (]: 3 of 22 START sql view model staging.stg_customers ............................. [RUN]
+[0m15:33:20.147189 [debug] [Thread-1 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.dim_channels'
+[0m15:33:20.147189 [info ] [Thread-4 (]: 4 of 22 START sql view model staging.stg_events ................................ [RUN]
+[0m15:33:20.147189 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.dim_date'
+[0m15:33:20.152760 [debug] [Thread-3 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.stg_customers'
+[0m15:33:20.152760 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.dim_channels
+[0m15:33:20.152760 [debug] [Thread-4 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.stg_events'
+[0m15:33:20.157354 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.dim_date
+[0m15:33:20.157354 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.stg_customers
+[0m15:33:20.175391 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_channels"
+[0m15:33:20.176668 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.stg_events
+[0m15:33:20.181249 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_date"
+[0m15:33:20.184308 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_customers"
+[0m15:33:20.193611 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_events"
+[0m15:33:20.193611 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.dim_channels
+[0m15:33:20.200613 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.dim_date
+[0m15:33:20.243315 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m15:33:20.243315 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m15:33:20.245525 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.stg_events
+[0m15:33:20.272546 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.stg_customers
+[0m15:33:20.290565 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_events"
+[0m15:33:20.294003 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_customers"
+[0m15:33:20.420385 [debug] [Thread-4 (]: On model.ecommerce_analytics.stg_events: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_events"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_events`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`events`
+),
+
+cleaned as (
+    select
+        cast(event_id       as string)      as event_id,
+        concat(cast(customer_id as string), '_', cast(cast(event_timestamp as timestamp) as date)) as session_id,
+        cast(customer_id    as string)      as customer_id,  -- nullable (anonymous users)
+
+        lower(trim(event_type))             as event_type,   -- page_view, add_to_cart, purchase
+        case when lower(trim(event_type)) = 'page_view' then '/product/details' else null end as page,
+        case
+            when customer_id is null or trim(cast(customer_id as string)) = '' then 'unknown'
+            else case mod(abs(farm_fingerprint(cast(customer_id as string))), 3)
+                when 0 then 'desktop' when 1 then 'mobile' else 'tablet'
+            end
+        end as device_type,
+
+        cast(event_timestamp as timestamp)  as event_timestamp,
+        cast(cast(event_timestamp as timestamp) as date) as event_date,
+
+        current_timestamp()                 as _dbt_loaded_at
+
+    from source
+    where event_id is not null and event_timestamp is not null
+)
+
+select * from cleaned;
+
+
+[0m15:33:20.421654 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m15:33:20.423322 [debug] [Thread-3 (]: On model.ecommerce_analytics.stg_customers: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_customers"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`customers`
+),
+
+cleaned as (
+    select
+        cast(customers_id   as string)  as customer_id,
+        trim(split(name, ' ')[safe_offset(0)]) as first_name,
+        trim(split(name, ' ')[safe_offset(1)]) as last_name,
+        lower(concat(split(email, '@')[safe_offset(0)], '_', cast(customers_id as string), '@', split(email, '@')[safe_offset(1)])) as email,
+        upper(trim(state_name))            as state_name,
+        upper(trim(city_name))             as city_name,
+
+        cast(signup_date    as date)    as signup_date,
+        cast(null as date)              as birth_date,
+
+        -- derived: days since signup
+        date_diff(current_date(), cast(signup_date as date), day) as days_since_signup,
+
+        cast(null as string)            as acquisition_channel,  -- paid, organic, referral
+
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where customers_id is not null and email is not null
+)
+
+select * from cleaned;
+
+
+[0m15:33:20.426854 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m15:33:22.534646 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_date"
+[0m15:33:22.575818 [debug] [Thread-2 (]: On model.ecommerce_analytics.dim_date: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_date"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_date`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Date dimension: generates one row per day from start_date to today + 1 year
+-- Uses BigQuery's GENERATE_DATE_ARRAY
+
+with date_spine as (
+    select date_val
+    from unnest(
+        generate_date_array(
+            '2022-01-01',
+            date_add(current_date(), interval 365 day),
+            interval 1 day
+        )
+    ) as date_val
+),
+
+enriched as (
+    select
+        -- surrogate key
+        cast(format_date('%Y%m%d', date_val) as integer)  as date_key,
+        date_val                                           as full_date,
+
+        -- year / quarter / month
+        extract(year     from date_val)                    as year,
+        extract(quarter  from date_val)                    as quarter_number,
+        concat('Q', extract(quarter from date_val))        as quarter_name,
+        extract(month    from date_val)                    as month_number,
+        format_date('%B', date_val)                        as month_name,
+        format_date('%b', date_val)                        as month_short,
+
+        -- week
+        extract(isoweek  from date_val)                    as iso_week_number,
+        extract(dayofweek from date_val)                   as day_of_week,   -- 1=Sun
+        format_date('%A', date_val)                        as day_name,
+        format_date('%a', date_val)                        as day_short,
+
+        -- day
+        extract(day      from date_val)                    as day_of_month,
+        extract(dayofyear from date_val)                   as day_of_year,
+
+        -- flags
+        case extract(dayofweek from date_val)
+            when 1 then true when 7 then true else false
+        end                                                as is_weekend,
+
+        -- fiscal (assuming Jan fiscal year start — adjust if needed)
+        extract(year from date_val)                        as fiscal_year,
+        extract(quarter from date_val)                     as fiscal_quarter,
+
+        -- period labels useful for dashboard filters
+        format_date('%Y-%m', date_val)                     as year_month,
+        format_date('%G-W%V', date_val)                    as year_week
+
+    from date_spine
+)
+
+select * from enriched
+    );
+  
+[0m15:33:22.608701 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_channels"
+[0m15:33:22.608701 [debug] [Thread-1 (]: On model.ecommerce_analytics.dim_channels: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_channels"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_channels`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Static channel reference — seed-style but built in dbt
+-- Add rows here as new channels are introduced
+
+with channels as (
+    select 'web' as channel_code, 'Website' as channel_name, 'Digital' as channel_type, 'Direct' as channel_category
+    union all
+    select 'mobile', 'Mobile App', 'Digital', 'Direct'
+    union all
+    select 'store', 'Physical Store', 'Offline', 'Direct'
+    union all
+    select 'marketplace', 'Marketplace', 'Digital', 'Partner'
+    union all
+    select 'social', 'Social Commerce', 'Digital', 'Partner'
+    union all
+    select 'email', 'Email Campaign', 'Digital', 'Marketing'
+),
+
+final as (
+    select
+        to_hex(md5(cast(coalesce(cast(channel_code as string), '_dbt_utils_surrogate_key_null_') as string))) as channel_sk,
+        channel_code,
+        channel_name,
+        channel_type,
+        channel_category,
+        case channel_type
+            when 'Digital' then true
+            else false
+        end as is_digital
+    from channels
+)
+
+select * from final
+    );
+  
+[0m15:33:22.833776 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:4244fac7-e1d7-4641-802e-1f7503cec5bf&page=queryresults
+[0m15:33:22.928012 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:f2c04770-764b-4958-a594-72dea519c6c0&page=queryresults
+[0m15:33:23.302368 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:b6f5f495-8407-4fad-8580-f761d9942c0b&page=queryresults
+[0m15:33:23.558820 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:7423b6f4-a6dd-4b63-9b43-abc92126689c&page=queryresults
+[0m15:33:23.775216 [debug] [Thread-3 (]: SQL status: OK in 0.841 seconds
+[0m15:33:23.992051 [debug] [Thread-4 (]: SQL status: OK in 1.150 seconds
+[0m15:33:25.224898 [debug] [Thread-1 (]: SQL status: OK in 1.663 seconds
+[0m15:33:25.242779 [debug] [Thread-2 (]: SQL status: OK in 1.938 seconds
+[0m15:33:28.648583 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012A24980>]}
+[0m15:33:28.649120 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0108D97F0>]}
+[0m15:33:28.650182 [info ] [Thread-3 (]: 3 of 22 OK created sql view model staging.stg_customers ........................ [[32mCREATE VIEW (0 processed)[0m in 8.49s]
+[0m15:33:28.651834 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.stg_customers
+[0m15:33:28.651311 [info ] [Thread-4 (]: 4 of 22 OK created sql view model staging.stg_events ........................... [[32mCREATE VIEW (0 processed)[0m in 8.49s]
+[0m15:33:28.652917 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.stg_marketing_spend
+[0m15:33:28.653989 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.stg_events
+[0m15:33:28.655050 [info ] [Thread-3 (]: 5 of 22 START sql view model staging.stg_marketing_spend ....................... [RUN]
+[0m15:33:28.655564 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.stg_order_items
+[0m15:33:28.656633 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_customers, now model.ecommerce_analytics.stg_marketing_spend)
+[0m15:33:28.658033 [info ] [Thread-4 (]: 6 of 22 START sql view model staging.stg_order_items ........................... [RUN]
+[0m15:33:28.658591 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.stg_marketing_spend
+[0m15:33:28.659125 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_events, now model.ecommerce_analytics.stg_order_items)
+[0m15:33:28.666090 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_marketing_spend"
+[0m15:33:28.666716 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.stg_order_items
+[0m15:33:28.672124 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_order_items"
+[0m15:33:28.675693 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.stg_marketing_spend
+[0m15:33:28.678914 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_marketing_spend"
+[0m15:33:28.680035 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.stg_order_items
+[0m15:33:28.682685 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_order_items"
+[0m15:33:28.682685 [debug] [Thread-3 (]: On model.ecommerce_analytics.stg_marketing_spend: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_marketing_spend"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_marketing_spend`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`marketing_spend`
+),
+
+cleaned as (
+    select
+        cast(spend_id as string) as spend_id,
+        cast(date as date) as spend_date,
+        lower(trim(channel)) as channel,
+        cast(spend_usd as numeric) as spend_usd,
+        cast(impressions as integer) as impressions,
+        cast(clicks as integer) as clicks,
+        round(safe_divide(cast(spend_usd as numeric),cast(clicks as numeric)),4) as cpc_usd,
+        round(safe_divide(cast(clicks as numeric),cast(impressions as numeric))*100,4) as ctr_pct,
+        current_timestamp() as _dbt_loaded_at
+    from source where spend_id is not null)
+select * from cleaned;
+
+
+[0m15:33:28.682685 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:33:28.682685 [debug] [Thread-4 (]: On model.ecommerce_analytics.stg_order_items: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_order_items"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`order_items`
+),
+
+cleaned as (
+    select
+        cast(order_item_id  as string)  as item_id,
+        cast(order_id       as string)  as order_id,
+        cast(product_id     as string)  as product_id,
+
+        cast(quantity       as integer) as quantity,
+        cast(unit_price     as numeric) as unit_price_usd,
+        cast(0              as numeric) as discount_pct,
+
+        -- derived: actual line revenue
+        round(
+            cast(quantity as numeric) * cast(unit_price as numeric)
+            * (1 - coalesce(cast(0 as numeric), 0) / 100),
+            2
+        )                               as line_revenue_usd,
+
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where order_item_id is not null and order_id is not null
+)
+
+select * from cleaned;
+
+
+[0m15:33:28.740789 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:33:29.142221 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0121794C0>]}
+[0m15:33:29.154906 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012311730>]}
+[0m15:33:29.179021 [info ] [Thread-2 (]: 2 of 22 OK created sql table model marts.dim_date .............................. [[32mCREATE TABLE (2.0k rows, 0 processed)[0m in 8.99s]
+[0m15:33:29.179021 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.dim_date
+[0m15:33:29.179021 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.stg_orders
+[0m15:33:29.179021 [info ] [Thread-1 (]: 1 of 22 OK created sql table model marts.dim_channels .......................... [[32mCREATE TABLE (6.0 rows, 0 processed)[0m in 9.01s]
+[0m15:33:29.179021 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.dim_channels
+[0m15:33:29.179021 [info ] [Thread-2 (]: 7 of 22 START sql view model staging.stg_orders ................................ [RUN]
+[0m15:33:29.179021 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.stg_products
+[0m15:33:29.186298 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_date, now model.ecommerce_analytics.stg_orders)
+[0m15:33:29.186298 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.stg_orders
+[0m15:33:29.186298 [info ] [Thread-1 (]: 8 of 22 START sql view model staging.stg_products .............................. [RUN]
+[0m15:33:29.196819 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_orders"
+[0m15:33:29.198830 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_channels, now model.ecommerce_analytics.stg_products)
+[0m15:33:29.198830 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.stg_products
+[0m15:33:29.208147 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_products"
+[0m15:33:29.210180 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.stg_products
+[0m15:33:29.212190 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.stg_orders
+[0m15:33:29.212190 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_products"
+[0m15:33:29.222780 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_orders"
+[0m15:33:29.226039 [debug] [Thread-1 (]: On model.ecommerce_analytics.stg_products: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_products"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_products`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`products`
+),
+
+cleaned as (
+    select
+        cast(product_id     as string)  as product_id,
+        trim(product_name)              as product_name,
+        trim(category)                  as category,
+        trim(brand)                     as brand,
+        cast(null as string)            as sub_category,
+        true                            as is_active,
+        cast(cost_price as numeric)     as cost_price_usd,
+        cast(price   as numeric)        as retail_price_usd,
+        round(safe_divide(cast(price as numeric)-cast(cost_price as numeric),cast(price as numeric))*100,2) as margin_pct,
+        
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where product_id is not null
+)
+
+select * from cleaned;
+
+
+[0m15:33:29.226482 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:33:29.227944 [debug] [Thread-2 (]: On model.ecommerce_analytics.stg_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_orders"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+  OPTIONS()
+  as -- stg_orders: clean column names, cast types, filter bad rows
+-- Raw → Staging: rename, cast, no business logic yet
+
+with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`orders`
+),
+
+cleaned as (
+    select
+        -- keys
+        cast(order_id       as string)    as order_id,
+        cast(customer_id    as string)    as customer_id,
+
+        -- dates
+        cast(order_date     as date)      as order_date,
+        cast(cast(order_date as date) as timestamp) as updated_at,
+
+        -- attributes
+        case upper(trim(status)) when 'RETURNED' then 'REFUNDED' else upper(trim(status)) end as order_status,   -- COMPLETED, CANCELLED etc.
+        lower(trim(channel))              as channel,        -- web, mobile, store
+
+        -- amounts (ensure non-negative)
+        cast(revenue        as numeric)   as revenue_usd,
+        cast(discount       as numeric)   as discount_usd,
+        cast(10.00          as numeric)   as shipping_cost_usd,
+
+        -- metadata
+        current_timestamp()               as _dbt_loaded_at
+
+    from source
+
+    where
+        order_id     is not null
+        and customer_id is not null
+        and order_date  is not null
+        and ( revenue >= 0 OR revenue is NULL)             -- drop corrupted negative revenue rows
+)
+
+select * from cleaned;
+
+
+[0m15:33:29.227944 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:33:30.820912 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:156d668b-4822-4dd5-a889-b22c711b8157&page=queryresults
+[0m15:33:30.883928 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:a5d10062-34e0-4315-9669-44ea6558285f&page=queryresults
+[0m15:33:31.336620 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:09561fa4-8cac-4119-ac64-6e3708a7dd35&page=queryresults
+[0m15:33:31.508806 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:6863608c-0368-41d6-a5d2-82b172c1f9da&page=queryresults
+[0m15:33:31.742651 [debug] [Thread-4 (]: SQL status: OK in 0.923 seconds
+[0m15:33:31.751022 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012A2D0A0>]}
+[0m15:33:31.753035 [info ] [Thread-4 (]: 6 of 22 OK created sql view model staging.stg_order_items ...................... [[32mCREATE VIEW (0 processed)[0m in 3.09s]
+[0m15:33:31.753035 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.stg_order_items
+[0m15:33:31.753035 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.stg_returns
+[0m15:33:31.757215 [info ] [Thread-4 (]: 9 of 22 START sql view model staging.stg_returns ............................... [RUN]
+[0m15:33:31.759383 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_order_items, now model.ecommerce_analytics.stg_returns)
+[0m15:33:31.759383 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.stg_returns
+[0m15:33:31.766266 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_returns"
+[0m15:33:31.767778 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.stg_returns
+[0m15:33:31.776474 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_returns"
+[0m15:33:31.779800 [debug] [Thread-3 (]: SQL status: OK in 0.896 seconds
+[0m15:33:31.790390 [debug] [Thread-4 (]: On model.ecommerce_analytics.stg_returns: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_returns"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`returns`
+),
+
+cleaned as (
+    select
+        cast(return_id as string) as return_id,
+        cast(order_id as string) as order_id,
+        cast(product_id as string) as product_id,
+        cast(return_date as date) as return_date,
+        trim(reason) as return_reason,
+        cast(refund_amount as numeric) as refund_amount_usd,
+        current_timestamp() as _dbt_loaded_at
+    from source where return_id is not null and order_id is not null)
+select * from cleaned;
+
+
+[0m15:33:31.791910 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012A2D580>]}
+[0m15:33:31.791910 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:33:31.794598 [info ] [Thread-3 (]: 5 of 22 OK created sql view model staging.stg_marketing_spend .................. [[32mCREATE VIEW (0 processed)[0m in 3.14s]
+[0m15:33:31.794598 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.stg_marketing_spend
+[0m15:33:31.794598 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.conversion_rate
+[0m15:33:31.794598 [info ] [Thread-3 (]: 10 of 22 START sql table model metrics.conversion_rate ......................... [RUN]
+[0m15:33:31.862441 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_marketing_spend, now model.ecommerce_analytics.conversion_rate)
+[0m15:33:31.863787 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.conversion_rate
+[0m15:33:31.863787 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.conversion_rate"
+[0m15:33:31.872157 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.conversion_rate
+[0m15:33:31.879637 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:33:32.254358 [debug] [Thread-2 (]: SQL status: OK in 0.917 seconds
+[0m15:33:32.265931 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012AE7530>]}
+[0m15:33:32.267939 [info ] [Thread-2 (]: 7 of 22 OK created sql view model staging.stg_orders ........................... [[32mCREATE VIEW (0 processed)[0m in 3.08s]
+[0m15:33:32.267939 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.stg_orders
+[0m15:33:32.270121 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.int_customer_churn_features
+[0m15:33:32.270121 [info ] [Thread-2 (]: 11 of 22 START sql view model staging.int_customer_churn_features .............. [RUN]
+[0m15:33:32.270121 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_orders, now model.ecommerce_analytics.int_customer_churn_features)
+[0m15:33:32.273835 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.int_customer_churn_features
+[0m15:33:32.283044 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m15:33:32.286854 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.int_customer_churn_features
+[0m15:33:32.299337 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m15:33:32.303368 [debug] [Thread-2 (]: On model.ecommerce_analytics.int_customer_churn_features: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_customer_churn_features"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_customer_churn_features`
+  OPTIONS()
+  as with customers as (
+    select customer_id from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+order_metrics as (
+    select
+        customer_id,
+        date_diff(current_date(), max(order_date), day) as days_since_last_order,
+        count(distinct case when order_date >= date_add(current_date(), interval -30 day) then order_id end) as order_frequency_30d,
+        avg(revenue_usd) as avg_order_value_lifetime,
+        avg(case when order_date >= date_add(current_date(), interval -30 day) then revenue_usd end) as avg_order_value_30d
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+    group by customer_id
+),
+
+final as (
+    select
+        c.customer_id,
+        coalesce(om.days_since_last_order, 999) as days_since_last_order,
+        coalesce(om.order_frequency_30d, 0) as order_frequency_30d,
+        coalesce(om.avg_order_value_30d, 0) - coalesce(om.avg_order_value_lifetime, 0) as avg_order_value_trend
+    from customers c
+    left join order_metrics om on c.customer_id = om.customer_id
+)
+
+select * from final;
+
+
+[0m15:33:32.305384 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:33:32.436214 [debug] [Thread-1 (]: SQL status: OK in 0.925 seconds
+[0m15:33:32.445562 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0123224E0>]}
+[0m15:33:32.447574 [info ] [Thread-1 (]: 8 of 22 OK created sql view model staging.stg_products ......................... [[32mCREATE VIEW (0 processed)[0m in 3.25s]
+[0m15:33:32.449583 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.stg_products
+[0m15:33:32.449583 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.int_customer_orders
+[0m15:33:32.449583 [info ] [Thread-1 (]: 12 of 22 START sql view model staging.int_customer_orders ...................... [RUN]
+[0m15:33:32.454067 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_products, now model.ecommerce_analytics.int_customer_orders)
+[0m15:33:32.454067 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.int_customer_orders
+[0m15:33:32.469906 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.int_customer_orders"
+[0m15:33:32.472260 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.int_customer_orders
+[0m15:33:32.481358 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.int_customer_orders"
+[0m15:33:32.521039 [debug] [Thread-1 (]: On model.ecommerce_analytics.int_customer_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_customer_orders"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_customer_orders`
+  OPTIONS()
+  as -- Per-customer aggregated purchase history
+-- Used to compute RFM segments in dim_customers
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+),
+
+customer_stats as (
+    select
+        customer_id,
+
+        -- Recency: days since last order
+        date_diff(current_date(), max(order_date), day)   as days_since_last_order,
+
+        -- Frequency
+        count(distinct order_id)                           as total_orders,
+
+        -- Monetary
+        sum(revenue_usd)                                   as lifetime_value_usd,
+        avg(revenue_usd)                                   as avg_order_value_usd,
+
+        -- First & last order
+        min(order_date)                                    as first_order_date,
+        max(order_date)                                    as last_order_date,
+
+        -- Preferred channel
+        approx_top_count(channel, 1)[offset(0)].value     as preferred_channel
+
+    from orders
+    group by customer_id
+),
+
+rfm_scored as (
+    select
+        *,
+        -- RFM quintile scoring (1=worst, 5=best)
+        ntile(5) over (order by days_since_last_order desc) as recency_score,
+        ntile(5) over (order by total_orders asc)           as frequency_score,
+        ntile(5) over (order by lifetime_value_usd asc)     as monetary_score
+    from customer_stats
+),
+
+segmented as (
+    select
+        *,
+        -- Simple segment based on combined RFM
+        case
+            when recency_score >= 4 and frequency_score >= 4 then 'Champions'
+            when recency_score >= 3 and frequency_score >= 3 then 'Loyal Customers'
+            when recency_score >= 4 and frequency_score <= 2 then 'New Customers'
+            when recency_score <= 2 and frequency_score >= 3 then 'At Risk'
+            when recency_score <= 2 and frequency_score <= 2 then 'Lost'
+            else 'Potential Loyalists'
+        end as rfm_segment
+    from rfm_scored
+)
+
+select * from segmented;
+
+
+[0m15:33:32.521039 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:33:33.876400 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.conversion_rate"
+[0m15:33:33.876400 [debug] [Thread-3 (]: On model.ecommerce_analytics.conversion_rate: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.conversion_rate"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Daily funnel: sessions → product views → add to cart → purchase
+
+with events as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_events`
+),
+
+daily_funnel as (
+    select
+        event_date,
+        device_type,
+
+        count(distinct session_id)                                          as sessions,
+
+        count(distinct case when event_type = 'page_view'
+            and page like '%product%'
+            then session_id end)                                            as product_views,
+
+        count(distinct case when event_type = 'add_to_cart'
+            then session_id end)                                            as add_to_cart,
+
+        count(distinct case when event_type = 'purchase'
+            then session_id end)                                            as purchases
+
+    from events
+    group by 1, 2
+),
+
+with_rates as (
+    select
+        *,
+        -- conversion rates
+        round(safe_divide(product_views, sessions) * 100, 2)    as view_rate_pct,
+        round(safe_divide(add_to_cart, sessions) * 100, 2)      as atc_rate_pct,
+        round(safe_divide(purchases, sessions) * 100, 2)        as purchase_rate_pct,
+        round(safe_divide(purchases, add_to_cart) * 100, 2)     as cart_conversion_pct
+    from daily_funnel
+)
+
+select * from with_rates
+order by event_date desc
+    );
+  
+[0m15:33:34.216702 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:bade3a0b-059c-4003-9c74-4d540d7d5a65&page=queryresults
+[0m15:33:34.532167 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:81e6d6ae-d497-4e7b-8392-161e7f6c0920&page=queryresults
+[0m15:33:34.593502 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:af82db79-5f0e-4e1b-84d2-f22b2c0745be&page=queryresults
+[0m15:33:34.910463 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:6e188e08-2b6d-4521-a981-1f424b3a1465&page=queryresults
+[0m15:33:35.186157 [debug] [Thread-4 (]: SQL status: OK in 0.966 seconds
+[0m15:33:35.194100 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012585E50>]}
+[0m15:33:35.196534 [info ] [Thread-4 (]: 9 of 22 OK created sql view model staging.stg_returns .......................... [[32mCREATE VIEW (0 processed)[0m in 3.43s]
+[0m15:33:35.196534 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.stg_returns
+[0m15:33:35.196534 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.marketing_performance
+[0m15:33:35.199868 [info ] [Thread-4 (]: 13 of 22 START sql table model metrics.marketing_performance ................... [RUN]
+[0m15:33:35.199868 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_returns, now model.ecommerce_analytics.marketing_performance)
+[0m15:33:35.199868 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.marketing_performance
+[0m15:33:35.207298 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.marketing_performance"
+[0m15:33:35.208195 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.marketing_performance
+[0m15:33:35.210712 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:33:35.542935 [debug] [Thread-1 (]: SQL status: OK in 0.913 seconds
+[0m15:33:35.554341 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012B83D40>]}
+[0m15:33:35.557193 [info ] [Thread-1 (]: 12 of 22 OK created sql view model staging.int_customer_orders ................. [[32mCREATE VIEW (0 processed)[0m in 3.10s]
+[0m15:33:35.558258 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.int_customer_orders
+[0m15:33:35.559244 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.int_product_revenue
+[0m15:33:35.559244 [info ] [Thread-1 (]: 14 of 22 START sql view model staging.int_product_revenue ...................... [RUN]
+[0m15:33:35.559244 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_customer_orders, now model.ecommerce_analytics.int_product_revenue)
+[0m15:33:35.559244 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.int_product_revenue
+[0m15:33:35.573601 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.int_product_revenue"
+[0m15:33:35.576605 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.int_product_revenue
+[0m15:33:35.584665 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.int_product_revenue"
+[0m15:33:35.586676 [debug] [Thread-1 (]: On model.ecommerce_analytics.int_product_revenue: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_product_revenue"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_product_revenue`
+  OPTIONS()
+  as with items as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+),
+
+orders as (
+    select order_id, order_date, order_status
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+),
+
+products as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_products`
+),
+
+product_revenue as (
+    select
+        i.product_id,
+        p.product_name,
+        p.category,
+        p.sub_category,
+        p.brand,
+        p.cost_price_usd,
+        p.retail_price_usd,
+        p.margin_pct,
+
+        count(distinct i.order_id)          as total_orders,
+        sum(i.quantity)                     as total_units_sold,
+        sum(i.line_revenue_usd)             as total_revenue_usd,
+        avg(i.unit_price_usd)               as avg_selling_price_usd,
+
+        -- profitability
+        sum(i.line_revenue_usd)
+            - sum(i.quantity * p.cost_price_usd) as gross_profit_usd
+
+    from items i
+    inner join orders o on i.order_id = o.order_id
+    left join products p on i.product_id = p.product_id
+    group by 1,2,3,4,5,6,7,8
+)
+
+select * from product_revenue;
+
+
+[0m15:33:35.586676 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:33:35.663119 [debug] [Thread-2 (]: SQL status: OK in 1.129 seconds
+[0m15:33:35.663119 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012B6E270>]}
+[0m15:33:35.673978 [info ] [Thread-2 (]: 11 of 22 OK created sql view model staging.int_customer_churn_features ......... [[32mCREATE VIEW (0 processed)[0m in 3.39s]
+[0m15:33:35.675900 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.int_customer_churn_features
+[0m15:33:35.679259 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.int_orders_enriched
+[0m15:33:35.679259 [info ] [Thread-2 (]: 15 of 22 START sql view model staging.int_orders_enriched ...................... [RUN]
+[0m15:33:35.679259 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_customer_churn_features, now model.ecommerce_analytics.int_orders_enriched)
+[0m15:33:35.679259 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.int_orders_enriched
+[0m15:33:35.692769 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.int_orders_enriched"
+[0m15:33:35.695413 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.int_orders_enriched
+[0m15:33:35.707110 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.int_orders_enriched"
+[0m15:33:35.708805 [debug] [Thread-2 (]: On model.ecommerce_analytics.int_orders_enriched: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_orders_enriched"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_orders_enriched`
+  OPTIONS()
+  as -- Joins orders with their items and customer info
+-- This becomes the base for fact_orders
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+),
+
+order_items_agg as (
+    select
+        order_id,
+        sum(quantity)           as total_items,
+        sum(line_revenue_usd)   as items_revenue_usd,
+        count(distinct product_id) as unique_products
+    from `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+    group by order_id
+),
+
+customers as (
+    select
+        customer_id,
+        state_name            as customer_state,
+        city_name             as customer_city,
+        acquisition_channel,
+        signup_date,
+        days_since_signup
+    from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+returns_agg as (
+    select
+        order_id,
+        sum(refund_amount_usd) as total_refund_usd
+    from `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+    group by order_id
+),
+
+enriched as (
+    select
+        -- order keys
+        o.order_id,
+        o.customer_id,
+
+        -- dates
+        o.order_date,
+        extract(year  from o.order_date) as order_year,
+        extract(month from o.order_date) as order_month,
+        extract(week  from o.order_date) as order_week,
+
+        -- order attributes
+        o.order_status,
+        o.channel,
+        c.customer_state              as state_name,
+        c.customer_city               as city_name,
+
+        -- financials
+        o.revenue_usd,
+        o.discount_usd,
+        o.shipping_cost_usd,
+        coalesce(r.total_refund_usd, 0) as refund_usd,
+        o.revenue_usd - coalesce(o.discount_usd, 0) - coalesce(r.total_refund_usd, 0) as net_revenue_usd,
+
+        -- items
+        coalesce(oi.total_items, 0)       as total_items,
+        coalesce(oi.unique_products, 0)   as unique_products,
+
+        -- customer context
+        c.days_since_signup,
+        -- new vs returning: first order?
+        case
+            when c.signup_date = o.order_date then 'new'
+            else 'returning'
+        end                               as customer_type
+
+    from orders o
+    left join order_items_agg oi on o.order_id = oi.order_id
+    left join customers c on o.customer_id = c.customer_id
+    left join returns_agg r on o.order_id = r.order_id
+)
+
+select * from enriched;
+
+
+[0m15:33:35.712096 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:33:37.093732 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.marketing_performance"
+[0m15:33:37.093732 [debug] [Thread-4 (]: On model.ecommerce_analytics.marketing_performance: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.marketing_performance"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`marketing_performance`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with spend as (select * from `genai-copilot-enterprisedata`.`staging`.`stg_marketing_spend`),
+rev as (
+    select order_date, channel, sum(revenue_usd) as revenue_usd, count(distinct order_id) as orders
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders` where order_status = "COMPLETED" group by 1,2)
+select
+    s.spend_date, s.channel, s.spend_usd, s.impressions, s.clicks, s.cpc_usd, s.ctr_pct,
+    coalesce(r.revenue_usd,0) as attributed_revenue_usd,
+    coalesce(r.orders,0) as attributed_orders,
+    round(safe_divide(coalesce(r.revenue_usd,0), s.spend_usd),2) as roas,
+    round(safe_divide(s.spend_usd, coalesce(r.orders,0)),2) as cac_usd
+from spend s
+left join rev r on s.spend_date = r.order_date and s.channel = r.channel
+order by spend_date desc
+    );
+  
+[0m15:33:37.715991 [debug] [Thread-3 (]: SQL status: OK in 2.801 seconds
+[0m15:33:37.891922 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:2df06e87-84ce-4e4e-a24d-c782118fd946&page=queryresults
+[0m15:33:37.978207 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:f7f8a350-24bb-4891-bcf9-e370a56d9b90&page=queryresults
+[0m15:33:38.140477 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:f20b68ac-0b61-472d-b490-1f5a017a51da&page=queryresults
+[0m15:33:38.177302 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012BA9D60>]}
+[0m15:33:38.177302 [info ] [Thread-3 (]: 10 of 22 OK created sql table model metrics.conversion_rate .................... [[32mCREATE TABLE (5.2k rows, 15.8 MiB processed)[0m in 6.31s]
+[0m15:33:38.185405 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.conversion_rate
+[0m15:33:38.185405 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.dim_customers
+[0m15:33:38.185405 [info ] [Thread-3 (]: 16 of 22 START sql table model marts.dim_customers ............................. [RUN]
+[0m15:33:38.185405 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.conversion_rate, now model.ecommerce_analytics.dim_customers)
+[0m15:33:38.191166 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.dim_customers
+[0m15:33:38.199800 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_customers"
+[0m15:33:38.204283 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.dim_customers
+[0m15:33:38.209485 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:33:38.836370 [debug] [Thread-2 (]: SQL status: OK in 0.939 seconds
+[0m15:33:38.843804 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012B67380>]}
+[0m15:33:38.843804 [info ] [Thread-2 (]: 15 of 22 OK created sql view model staging.int_orders_enriched ................. [[32mCREATE VIEW (0 processed)[0m in 3.16s]
+[0m15:33:38.843804 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.int_orders_enriched
+[0m15:33:38.843804 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.funnel_stages
+[0m15:33:38.843804 [info ] [Thread-2 (]: 17 of 22 START sql table model metrics.funnel_stages ........................... [RUN]
+[0m15:33:38.843804 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_orders_enriched, now model.ecommerce_analytics.funnel_stages)
+[0m15:33:38.843804 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.funnel_stages
+[0m15:33:38.860579 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.funnel_stages"
+[0m15:33:38.902381 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.funnel_stages
+[0m15:33:38.912337 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.funnel_stages"
+[0m15:33:38.914348 [debug] [Thread-2 (]: On model.ecommerce_analytics.funnel_stages: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.funnel_stages"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`funnel_stages`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      SELECT 
+        event_date, 
+        device_type, 
+        'Sessions' as stage_name, 
+        1 as stage_order, 
+        sessions as count from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date, 
+        device_type, 
+        'Product Views', 
+        2, 
+        product_views from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date,
+        device_type,
+        'Add to Cart',
+        3,
+        add_to_cart from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date, 
+        device_type, 
+        'Purchases', 
+        4, 
+        purchases from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+    );
+  
+[0m15:33:38.916870 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:33:38.992526 [debug] [Thread-1 (]: SQL status: OK in 0.852 seconds
+[0m15:33:39.006236 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012BF7980>]}
+[0m15:33:39.007152 [info ] [Thread-1 (]: 14 of 22 OK created sql view model staging.int_product_revenue ................. [[32mCREATE VIEW (0 processed)[0m in 3.44s]
+[0m15:33:39.010426 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.int_product_revenue
+[0m15:33:39.017199 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.dim_products
+[0m15:33:39.021238 [info ] [Thread-1 (]: 18 of 22 START sql table model marts.dim_products .............................. [RUN]
+[0m15:33:39.025096 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_product_revenue, now model.ecommerce_analytics.dim_products)
+[0m15:33:39.029184 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.dim_products
+[0m15:33:39.044174 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_products"
+[0m15:33:39.048606 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.dim_products
+[0m15:33:39.059175 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:33:40.223570 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_customers"
+[0m15:33:40.226426 [debug] [Thread-3 (]: On model.ecommerce_analytics.dim_customers: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_customers"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with customers as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+customer_stats as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_customer_orders`
+),
+
+final as (
+    select
+        -- surrogate key (BigQuery-safe)
+        to_hex(md5(cast(coalesce(cast(c.customer_id as string), '_dbt_utils_surrogate_key_null_') as string))) as customer_sk,
+
+        -- natural key
+        c.customer_id,
+
+        -- personal attributes
+        c.first_name,
+        c.last_name,
+        concat(c.first_name, ' ', c.last_name)  as full_name,
+        c.email,
+        c.state_name,
+        c.city_name,
+
+        -- signup info
+        c.signup_date,
+        c.acquisition_channel,
+        c.days_since_signup,
+
+        -- RFM metrics (from intermediate)
+        coalesce(cs.total_orders, 0)              as total_orders,
+        coalesce(cs.lifetime_value_usd, 0)        as lifetime_value_usd,
+        coalesce(cs.avg_order_value_usd, 0)       as avg_order_value_usd,
+        cs.days_since_last_order,
+        cs.first_order_date,
+        cs.last_order_date,
+        cs.preferred_channel,
+
+        -- RFM scores
+        cs.recency_score,
+        cs.frequency_score,
+        cs.monetary_score,
+        coalesce(cs.rfm_segment, 'No Purchases')  as rfm_segment,
+
+        -- value tier
+        case
+            when coalesce(cs.lifetime_value_usd, 0) >= 1000 then 'High Value'
+            when coalesce(cs.lifetime_value_usd, 0) >= 300  then 'Mid Value'
+            when coalesce(cs.lifetime_value_usd, 0) > 0     then 'Low Value'
+            else 'No Purchase'
+        end                                        as value_tier
+
+    from customers c
+    left join customer_stats cs on c.customer_id = cs.customer_id
+)
+
+select * from final
+    );
+  
+[0m15:33:40.577852 [debug] [Thread-4 (]: SQL status: OK in 2.604 seconds
+[0m15:33:40.986485 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_products"
+[0m15:33:40.986485 [debug] [Thread-1 (]: On model.ecommerce_analytics.dim_products: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_products"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_products`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with products as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_products`
+),
+
+product_perf as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_product_revenue`
+),
+
+final as (
+    select
+        to_hex(md5(cast(coalesce(cast(p.product_id as string), '_dbt_utils_surrogate_key_null_') as string))) as product_sk,
+
+        p.product_id,
+        p.product_name,
+        p.category,
+        p.sub_category,
+        p.brand,
+        p.is_active,
+
+        -- pricing
+        p.cost_price_usd,
+        p.retail_price_usd,
+        p.margin_pct,
+
+        -- price tier
+        case
+            when p.retail_price_usd >= 200 then 'Premium'
+            when p.retail_price_usd >= 50  then 'Mid-Range'
+            else 'Budget'
+        end as price_tier,
+
+        -- performance (from intermediate)
+        coalesce(pp.total_orders, 0)        as total_orders,
+        coalesce(pp.total_units_sold, 0)    as total_units_sold,
+        coalesce(pp.total_revenue_usd, 0)   as total_revenue_usd,
+        coalesce(pp.gross_profit_usd, 0)    as gross_profit_usd,
+
+        -- performance label
+        case
+            when coalesce(pp.total_revenue_usd, 0) >= 50000 then 'Top Seller'
+            when coalesce(pp.total_revenue_usd, 0) >= 10000 then 'Good Seller'
+            when coalesce(pp.total_revenue_usd, 0) > 0      then 'Slow Mover'
+            else 'No Sales'
+        end as sales_performance
+
+    from products p
+    left join product_perf pp on p.product_id = pp.product_id
+)
+
+select * from final
+    );
+  
+[0m15:33:41.093732 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012311730>]}
+[0m15:33:41.093732 [info ] [Thread-4 (]: 13 of 22 OK created sql table model metrics.marketing_performance .............. [[32mCREATE TABLE (6.5k rows, 3.3 MiB processed)[0m in 5.89s]
+[0m15:33:41.098258 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.marketing_performance
+[0m15:33:41.308735 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:a2d00818-4229-4d60-8b7e-e5881f05a951&page=queryresults
+[0m15:33:41.336396 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:316764eb-ec6b-4e9a-b2a5-9a47b026fe1f&page=queryresults
+[0m15:33:41.942175 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:69b7a93b-0e9c-4416-ac04-e8364834ccd4&page=queryresults
+[0m15:33:43.193508 [debug] [Thread-2 (]: SQL status: OK in 1.856 seconds
+[0m15:33:43.676572 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012BBE690>]}
+[0m15:33:43.684097 [info ] [Thread-2 (]: 17 of 22 OK created sql table model metrics.funnel_stages ...................... [[32mCREATE TABLE (20.9k rows, 248.0 KiB processed)[0m in 4.83s]
+[0m15:33:43.684097 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.funnel_stages
+[0m15:33:44.351757 [debug] [Thread-1 (]: SQL status: OK in 2.408 seconds
+[0m15:33:44.817070 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012C26360>]}
+[0m15:33:44.817070 [info ] [Thread-1 (]: 18 of 22 OK created sql table model marts.dim_products ......................... [[32mCREATE TABLE (5.0k rows, 10.7 MiB processed)[0m in 5.79s]
+[0m15:33:44.817070 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.dim_products
+[0m15:33:44.817070 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.product_performance
+[0m15:33:44.823553 [info ] [Thread-4 (]: 19 of 22 START sql table model metrics.product_performance ..................... [RUN]
+[0m15:33:44.824665 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.marketing_performance, now model.ecommerce_analytics.product_performance)
+[0m15:33:44.826270 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.product_performance
+[0m15:33:44.830428 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.product_performance"
+[0m15:33:44.835880 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.product_performance
+[0m15:33:44.840255 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:33:44.976212 [debug] [Thread-3 (]: SQL status: OK in 3.667 seconds
+[0m15:33:45.431782 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012BF7950>]}
+[0m15:33:45.431782 [info ] [Thread-3 (]: 16 of 22 OK created sql table model marts.dim_customers ........................ [[32mCREATE TABLE (20.0k rows, 4.5 MiB processed)[0m in 7.25s]
+[0m15:33:45.431782 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.dim_customers
+[0m15:33:45.431782 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.customer_ltv
+[0m15:33:45.431782 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.fact_orders
+[0m15:33:45.431782 [info ] [Thread-1 (]: 20 of 22 START sql table model metrics.customer_ltv ............................ [RUN]
+[0m15:33:45.441308 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_products, now model.ecommerce_analytics.customer_ltv)
+[0m15:33:45.441308 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.customer_ltv
+[0m15:33:45.449299 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.customer_ltv"
+[0m15:33:45.431782 [info ] [Thread-2 (]: 21 of 22 START sql table model marts.fact_orders ............................... [RUN]
+[0m15:33:45.449299 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.funnel_stages, now model.ecommerce_analytics.fact_orders)
+[0m15:33:45.449299 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.fact_orders
+[0m15:33:45.463101 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.fact_orders"
+[0m15:33:45.492817 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.customer_ltv
+[0m15:33:45.492817 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.fact_orders
+[0m15:33:45.499079 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:33:45.499079 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:33:46.560249 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.product_performance"
+[0m15:33:46.560249 [debug] [Thread-4 (]: On model.ecommerce_analytics.product_performance: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.product_performance"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`product_performance`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      select
+    product_id,
+    product_name,
+    category,
+    sub_category,
+    brand,
+    price_tier,
+    sales_performance,
+    retail_price_usd,
+    cost_price_usd,
+    margin_pct,
+    total_orders,
+    total_units_sold,
+    total_revenue_usd,
+    gross_profit_usd,
+    is_active
+from `genai-copilot-enterprisedata`.`marts`.`dim_products`
+order by total_revenue_usd desc
+    );
+  
+[0m15:33:47.376541 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:8042eccc-2de3-46ca-9f78-e05d340431b4&page=queryresults
+[0m15:33:47.496307 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.customer_ltv"
+[0m15:33:47.496307 [debug] [Thread-1 (]: On model.ecommerce_analytics.customer_ltv: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.customer_ltv"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`customer_ltv`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      select
+    customer_id,
+    full_name,
+    email,
+    state_name,
+    city_name,
+    acquisition_channel,
+    signup_date,
+    rfm_segment,
+    value_tier,
+    total_orders,
+    lifetime_value_usd,
+    avg_order_value_usd,
+    days_since_last_order,
+    first_order_date,
+    last_order_date,
+    preferred_channel,
+    recency_score,
+    frequency_score,
+    monetary_score
+from `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+where total_orders > 0
+    );
+  
+[0m15:33:47.502605 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.fact_orders"
+[0m15:33:47.507191 [debug] [Thread-2 (]: On model.ecommerce_analytics.fact_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.fact_orders"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`fact_orders`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- fact_orders: one row per order
+-- All foreign keys (SKs) point to dimension tables
+-- All measures are additive
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_orders_enriched`
+),
+
+dim_customers as (
+    select customer_sk, customer_id from `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+),
+
+dim_products as (
+    -- We need product_sk per order — use most expensive item as primary product
+    select
+        oi.order_id,
+        dp.product_sk
+    from `genai-copilot-enterprisedata`.`staging`.`stg_order_items` oi
+    inner join `genai-copilot-enterprisedata`.`marts`.`dim_products` dp on oi.product_id = dp.product_id
+    qualify row_number() over (
+        partition by oi.order_id
+        order by oi.line_revenue_usd desc
+    ) = 1
+),
+
+dim_channels as (
+    select channel_sk, channel_code from `genai-copilot-enterprisedata`.`marts`.`dim_channels`
+),
+
+dim_date as (
+    select date_key, full_date from `genai-copilot-enterprisedata`.`marts`.`dim_date`
+),
+
+final as (
+    select
+        -- surrogate key for the fact row
+        to_hex(md5(cast(coalesce(cast(o.order_id as string), '_dbt_utils_surrogate_key_null_') as string))) as order_sk,
+
+        -- natural key (keep for debugging)
+        o.order_id,
+
+        -- foreign keys → dimensions
+        dc.customer_sk,
+        dp.product_sk,
+        dch.channel_sk,
+        dd.date_key                                     as order_date_key,
+
+        -- degenerate dimensions (attributes that don't need their own dim)
+        o.order_status,
+        o.state_name,
+        o.city_name,
+        o.customer_type,                                -- new vs returning
+
+        -- DATE (also store raw date for easy filtering)
+        o.order_date,
+        o.order_year,
+        o.order_month,
+        o.order_week,
+
+        -- MEASURES (all additive)
+        o.revenue_usd,
+        o.discount_usd,
+        o.refund_usd,
+        o.shipping_cost_usd,
+        o.net_revenue_usd,
+        o.total_items,
+        o.unique_products,
+
+        -- derived measures
+        o.revenue_usd - o.discount_usd                 as discounted_revenue_usd,
+        case when o.order_status = 'COMPLETED' then 1 else 0 end as is_completed,
+        case when o.order_status = 'CANCELLED' then 1 else 0 end as is_cancelled
+
+    from orders o
+    left join dim_customers  dc  on o.customer_id   = dc.customer_id
+    left join dim_products   dp  on o.order_id      = dp.order_id
+    left join dim_channels   dch on o.channel       = dch.channel_code
+    left join dim_date       dd  on o.order_date    = dd.full_date
+)
+
+select * from final
+    );
+  
+[0m15:33:48.303413 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:58f4ddb0-183c-4319-84a3-d82cb9ce68d4&page=queryresults
+[0m15:33:48.523911 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:cc1e4614-9ce4-4a65-ab72-036be6b42018&page=queryresults
+[0m15:33:48.915627 [debug] [Thread-4 (]: SQL status: OK in 1.538 seconds
+[0m15:33:49.400895 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0125FF0B0>]}
+[0m15:33:49.404059 [info ] [Thread-4 (]: 19 of 22 OK created sql table model metrics.product_performance ................ [[32mCREATE TABLE (5.0k rows, 888.2 KiB processed)[0m in 4.57s]
+[0m15:33:49.405598 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.product_performance
+[0m15:33:49.826556 [debug] [Thread-1 (]: SQL status: OK in 1.522 seconds
+[0m15:33:50.328010 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A012C5A000>]}
+[0m15:33:50.328010 [info ] [Thread-1 (]: 20 of 22 OK created sql table model metrics.customer_ltv ....................... [[32mCREATE TABLE (15.3k rows, 3.8 MiB processed)[0m in 4.89s]
+[0m15:33:50.328010 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.customer_ltv
+[0m15:33:52.159147 [debug] [Thread-2 (]: SQL status: OK in 3.635 seconds
+[0m15:33:52.612829 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A069B730E0>]}
+[0m15:33:52.614836 [info ] [Thread-2 (]: 21 of 22 OK created sql table model marts.fact_orders .......................... [[32mCREATE TABLE (50.0k rows, 13.6 MiB processed)[0m in 7.16s]
+[0m15:33:52.614836 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.fact_orders
+[0m15:33:52.614836 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.revenue_daily
+[0m15:33:52.614836 [info ] [Thread-3 (]: 22 of 22 START sql table model metrics.revenue_daily ........................... [RUN]
+[0m15:33:52.619047 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_customers, now model.ecommerce_analytics.revenue_daily)
+[0m15:33:52.619047 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.revenue_daily
+[0m15:33:52.626618 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.revenue_daily"
+[0m15:33:52.628628 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.revenue_daily
+[0m15:33:52.636675 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:33:54.257049 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.revenue_daily"
+[0m15:33:54.260064 [debug] [Thread-3 (]: On model.ecommerce_analytics.revenue_daily: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.revenue_daily"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`revenue_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Pre-aggregated daily revenue — Streamlit queries this directly
+-- Much cheaper than querying fact_orders every time
+
+with fact as (
+    select * from `genai-copilot-enterprisedata`.`marts`.`fact_orders`
+),
+
+daily as (
+    select
+        order_date,
+        order_year,
+        order_month,
+        order_week,
+
+        -- breakdowns
+        state_name,
+        city_name,
+        customer_type,
+
+        -- channel (join back to get name)
+        dch.channel_name,
+        dch.channel_type,
+
+        -- measures
+        count(distinct order_id)                                                    as total_orders,
+        count(distinct customer_sk)                                                 as unique_customers,
+        sum(case when is_completed = 1 then revenue_usd else 0 end)                 as gross_revenue_usd,
+        sum(case when is_completed = 1 then discount_usd else 0 end)                as total_discounts_usd,
+        sum(case when is_completed = 1 then net_revenue_usd else 0 end)             as net_revenue_usd,
+        sum(total_items)                                                            as total_items_sold,
+        sum(is_cancelled)                                                           as cancelled_orders,
+        SAFE_DIVIDE(COUNT(DISTINCT order_id) - SUM(is_cancelled),COUNT(DISTINCT order_id)) AS order_fullfillment_rate,
+        SAFE_DIVIDE(SUM(total_items) - COUNT(DISTINCT order_id))                    AS basket_depth,
+        SAFE_DIVIDE(SUM(CASE WHEN is_completed = 1 THEN revenue_usd ELSE 0), COUNT(CASE WHEN is_completed = 1 THEN 1 END))   AS avg_order_value
+
+
+    from fact
+    left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk
+    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
+)
+
+select * from daily
+    );
+  
+[0m15:33:54.760921 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:de20b6d9-2096-407c-a564-48bb4dce5cfe&page=queryresults
+[0m15:33:54.760921 [error] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:de20b6d9-2096-407c-a564-48bb4dce5cfe&page=queryresults
+[0m15:33:55.095558 [debug] [Thread-3 (]: Database Error in model revenue_daily (models\marts\metrics\revenue_daily.sql)
+  Syntax error: Expected keyword END but got ")" at [47:75]
+  compiled code at target\run\ecommerce_analytics\models\marts\metrics\revenue_daily.sql
+[0m15:33:55.095558 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '1927e100-f955-4462-999f-3db8a4fd6a3a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A0121485C0>]}
+[0m15:33:55.095558 [error] [Thread-3 (]: 22 of 22 ERROR creating sql table model metrics.revenue_daily .................. [[31mERROR[0m in 2.48s]
+[0m15:33:55.095558 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.revenue_daily
+[0m15:33:55.095558 [debug] [Thread-7 (]: Marking all children of 'model.ecommerce_analytics.revenue_daily' to be skipped because of status 'error'.  Reason: Database Error in model revenue_daily (models\marts\metrics\revenue_daily.sql)
+  Syntax error: Expected keyword END but got ")" at [47:75]
+  compiled code at target\run\ecommerce_analytics\models\marts\metrics\revenue_daily.sql.
+[0m15:33:55.095558 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m15:33:55.162482 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m15:33:55.162482 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:33:55.162482 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:33:55.162482 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:33:55.162482 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_staging' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_metrics' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_marts' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'model.ecommerce_analytics.customer_ltv' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'model.ecommerce_analytics.fact_orders' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'model.ecommerce_analytics.revenue_daily' was properly closed.
+[0m15:33:55.170986 [debug] [MainThread]: Connection 'model.ecommerce_analytics.product_performance' was properly closed.
+[0m15:33:55.170986 [info ] [MainThread]: 
+[0m15:33:55.176433 [info ] [MainThread]: Finished running 11 table models, 11 view models in 0 hours 0 minutes and 40.59 seconds (40.59s).
+[0m15:33:55.178861 [debug] [MainThread]: Command end result
+[0m15:33:55.267158 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m15:33:55.276406 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m15:33:55.276406 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\run_results.json
+[0m15:33:55.290169 [info ] [MainThread]: 
+[0m15:33:55.291215 [info ] [MainThread]: [31mCompleted with 1 error, 0 partial successes, and 0 warnings:[0m
+[0m15:33:55.291215 [info ] [MainThread]: 
+[0m15:33:55.293494 [error] [MainThread]: [31mFailure in model revenue_daily (models\marts\metrics\revenue_daily.sql)[0m
+[0m15:33:55.293494 [error] [MainThread]:   Database Error in model revenue_daily (models\marts\metrics\revenue_daily.sql)
+  Syntax error: Expected keyword END but got ")" at [47:75]
+  compiled code at target\run\ecommerce_analytics\models\marts\metrics\revenue_daily.sql
+[0m15:33:55.293494 [info ] [MainThread]: 
+[0m15:33:55.293494 [info ] [MainThread]:   compiled code at target\compiled\ecommerce_analytics\models\marts\metrics\revenue_daily.sql
+[0m15:33:55.297090 [info ] [MainThread]: 
+[0m15:33:55.297090 [info ] [MainThread]: Done. PASS=21 WARN=0 ERROR=1 SKIP=0 NO-OP=0 TOTAL=22
+[0m15:33:55.297090 [debug] [MainThread]: Command `dbt run` failed at 15:33:55.297090 after 51.88 seconds
+[0m15:33:55.297090 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06D03C620>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06E560DD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001A06E563EC0>]}
+[0m15:33:57.606976 [debug] [MainThread]: An error was encountered while trying to send an event
+[0m15:33:57.610137 [debug] [MainThread]: Flushing usage events
+[0m15:39:43.518535 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028768223C20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002876868E240>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028765615F70>]}
+
+
+============================== 15:39:43.525601 | e1c4c91b-e502-4839-8a73-b782199485b2 ==============================
+[0m15:39:43.525601 [info ] [MainThread]: Running with dbt=1.11.11
+[0m15:39:43.525601 [debug] [MainThread]: running dbt with arguments {'static_parser': 'True', 'no_print': 'None', 'version_check': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'printer_width': '80', 'write_json': 'True', 'empty': 'False', 'log_cache_events': 'False', 'introspect': 'True', 'cache_selected_only': 'False', 'log_format': 'default', 'debug': 'False', 'fail_fast': 'False', 'profiles_dir': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt', 'send_anonymous_usage_stats': 'True', 'quiet': 'False', 'warn_error': 'None', 'partial_parse': 'True', 'invocation_command': 'dbt run', 'use_colors': 'True', 'indirect_selection': 'eager', 'use_experimental_parser': 'False', 'log_path': 'D:\\JOB\\Work\\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\\dbt\\logs'}
+[0m15:39:44.809840 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870AA6C4A0>]}
+[0m15:39:44.870370 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870AEC0440>]}
+[0m15:39:44.870370 [info ] [MainThread]: Registered adapter: bigquery=1.11.1
+[0m15:39:45.341727 [debug] [MainThread]: checksum: 30a8cc8fdcbf66701b0944d4ccce3fa46dd04b61e5df68b9f16d57b2e0e3f0be, vars: {}, profile: , target: , version: 1.11.11
+[0m15:39:45.621595 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m15:39:45.621595 [debug] [MainThread]: Partial parsing: updated file: ecommerce_analytics://models\marts\metrics\revenue_daily.sql
+[0m15:39:45.875080 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B9E4830>]}
+[0m15:39:45.978929 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m15:39:45.978929 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m15:39:46.001222 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B9BDCA0>]}
+[0m15:39:46.005682 [info ] [MainThread]: Found 22 models, 50 data tests, 7 sources, 667 macros
+[0m15:39:46.005682 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CA0E030>]}
+[0m15:39:46.008078 [info ] [MainThread]: 
+[0m15:39:46.008078 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m15:39:46.008078 [info ] [MainThread]: 
+[0m15:39:46.008078 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m15:39:46.018721 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:39:46.018721 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:46.020208 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:39:46.020208 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata'
+[0m15:39:46.021601 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:46.021601 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:47.867530 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_staging'
+[0m15:39:47.867530 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:47.867530 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_metrics'
+[0m15:39:47.867530 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:47.867530 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_genai-copilot-enterprisedata_marts'
+[0m15:39:47.867530 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m15:39:49.726867 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028766F960C0>]}
+[0m15:39:49.726867 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m15:39:49.786732 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.dim_channels
+[0m15:39:49.786732 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.dim_date
+[0m15:39:49.786732 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.stg_customers
+[0m15:39:49.786732 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.stg_events
+[0m15:39:49.786732 [info ] [Thread-1 (]: 1 of 22 START sql table model marts.dim_channels ............................... [RUN]
+[0m15:39:49.794272 [info ] [Thread-2 (]: 2 of 22 START sql table model marts.dim_date ................................... [RUN]
+[0m15:39:49.794272 [info ] [Thread-3 (]: 3 of 22 START sql view model staging.stg_customers ............................. [RUN]
+[0m15:39:49.794272 [debug] [Thread-1 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.dim_channels'
+[0m15:39:49.798262 [debug] [Thread-2 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.dim_date'
+[0m15:39:49.794272 [info ] [Thread-4 (]: 4 of 22 START sql view model staging.stg_events ................................ [RUN]
+[0m15:39:49.798772 [debug] [Thread-3 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.stg_customers'
+[0m15:39:49.798772 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.dim_channels
+[0m15:39:49.800521 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.dim_date
+[0m15:39:49.800521 [debug] [Thread-4 (]: Acquiring new bigquery connection 'model.ecommerce_analytics.stg_events'
+[0m15:39:49.802529 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.stg_customers
+[0m15:39:49.825601 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_date"
+[0m15:39:49.825601 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.stg_events
+[0m15:39:49.840006 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_channels"
+[0m15:39:49.842573 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_customers"
+[0m15:39:49.842573 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_events"
+[0m15:39:49.852170 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.dim_date
+[0m15:39:49.867263 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.stg_customers
+[0m15:39:49.886373 [debug] [Thread-2 (]: Opening a new connection, currently in state init
+[0m15:39:49.901824 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.dim_channels
+[0m15:39:49.911162 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_customers"
+[0m15:39:49.911162 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.stg_events
+[0m15:39:49.915043 [debug] [Thread-1 (]: Opening a new connection, currently in state init
+[0m15:39:49.919963 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_events"
+[0m15:39:49.976565 [debug] [Thread-3 (]: On model.ecommerce_analytics.stg_customers: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_customers"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`customers`
+),
+
+cleaned as (
+    select
+        cast(customers_id   as string)  as customer_id,
+        trim(split(name, ' ')[safe_offset(0)]) as first_name,
+        trim(split(name, ' ')[safe_offset(1)]) as last_name,
+        lower(concat(split(email, '@')[safe_offset(0)], '_', cast(customers_id as string), '@', split(email, '@')[safe_offset(1)])) as email,
+        upper(trim(state_name))            as state_name,
+        upper(trim(city_name))             as city_name,
+
+        cast(signup_date    as date)    as signup_date,
+        cast(null as date)              as birth_date,
+
+        -- derived: days since signup
+        date_diff(current_date(), cast(signup_date as date), day) as days_since_signup,
+
+        cast(null as string)            as acquisition_channel,  -- paid, organic, referral
+
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where customers_id is not null and email is not null
+)
+
+select * from cleaned;
+
+
+[0m15:39:49.979597 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m15:39:50.034075 [debug] [Thread-4 (]: On model.ecommerce_analytics.stg_events: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_events"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_events`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`events`
+),
+
+cleaned as (
+    select
+        cast(event_id       as string)      as event_id,
+        concat(cast(customer_id as string), '_', cast(cast(event_timestamp as timestamp) as date)) as session_id,
+        cast(customer_id    as string)      as customer_id,  -- nullable (anonymous users)
+
+        lower(trim(event_type))             as event_type,   -- page_view, add_to_cart, purchase
+        case when lower(trim(event_type)) = 'page_view' then '/product/details' else null end as page,
+        case
+            when customer_id is null or trim(cast(customer_id as string)) = '' then 'unknown'
+            else case mod(abs(farm_fingerprint(cast(customer_id as string))), 3)
+                when 0 then 'desktop' when 1 then 'mobile' else 'tablet'
+            end
+        end as device_type,
+
+        cast(event_timestamp as timestamp)  as event_timestamp,
+        cast(cast(event_timestamp as timestamp) as date) as event_date,
+
+        current_timestamp()                 as _dbt_loaded_at
+
+    from source
+    where event_id is not null and event_timestamp is not null
+)
+
+select * from cleaned;
+
+
+[0m15:39:50.075026 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m15:39:51.853089 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_channels"
+[0m15:39:51.853089 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_date"
+[0m15:39:51.857858 [debug] [Thread-2 (]: On model.ecommerce_analytics.dim_date: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_date"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_date`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Date dimension: generates one row per day from start_date to today + 1 year
+-- Uses BigQuery's GENERATE_DATE_ARRAY
+
+with date_spine as (
+    select date_val
+    from unnest(
+        generate_date_array(
+            '2022-01-01',
+            date_add(current_date(), interval 365 day),
+            interval 1 day
+        )
+    ) as date_val
+),
+
+enriched as (
+    select
+        -- surrogate key
+        cast(format_date('%Y%m%d', date_val) as integer)  as date_key,
+        date_val                                           as full_date,
+
+        -- year / quarter / month
+        extract(year     from date_val)                    as year,
+        extract(quarter  from date_val)                    as quarter_number,
+        concat('Q', extract(quarter from date_val))        as quarter_name,
+        extract(month    from date_val)                    as month_number,
+        format_date('%B', date_val)                        as month_name,
+        format_date('%b', date_val)                        as month_short,
+
+        -- week
+        extract(isoweek  from date_val)                    as iso_week_number,
+        extract(dayofweek from date_val)                   as day_of_week,   -- 1=Sun
+        format_date('%A', date_val)                        as day_name,
+        format_date('%a', date_val)                        as day_short,
+
+        -- day
+        extract(day      from date_val)                    as day_of_month,
+        extract(dayofyear from date_val)                   as day_of_year,
+
+        -- flags
+        case extract(dayofweek from date_val)
+            when 1 then true when 7 then true else false
+        end                                                as is_weekend,
+
+        -- fiscal (assuming Jan fiscal year start — adjust if needed)
+        extract(year from date_val)                        as fiscal_year,
+        extract(quarter from date_val)                     as fiscal_quarter,
+
+        -- period labels useful for dashboard filters
+        format_date('%Y-%m', date_val)                     as year_month,
+        format_date('%G-W%V', date_val)                    as year_week
+
+    from date_spine
+)
+
+select * from enriched
+    );
+  
+[0m15:39:51.859877 [debug] [Thread-1 (]: On model.ecommerce_analytics.dim_channels: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_channels"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_channels`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Static channel reference — seed-style but built in dbt
+-- Add rows here as new channels are introduced
+
+with channels as (
+    select 'web' as channel_code, 'Website' as channel_name, 'Digital' as channel_type, 'Direct' as channel_category
+    union all
+    select 'mobile', 'Mobile App', 'Digital', 'Direct'
+    union all
+    select 'store', 'Physical Store', 'Offline', 'Direct'
+    union all
+    select 'marketplace', 'Marketplace', 'Digital', 'Partner'
+    union all
+    select 'social', 'Social Commerce', 'Digital', 'Partner'
+    union all
+    select 'email', 'Email Campaign', 'Digital', 'Marketing'
+),
+
+final as (
+    select
+        to_hex(md5(cast(coalesce(cast(channel_code as string), '_dbt_utils_surrogate_key_null_') as string))) as channel_sk,
+        channel_code,
+        channel_name,
+        channel_type,
+        channel_category,
+        case channel_type
+            when 'Digital' then true
+            else false
+        end as is_digital
+    from channels
+)
+
+select * from final
+    );
+  
+[0m15:39:52.118135 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:6e6f9f63-a0ab-42e3-a51a-4c517050cdf3&page=queryresults
+[0m15:39:52.132868 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:8eb79481-7f5f-4ac8-ac75-d5d181aafa35&page=queryresults
+[0m15:39:52.519175 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:0d103a07-0ba9-4388-90f9-008a84c1f6ef&page=queryresults
+[0m15:39:52.553274 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:371a110b-e281-4325-b9c0-bb02bfe25f7a&page=queryresults
+[0m15:39:53.083345 [debug] [Thread-3 (]: SQL status: OK in 0.957 seconds
+[0m15:39:53.147439 [debug] [Thread-4 (]: SQL status: OK in 1.013 seconds
+[0m15:39:53.243105 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CB3BB00>]}
+[0m15:39:53.243105 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B069640>]}
+[0m15:39:53.243105 [info ] [Thread-3 (]: 3 of 22 OK created sql view model staging.stg_customers ........................ [[32mCREATE VIEW (0 processed)[0m in 3.44s]
+[0m15:39:53.243105 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.stg_customers
+[0m15:39:53.243105 [info ] [Thread-4 (]: 4 of 22 OK created sql view model staging.stg_events ........................... [[32mCREATE VIEW (0 processed)[0m in 3.44s]
+[0m15:39:53.243105 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.stg_marketing_spend
+[0m15:39:53.243105 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.stg_events
+[0m15:39:53.243105 [info ] [Thread-3 (]: 5 of 22 START sql view model staging.stg_marketing_spend ....................... [RUN]
+[0m15:39:53.243105 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.stg_order_items
+[0m15:39:53.243105 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_customers, now model.ecommerce_analytics.stg_marketing_spend)
+[0m15:39:53.257841 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.stg_marketing_spend
+[0m15:39:53.257841 [info ] [Thread-4 (]: 6 of 22 START sql view model staging.stg_order_items ........................... [RUN]
+[0m15:39:53.263889 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_marketing_spend"
+[0m15:39:53.265933 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_events, now model.ecommerce_analytics.stg_order_items)
+[0m15:39:53.266735 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.stg_order_items
+[0m15:39:53.274328 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_order_items"
+[0m15:39:53.274328 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.stg_marketing_spend
+[0m15:39:53.286293 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_marketing_spend"
+[0m15:39:53.287688 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.stg_order_items
+[0m15:39:53.291431 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_order_items"
+[0m15:39:53.291431 [debug] [Thread-3 (]: On model.ecommerce_analytics.stg_marketing_spend: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_marketing_spend"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_marketing_spend`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`marketing_spend`
+),
+
+cleaned as (
+    select
+        cast(spend_id as string) as spend_id,
+        cast(date as date) as spend_date,
+        lower(trim(channel)) as channel,
+        cast(spend_usd as numeric) as spend_usd,
+        cast(impressions as integer) as impressions,
+        cast(clicks as integer) as clicks,
+        round(safe_divide(cast(spend_usd as numeric),cast(clicks as numeric)),4) as cpc_usd,
+        round(safe_divide(cast(clicks as numeric),cast(impressions as numeric))*100,4) as ctr_pct,
+        current_timestamp() as _dbt_loaded_at
+    from source where spend_id is not null)
+select * from cleaned;
+
+
+[0m15:39:53.291431 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:39:53.291431 [debug] [Thread-4 (]: On model.ecommerce_analytics.stg_order_items: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_order_items"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`order_items`
+),
+
+cleaned as (
+    select
+        cast(order_item_id  as string)  as item_id,
+        cast(order_id       as string)  as order_id,
+        cast(product_id     as string)  as product_id,
+
+        cast(quantity       as integer) as quantity,
+        cast(unit_price     as numeric) as unit_price_usd,
+        cast(0              as numeric) as discount_pct,
+
+        -- derived: actual line revenue
+        round(
+            cast(quantity as numeric) * cast(unit_price as numeric)
+            * (1 - coalesce(cast(0 as numeric), 0) / 100),
+            2
+        )                               as line_revenue_usd,
+
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where order_item_id is not null and order_id is not null
+)
+
+select * from cleaned;
+
+
+[0m15:39:53.291431 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:39:53.901397 [debug] [Thread-1 (]: SQL status: OK in 1.349 seconds
+[0m15:39:54.168588 [debug] [Thread-2 (]: SQL status: OK in 1.647 seconds
+[0m15:39:54.434029 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CB3BBF0>]}
+[0m15:39:54.434029 [info ] [Thread-1 (]: 1 of 22 OK created sql table model marts.dim_channels .......................... [[32mCREATE TABLE (6.0 rows, 0 processed)[0m in 4.64s]
+[0m15:39:54.434029 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.dim_channels
+[0m15:39:54.434029 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.stg_orders
+[0m15:39:54.434029 [info ] [Thread-1 (]: 7 of 22 START sql view model staging.stg_orders ................................ [RUN]
+[0m15:39:54.434029 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_channels, now model.ecommerce_analytics.stg_orders)
+[0m15:39:54.434029 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.stg_orders
+[0m15:39:54.454845 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_orders"
+[0m15:39:54.455970 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.stg_orders
+[0m15:39:54.459031 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_orders"
+[0m15:39:54.459031 [debug] [Thread-1 (]: On model.ecommerce_analytics.stg_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_orders"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+  OPTIONS()
+  as -- stg_orders: clean column names, cast types, filter bad rows
+-- Raw → Staging: rename, cast, no business logic yet
+
+with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`orders`
+),
+
+cleaned as (
+    select
+        -- keys
+        cast(order_id       as string)    as order_id,
+        cast(customer_id    as string)    as customer_id,
+
+        -- dates
+        cast(order_date     as date)      as order_date,
+        cast(cast(order_date as date) as timestamp) as updated_at,
+
+        -- attributes
+        case upper(trim(status)) when 'RETURNED' then 'REFUNDED' else upper(trim(status)) end as order_status,   -- COMPLETED, CANCELLED etc.
+        lower(trim(channel))              as channel,        -- web, mobile, store
+
+        -- amounts (ensure non-negative)
+        cast(revenue        as numeric)   as revenue_usd,
+        cast(discount       as numeric)   as discount_usd,
+        cast(10.00          as numeric)   as shipping_cost_usd,
+
+        -- metadata
+        current_timestamp()               as _dbt_loaded_at
+
+    from source
+
+    where
+        order_id     is not null
+        and customer_id is not null
+        and order_date  is not null
+        and ( revenue >= 0 OR revenue is NULL)             -- drop corrupted negative revenue rows
+)
+
+select * from cleaned;
+
+
+[0m15:39:54.459031 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:39:54.669289 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CA97290>]}
+[0m15:39:54.669289 [info ] [Thread-2 (]: 2 of 22 OK created sql table model marts.dim_date .............................. [[32mCREATE TABLE (2.0k rows, 0 processed)[0m in 4.87s]
+[0m15:39:54.669289 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.dim_date
+[0m15:39:54.669289 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.stg_products
+[0m15:39:54.672579 [info ] [Thread-2 (]: 8 of 22 START sql view model staging.stg_products .............................. [RUN]
+[0m15:39:54.672579 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_date, now model.ecommerce_analytics.stg_products)
+[0m15:39:54.672579 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.stg_products
+[0m15:39:54.677139 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_products"
+[0m15:39:54.679149 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.stg_products
+[0m15:39:54.686668 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_products"
+[0m15:39:54.686668 [debug] [Thread-2 (]: On model.ecommerce_analytics.stg_products: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_products"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_products`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`products`
+),
+
+cleaned as (
+    select
+        cast(product_id     as string)  as product_id,
+        trim(product_name)              as product_name,
+        trim(category)                  as category,
+        trim(brand)                     as brand,
+        cast(null as string)            as sub_category,
+        true                            as is_active,
+        cast(cost_price as numeric)     as cost_price_usd,
+        cast(price   as numeric)        as retail_price_usd,
+        round(safe_divide(cast(price as numeric)-cast(cost_price as numeric),cast(price as numeric))*100,2) as margin_pct,
+        
+        current_timestamp()             as _dbt_loaded_at
+
+    from source
+    where product_id is not null
+)
+
+select * from cleaned;
+
+
+[0m15:39:54.689631 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:39:55.049563 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:8a921cff-23a2-4ba2-a623-bc4827834a6b&page=queryresults
+[0m15:39:55.156685 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:d5ff12f3-8122-4e18-9ba7-c7afbeaec5c6&page=queryresults
+[0m15:39:55.897346 [debug] [Thread-3 (]: SQL status: OK in 0.860 seconds
+[0m15:39:55.915503 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D1C2840>]}
+[0m15:39:55.915503 [info ] [Thread-3 (]: 5 of 22 OK created sql view model staging.stg_marketing_spend .................. [[32mCREATE VIEW (0 processed)[0m in 2.67s]
+[0m15:39:55.915503 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.stg_marketing_spend
+[0m15:39:55.915503 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.stg_returns
+[0m15:39:55.921188 [info ] [Thread-3 (]: 9 of 22 START sql view model staging.stg_returns ............................... [RUN]
+[0m15:39:55.921188 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_marketing_spend, now model.ecommerce_analytics.stg_returns)
+[0m15:39:55.921188 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.stg_returns
+[0m15:39:55.921188 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.stg_returns"
+[0m15:39:55.921188 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.stg_returns
+[0m15:39:55.933253 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.stg_returns"
+[0m15:39:55.935214 [debug] [Thread-3 (]: On model.ecommerce_analytics.stg_returns: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.stg_returns"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`returns`
+),
+
+cleaned as (
+    select
+        cast(return_id as string) as return_id,
+        cast(order_id as string) as order_id,
+        cast(product_id as string) as product_id,
+        cast(return_date as date) as return_date,
+        trim(reason) as return_reason,
+        cast(refund_amount as numeric) as refund_amount_usd,
+        current_timestamp() as _dbt_loaded_at
+    from source where return_id is not null and order_id is not null)
+select * from cleaned;
+
+
+[0m15:39:55.936703 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:39:56.059935 [debug] [Thread-4 (]: SQL status: OK in 0.912 seconds
+[0m15:39:56.075998 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D2DB140>]}
+[0m15:39:56.075998 [info ] [Thread-4 (]: 6 of 22 OK created sql view model staging.stg_order_items ...................... [[32mCREATE VIEW (0 processed)[0m in 2.81s]
+[0m15:39:56.078008 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.stg_order_items
+[0m15:39:56.078008 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.conversion_rate
+[0m15:39:56.078008 [info ] [Thread-4 (]: 10 of 22 START sql table model metrics.conversion_rate ......................... [RUN]
+[0m15:39:56.078008 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_order_items, now model.ecommerce_analytics.conversion_rate)
+[0m15:39:56.078008 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.conversion_rate
+[0m15:39:56.253633 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.conversion_rate"
+[0m15:39:56.267395 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.conversion_rate
+[0m15:39:56.270001 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:39:56.328820 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:c177c8e5-2df6-4bf8-bbe8-6c4be95b8611&page=queryresults
+[0m15:39:56.363890 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:5a764384-6aef-4dec-96c9-1bee18e3dde5&page=queryresults
+[0m15:39:57.230855 [debug] [Thread-2 (]: SQL status: OK in 0.865 seconds
+[0m15:39:57.237156 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D2AF740>]}
+[0m15:39:57.237156 [debug] [Thread-1 (]: SQL status: OK in 0.907 seconds
+[0m15:39:57.237156 [info ] [Thread-2 (]: 8 of 22 OK created sql view model staging.stg_products ......................... [[32mCREATE VIEW (0 processed)[0m in 2.56s]
+[0m15:39:57.239831 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.stg_products
+[0m15:39:57.242379 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D290740>]}
+[0m15:39:57.242379 [info ] [Thread-1 (]: 7 of 22 OK created sql view model staging.stg_orders ........................... [[32mCREATE VIEW (0 processed)[0m in 2.81s]
+[0m15:39:57.246948 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.stg_orders
+[0m15:39:57.248310 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.int_customer_churn_features
+[0m15:39:57.249578 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.int_customer_orders
+[0m15:39:57.249578 [info ] [Thread-2 (]: 11 of 22 START sql view model staging.int_customer_churn_features .............. [RUN]
+[0m15:39:57.251668 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_products, now model.ecommerce_analytics.int_customer_churn_features)
+[0m15:39:57.251668 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.int_customer_churn_features
+[0m15:39:57.257998 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m15:39:57.249578 [info ] [Thread-1 (]: 12 of 22 START sql view model staging.int_customer_orders ...................... [RUN]
+[0m15:39:57.260376 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_orders, now model.ecommerce_analytics.int_customer_orders)
+[0m15:39:57.261430 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.int_customer_orders
+[0m15:39:57.261430 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.int_customer_orders"
+[0m15:39:57.261430 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.int_customer_churn_features
+[0m15:39:57.270398 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.int_customer_churn_features"
+[0m15:39:57.273158 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.int_customer_orders
+[0m15:39:57.275698 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.int_customer_orders"
+[0m15:39:57.278324 [debug] [Thread-2 (]: On model.ecommerce_analytics.int_customer_churn_features: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_customer_churn_features"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_customer_churn_features`
+  OPTIONS()
+  as with customers as (
+    select customer_id from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+order_metrics as (
+    select
+        customer_id,
+        date_diff(current_date(), max(order_date), day) as days_since_last_order,
+        count(distinct case when order_date >= date_add(current_date(), interval -30 day) then order_id end) as order_frequency_30d,
+        avg(revenue_usd) as avg_order_value_lifetime,
+        avg(case when order_date >= date_add(current_date(), interval -30 day) then revenue_usd end) as avg_order_value_30d
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+    group by customer_id
+),
+
+final as (
+    select
+        c.customer_id,
+        coalesce(om.days_since_last_order, 999) as days_since_last_order,
+        coalesce(om.order_frequency_30d, 0) as order_frequency_30d,
+        coalesce(om.avg_order_value_30d, 0) - coalesce(om.avg_order_value_lifetime, 0) as avg_order_value_trend
+    from customers c
+    left join order_metrics om on c.customer_id = om.customer_id
+)
+
+select * from final;
+
+
+[0m15:39:57.278324 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:39:57.281011 [debug] [Thread-1 (]: On model.ecommerce_analytics.int_customer_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_customer_orders"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_customer_orders`
+  OPTIONS()
+  as -- Per-customer aggregated purchase history
+-- Used to compute RFM segments in dim_customers
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+),
+
+customer_stats as (
+    select
+        customer_id,
+
+        -- Recency: days since last order
+        date_diff(current_date(), max(order_date), day)   as days_since_last_order,
+
+        -- Frequency
+        count(distinct order_id)                           as total_orders,
+
+        -- Monetary
+        sum(revenue_usd)                                   as lifetime_value_usd,
+        avg(revenue_usd)                                   as avg_order_value_usd,
+
+        -- First & last order
+        min(order_date)                                    as first_order_date,
+        max(order_date)                                    as last_order_date,
+
+        -- Preferred channel
+        approx_top_count(channel, 1)[offset(0)].value     as preferred_channel
+
+    from orders
+    group by customer_id
+),
+
+rfm_scored as (
+    select
+        *,
+        -- RFM quintile scoring (1=worst, 5=best)
+        ntile(5) over (order by days_since_last_order desc) as recency_score,
+        ntile(5) over (order by total_orders asc)           as frequency_score,
+        ntile(5) over (order by lifetime_value_usd asc)     as monetary_score
+    from customer_stats
+),
+
+segmented as (
+    select
+        *,
+        -- Simple segment based on combined RFM
+        case
+            when recency_score >= 4 and frequency_score >= 4 then 'Champions'
+            when recency_score >= 3 and frequency_score >= 3 then 'Loyal Customers'
+            when recency_score >= 4 and frequency_score <= 2 then 'New Customers'
+            when recency_score <= 2 and frequency_score >= 3 then 'At Risk'
+            when recency_score <= 2 and frequency_score <= 2 then 'Lost'
+            else 'Potential Loyalists'
+        end as rfm_segment
+    from rfm_scored
+)
+
+select * from segmented;
+
+
+[0m15:39:57.281011 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:39:57.727689 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.conversion_rate"
+[0m15:39:57.727689 [debug] [Thread-4 (]: On model.ecommerce_analytics.conversion_rate: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.conversion_rate"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Daily funnel: sessions → product views → add to cart → purchase
+
+with events as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_events`
+),
+
+daily_funnel as (
+    select
+        event_date,
+        device_type,
+
+        count(distinct session_id)                                          as sessions,
+
+        count(distinct case when event_type = 'page_view'
+            and page like '%product%'
+            then session_id end)                                            as product_views,
+
+        count(distinct case when event_type = 'add_to_cart'
+            then session_id end)                                            as add_to_cart,
+
+        count(distinct case when event_type = 'purchase'
+            then session_id end)                                            as purchases
+
+    from events
+    group by 1, 2
+),
+
+with_rates as (
+    select
+        *,
+        -- conversion rates
+        round(safe_divide(product_views, sessions) * 100, 2)    as view_rate_pct,
+        round(safe_divide(add_to_cart, sessions) * 100, 2)      as atc_rate_pct,
+        round(safe_divide(purchases, sessions) * 100, 2)        as purchase_rate_pct,
+        round(safe_divide(purchases, add_to_cart) * 100, 2)     as cart_conversion_pct
+    from daily_funnel
+)
+
+select * from with_rates
+order by event_date desc
+    );
+  
+[0m15:39:58.031489 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:a03abe87-6acc-4974-b9ec-18afd7c6bbaf&page=queryresults
+[0m15:39:58.695745 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:bafe6f79-89fa-4b72-90f2-ae0c2bc0f153&page=queryresults
+[0m15:39:58.872851 [debug] [Thread-3 (]: SQL status: OK in 0.843 seconds
+[0m15:39:58.885889 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D2DAEA0>]}
+[0m15:39:58.885889 [info ] [Thread-3 (]: 9 of 22 OK created sql view model staging.stg_returns .......................... [[32mCREATE VIEW (0 processed)[0m in 2.96s]
+[0m15:39:58.885889 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.stg_returns
+[0m15:39:58.885889 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.int_product_revenue
+[0m15:39:58.885889 [info ] [Thread-3 (]: 13 of 22 START sql view model staging.int_product_revenue ...................... [RUN]
+[0m15:39:58.885889 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.stg_returns, now model.ecommerce_analytics.int_product_revenue)
+[0m15:39:58.891488 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.int_product_revenue
+[0m15:39:58.894045 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.int_product_revenue"
+[0m15:39:58.894045 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.int_product_revenue
+[0m15:39:58.904678 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.int_product_revenue"
+[0m15:39:58.908273 [debug] [Thread-3 (]: On model.ecommerce_analytics.int_product_revenue: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_product_revenue"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_product_revenue`
+  OPTIONS()
+  as with items as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+),
+
+orders as (
+    select order_id, order_date, order_status
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+    where order_status = 'COMPLETED'
+),
+
+products as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_products`
+),
+
+product_revenue as (
+    select
+        i.product_id,
+        p.product_name,
+        p.category,
+        p.sub_category,
+        p.brand,
+        p.cost_price_usd,
+        p.retail_price_usd,
+        p.margin_pct,
+
+        count(distinct i.order_id)          as total_orders,
+        sum(i.quantity)                     as total_units_sold,
+        sum(i.line_revenue_usd)             as total_revenue_usd,
+        avg(i.unit_price_usd)               as avg_selling_price_usd,
+
+        -- profitability
+        sum(i.line_revenue_usd)
+            - sum(i.quantity * p.cost_price_usd) as gross_profit_usd
+
+    from items i
+    inner join orders o on i.order_id = o.order_id
+    left join products p on i.product_id = p.product_id
+    group by 1,2,3,4,5,6,7,8
+)
+
+select * from product_revenue;
+
+
+[0m15:39:58.908273 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:39:59.213004 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:aefe819e-a448-4aeb-add0-45930df32269&page=queryresults
+[0m15:39:59.435401 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:dc97ac97-2dcd-408d-a831-c919bd80d604&page=queryresults
+[0m15:40:00.166575 [debug] [Thread-1 (]: SQL status: OK in 0.961 seconds
+[0m15:40:00.186110 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B2042C0>]}
+[0m15:40:00.186110 [info ] [Thread-1 (]: 12 of 22 OK created sql view model staging.int_customer_orders ................. [[32mCREATE VIEW (0 processed)[0m in 2.93s]
+[0m15:40:00.187681 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.int_customer_orders
+[0m15:40:00.189228 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.marketing_performance
+[0m15:40:00.189228 [info ] [Thread-1 (]: 14 of 22 START sql table model metrics.marketing_performance ................... [RUN]
+[0m15:40:00.190782 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_customer_orders, now model.ecommerce_analytics.marketing_performance)
+[0m15:40:00.190782 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.marketing_performance
+[0m15:40:00.195462 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.marketing_performance"
+[0m15:40:00.197046 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.marketing_performance
+[0m15:40:00.202565 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:40:00.362205 [debug] [Thread-2 (]: SQL status: OK in 0.929 seconds
+[0m15:40:00.362205 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B85BD40>]}
+[0m15:40:00.372423 [info ] [Thread-2 (]: 11 of 22 OK created sql view model staging.int_customer_churn_features ......... [[32mCREATE VIEW (0 processed)[0m in 3.11s]
+[0m15:40:00.372423 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.int_customer_churn_features
+[0m15:40:00.372423 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.int_orders_enriched
+[0m15:40:00.376159 [info ] [Thread-2 (]: 15 of 22 START sql view model staging.int_orders_enriched ...................... [RUN]
+[0m15:40:00.377169 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_customer_churn_features, now model.ecommerce_analytics.int_orders_enriched)
+[0m15:40:00.377169 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.int_orders_enriched
+[0m15:40:00.377169 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.int_orders_enriched"
+[0m15:40:00.384913 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.int_orders_enriched
+[0m15:40:00.388937 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.int_orders_enriched"
+[0m15:40:00.391953 [debug] [Thread-2 (]: On model.ecommerce_analytics.int_orders_enriched: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.int_orders_enriched"} */
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`int_orders_enriched`
+  OPTIONS()
+  as -- Joins orders with their items and customer info
+-- This becomes the base for fact_orders
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_orders`
+),
+
+order_items_agg as (
+    select
+        order_id,
+        sum(quantity)           as total_items,
+        sum(line_revenue_usd)   as items_revenue_usd,
+        count(distinct product_id) as unique_products
+    from `genai-copilot-enterprisedata`.`staging`.`stg_order_items`
+    group by order_id
+),
+
+customers as (
+    select
+        customer_id,
+        state_name            as customer_state,
+        city_name             as customer_city,
+        acquisition_channel,
+        signup_date,
+        days_since_signup
+    from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+returns_agg as (
+    select
+        order_id,
+        sum(refund_amount_usd) as total_refund_usd
+    from `genai-copilot-enterprisedata`.`staging`.`stg_returns`
+    group by order_id
+),
+
+enriched as (
+    select
+        -- order keys
+        o.order_id,
+        o.customer_id,
+
+        -- dates
+        o.order_date,
+        extract(year  from o.order_date) as order_year,
+        extract(month from o.order_date) as order_month,
+        extract(week  from o.order_date) as order_week,
+
+        -- order attributes
+        o.order_status,
+        o.channel,
+        c.customer_state              as state_name,
+        c.customer_city               as city_name,
+
+        -- financials
+        o.revenue_usd,
+        o.discount_usd,
+        o.shipping_cost_usd,
+        coalesce(r.total_refund_usd, 0) as refund_usd,
+        o.revenue_usd - coalesce(o.discount_usd, 0) - coalesce(r.total_refund_usd, 0) as net_revenue_usd,
+
+        -- items
+        coalesce(oi.total_items, 0)       as total_items,
+        coalesce(oi.unique_products, 0)   as unique_products,
+
+        -- customer context
+        c.days_since_signup,
+        -- new vs returning: first order?
+        case
+            when c.signup_date = o.order_date then 'new'
+            else 'returning'
+        end                               as customer_type
+
+    from orders o
+    left join order_items_agg oi on o.order_id = oi.order_id
+    left join customers c on o.customer_id = c.customer_id
+    left join returns_agg r on o.order_id = r.order_id
+)
+
+select * from enriched;
+
+
+[0m15:40:00.391953 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:40:00.708651 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:c5809302-608f-4e7e-8fe7-11a5cfde0aab&page=queryresults
+[0m15:40:01.644798 [debug] [Thread-3 (]: SQL status: OK in 0.938 seconds
+[0m15:40:01.652551 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D1B7C80>]}
+[0m15:40:01.654560 [info ] [Thread-3 (]: 13 of 22 OK created sql view model staging.int_product_revenue ................. [[32mCREATE VIEW (0 processed)[0m in 2.77s]
+[0m15:40:01.654560 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.int_product_revenue
+[0m15:40:01.656260 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.dim_customers
+[0m15:40:01.656260 [info ] [Thread-3 (]: 16 of 22 START sql table model marts.dim_customers ............................. [RUN]
+[0m15:40:01.656260 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_product_revenue, now model.ecommerce_analytics.dim_customers)
+[0m15:40:01.659072 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.dim_customers
+[0m15:40:01.665850 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_customers"
+[0m15:40:01.666985 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.dim_customers
+[0m15:40:01.671494 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:40:01.676774 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.marketing_performance"
+[0m15:40:01.725649 [debug] [Thread-1 (]: On model.ecommerce_analytics.marketing_performance: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.marketing_performance"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`marketing_performance`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with spend as (select * from `genai-copilot-enterprisedata`.`staging`.`stg_marketing_spend`),
+rev as (
+    select order_date, channel, sum(revenue_usd) as revenue_usd, count(distinct order_id) as orders
+    from `genai-copilot-enterprisedata`.`staging`.`stg_orders` where order_status = "COMPLETED" group by 1,2)
+select
+    s.spend_date, s.channel, s.spend_usd, s.impressions, s.clicks, s.cpc_usd, s.ctr_pct,
+    coalesce(r.revenue_usd,0) as attributed_revenue_usd,
+    coalesce(r.orders,0) as attributed_orders,
+    round(safe_divide(coalesce(r.revenue_usd,0), s.spend_usd),2) as roas,
+    round(safe_divide(s.spend_usd, coalesce(r.orders,0)),2) as cac_usd
+from spend s
+left join rev r on s.spend_date = r.order_date and s.channel = r.channel
+order by spend_date desc
+    );
+  
+[0m15:40:02.260978 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:58c12cd7-0f37-438d-9db7-420c7bfe33f6&page=queryresults
+[0m15:40:02.621134 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:f2d5f286-370c-4ec5-ae62-4b2ce19bc407&page=queryresults
+[0m15:40:02.715371 [debug] [Thread-4 (]: SQL status: OK in 4.014 seconds
+[0m15:40:03.153738 [debug] [Thread-2 (]: SQL status: OK in 0.896 seconds
+[0m15:40:03.153738 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D29E7E0>]}
+[0m15:40:03.153738 [info ] [Thread-2 (]: 15 of 22 OK created sql view model staging.int_orders_enriched ................. [[32mCREATE VIEW (0 processed)[0m in 2.78s]
+[0m15:40:03.168788 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_customers"
+[0m15:40:03.168788 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.int_orders_enriched
+[0m15:40:03.168788 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.dim_products
+[0m15:40:03.168788 [info ] [Thread-2 (]: 17 of 22 START sql table model marts.dim_products .............................. [RUN]
+[0m15:40:03.168788 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.int_orders_enriched, now model.ecommerce_analytics.dim_products)
+[0m15:40:03.168788 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.dim_products
+[0m15:40:03.173783 [debug] [Thread-3 (]: On model.ecommerce_analytics.dim_customers: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_customers"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with customers as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_customers`
+),
+
+customer_stats as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_customer_orders`
+),
+
+final as (
+    select
+        -- surrogate key (BigQuery-safe)
+        to_hex(md5(cast(coalesce(cast(c.customer_id as string), '_dbt_utils_surrogate_key_null_') as string))) as customer_sk,
+
+        -- natural key
+        c.customer_id,
+
+        -- personal attributes
+        c.first_name,
+        c.last_name,
+        concat(c.first_name, ' ', c.last_name)  as full_name,
+        c.email,
+        c.state_name,
+        c.city_name,
+
+        -- signup info
+        c.signup_date,
+        c.acquisition_channel,
+        c.days_since_signup,
+
+        -- RFM metrics (from intermediate)
+        coalesce(cs.total_orders, 0)              as total_orders,
+        coalesce(cs.lifetime_value_usd, 0)        as lifetime_value_usd,
+        coalesce(cs.avg_order_value_usd, 0)       as avg_order_value_usd,
+        cs.days_since_last_order,
+        cs.first_order_date,
+        cs.last_order_date,
+        cs.preferred_channel,
+
+        -- RFM scores
+        cs.recency_score,
+        cs.frequency_score,
+        cs.monetary_score,
+        coalesce(cs.rfm_segment, 'No Purchases')  as rfm_segment,
+
+        -- value tier
+        case
+            when coalesce(cs.lifetime_value_usd, 0) >= 1000 then 'High Value'
+            when coalesce(cs.lifetime_value_usd, 0) >= 300  then 'Mid Value'
+            when coalesce(cs.lifetime_value_usd, 0) > 0     then 'Low Value'
+            else 'No Purchase'
+        end                                        as value_tier
+
+    from customers c
+    left join customer_stats cs on c.customer_id = cs.customer_id
+)
+
+select * from final
+    );
+  
+[0m15:40:03.185058 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.dim_products"
+[0m15:40:03.186523 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.dim_products
+[0m15:40:03.186523 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:40:03.258799 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CB3A3C0>]}
+[0m15:40:03.258799 [info ] [Thread-4 (]: 10 of 22 OK created sql table model metrics.conversion_rate .................... [[32mCREATE TABLE (5.2k rows, 15.8 MiB processed)[0m in 7.18s]
+[0m15:40:03.274594 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.conversion_rate
+[0m15:40:03.276607 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.funnel_stages
+[0m15:40:03.276607 [info ] [Thread-4 (]: 18 of 22 START sql table model metrics.funnel_stages ........................... [RUN]
+[0m15:40:03.278618 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.conversion_rate, now model.ecommerce_analytics.funnel_stages)
+[0m15:40:03.278618 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.funnel_stages
+[0m15:40:03.288196 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.funnel_stages"
+[0m15:40:03.290720 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.funnel_stages
+[0m15:40:03.290720 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:40:04.159315 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:3770e578-a5b0-474e-9d13-ea5d095f4aba&page=queryresults
+[0m15:40:04.850477 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.funnel_stages"
+[0m15:40:04.850477 [debug] [Thread-4 (]: On model.ecommerce_analytics.funnel_stages: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.funnel_stages"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`funnel_stages`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      SELECT 
+        event_date, 
+        device_type, 
+        'Sessions' as stage_name, 
+        1 as stage_order, 
+        sessions as count from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date, 
+        device_type, 
+        'Product Views', 
+        2, 
+        product_views from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date,
+        device_type,
+        'Add to Cart',
+        3,
+        add_to_cart from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+UNION ALL
+    SELECT 
+        event_date, 
+        device_type, 
+        'Purchases', 
+        4, 
+        purchases from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+    );
+  
+[0m15:40:04.881483 [debug] [Thread-1 (]: SQL status: OK in 2.260 seconds
+[0m15:40:05.453567 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D1BFDD0>]}
+[0m15:40:05.453567 [info ] [Thread-1 (]: 14 of 22 OK created sql table model metrics.marketing_performance .............. [[32mCREATE TABLE (6.5k rows, 3.3 MiB processed)[0m in 5.26s]
+[0m15:40:05.453567 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.marketing_performance
+[0m15:40:05.666817 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.dim_products"
+[0m15:40:05.669181 [debug] [Thread-2 (]: On model.ecommerce_analytics.dim_products: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.dim_products"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`dim_products`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      with products as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`stg_products`
+),
+
+product_perf as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_product_revenue`
+),
+
+final as (
+    select
+        to_hex(md5(cast(coalesce(cast(p.product_id as string), '_dbt_utils_surrogate_key_null_') as string))) as product_sk,
+
+        p.product_id,
+        p.product_name,
+        p.category,
+        p.sub_category,
+        p.brand,
+        p.is_active,
+
+        -- pricing
+        p.cost_price_usd,
+        p.retail_price_usd,
+        p.margin_pct,
+
+        -- price tier
+        case
+            when p.retail_price_usd >= 200 then 'Premium'
+            when p.retail_price_usd >= 50  then 'Mid-Range'
+            else 'Budget'
+        end as price_tier,
+
+        -- performance (from intermediate)
+        coalesce(pp.total_orders, 0)        as total_orders,
+        coalesce(pp.total_units_sold, 0)    as total_units_sold,
+        coalesce(pp.total_revenue_usd, 0)   as total_revenue_usd,
+        coalesce(pp.gross_profit_usd, 0)    as gross_profit_usd,
+
+        -- performance label
+        case
+            when coalesce(pp.total_revenue_usd, 0) >= 50000 then 'Top Seller'
+            when coalesce(pp.total_revenue_usd, 0) >= 10000 then 'Good Seller'
+            when coalesce(pp.total_revenue_usd, 0) > 0      then 'Slow Mover'
+            else 'No Sales'
+        end as sales_performance
+
+    from products p
+    left join product_perf pp on p.product_id = pp.product_id
+)
+
+select * from final
+    );
+  
+[0m15:40:05.729899 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:72d2c113-a912-4ce2-a273-91e19ddeec8e&page=queryresults
+[0m15:40:06.552802 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:ae33a58d-4c59-4807-81a5-3243d9cb6420&page=queryresults
+[0m15:40:07.356460 [debug] [Thread-4 (]: SQL status: OK in 1.633 seconds
+[0m15:40:07.830321 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B204380>]}
+[0m15:40:07.832329 [info ] [Thread-4 (]: 18 of 22 OK created sql table model metrics.funnel_stages ...................... [[32mCREATE TABLE (20.9k rows, 248.0 KiB processed)[0m in 4.55s]
+[0m15:40:07.832329 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.funnel_stages
+[0m15:40:08.129291 [debug] [Thread-3 (]: SQL status: OK in 3.956 seconds
+[0m15:40:08.611256 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CB6A4B0>]}
+[0m15:40:08.613266 [info ] [Thread-3 (]: 16 of 22 OK created sql table model marts.dim_customers ........................ [[32mCREATE TABLE (20.0k rows, 4.5 MiB processed)[0m in 6.95s]
+[0m15:40:08.613266 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.dim_customers
+[0m15:40:08.613266 [debug] [Thread-1 (]: Began running node model.ecommerce_analytics.customer_ltv
+[0m15:40:08.613266 [info ] [Thread-1 (]: 19 of 22 START sql table model metrics.customer_ltv ............................ [RUN]
+[0m15:40:08.613266 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.marketing_performance, now model.ecommerce_analytics.customer_ltv)
+[0m15:40:08.613266 [debug] [Thread-1 (]: Began compiling node model.ecommerce_analytics.customer_ltv
+[0m15:40:08.619616 [debug] [Thread-1 (]: Writing injected SQL for node "model.ecommerce_analytics.customer_ltv"
+[0m15:40:08.619616 [debug] [Thread-1 (]: Began executing node model.ecommerce_analytics.customer_ltv
+[0m15:40:08.627671 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m15:40:10.090004 [debug] [Thread-1 (]: Writing runtime sql for node "model.ecommerce_analytics.customer_ltv"
+[0m15:40:10.092014 [debug] [Thread-1 (]: On model.ecommerce_analytics.customer_ltv: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.customer_ltv"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`customer_ltv`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      select
+    customer_id,
+    full_name,
+    email,
+    state_name,
+    city_name,
+    acquisition_channel,
+    signup_date,
+    rfm_segment,
+    value_tier,
+    total_orders,
+    lifetime_value_usd,
+    avg_order_value_usd,
+    days_since_last_order,
+    first_order_date,
+    last_order_date,
+    preferred_channel,
+    recency_score,
+    frequency_score,
+    monetary_score
+from `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+where total_orders > 0
+    );
+  
+[0m15:40:10.782366 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:304dead9-64e9-4922-bf4b-e159b24bc33e&page=queryresults
+[0m15:40:12.276806 [debug] [Thread-1 (]: SQL status: OK in 1.486 seconds
+[0m15:40:12.775036 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D18F560>]}
+[0m15:40:12.775036 [info ] [Thread-1 (]: 19 of 22 OK created sql table model metrics.customer_ltv ....................... [[32mCREATE TABLE (15.3k rows, 3.8 MiB processed)[0m in 4.16s]
+[0m15:40:12.775036 [debug] [Thread-1 (]: Finished running node model.ecommerce_analytics.customer_ltv
+[0m15:40:15.587241 [debug] [Thread-2 (]: SQL status: OK in 9.037 seconds
+[0m15:40:16.104967 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B204800>]}
+[0m15:40:16.104967 [info ] [Thread-2 (]: 17 of 22 OK created sql table model marts.dim_products ......................... [[32mCREATE TABLE (5.0k rows, 10.7 MiB processed)[0m in 12.94s]
+[0m15:40:16.120648 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.dim_products
+[0m15:40:16.120648 [debug] [Thread-3 (]: Began running node model.ecommerce_analytics.fact_orders
+[0m15:40:16.120648 [debug] [Thread-4 (]: Began running node model.ecommerce_analytics.product_performance
+[0m15:40:16.120648 [info ] [Thread-3 (]: 20 of 22 START sql table model marts.fact_orders ............................... [RUN]
+[0m15:40:16.120648 [info ] [Thread-4 (]: 21 of 22 START sql table model metrics.product_performance ..................... [RUN]
+[0m15:40:16.120648 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_customers, now model.ecommerce_analytics.fact_orders)
+[0m15:40:16.126240 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.funnel_stages, now model.ecommerce_analytics.product_performance)
+[0m15:40:16.127425 [debug] [Thread-3 (]: Began compiling node model.ecommerce_analytics.fact_orders
+[0m15:40:16.127425 [debug] [Thread-4 (]: Began compiling node model.ecommerce_analytics.product_performance
+[0m15:40:16.136293 [debug] [Thread-3 (]: Writing injected SQL for node "model.ecommerce_analytics.fact_orders"
+[0m15:40:16.144793 [debug] [Thread-4 (]: Writing injected SQL for node "model.ecommerce_analytics.product_performance"
+[0m15:40:16.146804 [debug] [Thread-4 (]: Began executing node model.ecommerce_analytics.product_performance
+[0m15:40:16.146804 [debug] [Thread-3 (]: Began executing node model.ecommerce_analytics.fact_orders
+[0m15:40:16.151542 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m15:40:16.154166 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m15:40:17.759773 [debug] [Thread-4 (]: Writing runtime sql for node "model.ecommerce_analytics.product_performance"
+[0m15:40:17.759773 [debug] [Thread-4 (]: On model.ecommerce_analytics.product_performance: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.product_performance"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`product_performance`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      select
+    product_id,
+    product_name,
+    category,
+    sub_category,
+    brand,
+    price_tier,
+    sales_performance,
+    retail_price_usd,
+    cost_price_usd,
+    margin_pct,
+    total_orders,
+    total_units_sold,
+    total_revenue_usd,
+    gross_profit_usd,
+    is_active
+from `genai-copilot-enterprisedata`.`marts`.`dim_products`
+order by total_revenue_usd desc
+    );
+  
+[0m15:40:17.790589 [debug] [Thread-3 (]: Writing runtime sql for node "model.ecommerce_analytics.fact_orders"
+[0m15:40:17.792598 [debug] [Thread-3 (]: On model.ecommerce_analytics.fact_orders: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.fact_orders"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`marts`.`fact_orders`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- fact_orders: one row per order
+-- All foreign keys (SKs) point to dimension tables
+-- All measures are additive
+
+with orders as (
+    select * from `genai-copilot-enterprisedata`.`staging`.`int_orders_enriched`
+),
+
+dim_customers as (
+    select customer_sk, customer_id from `genai-copilot-enterprisedata`.`marts`.`dim_customers`
+),
+
+dim_products as (
+    -- We need product_sk per order — use most expensive item as primary product
+    select
+        oi.order_id,
+        dp.product_sk
+    from `genai-copilot-enterprisedata`.`staging`.`stg_order_items` oi
+    inner join `genai-copilot-enterprisedata`.`marts`.`dim_products` dp on oi.product_id = dp.product_id
+    qualify row_number() over (
+        partition by oi.order_id
+        order by oi.line_revenue_usd desc
+    ) = 1
+),
+
+dim_channels as (
+    select channel_sk, channel_code from `genai-copilot-enterprisedata`.`marts`.`dim_channels`
+),
+
+dim_date as (
+    select date_key, full_date from `genai-copilot-enterprisedata`.`marts`.`dim_date`
+),
+
+final as (
+    select
+        -- surrogate key for the fact row
+        to_hex(md5(cast(coalesce(cast(o.order_id as string), '_dbt_utils_surrogate_key_null_') as string))) as order_sk,
+
+        -- natural key (keep for debugging)
+        o.order_id,
+
+        -- foreign keys → dimensions
+        dc.customer_sk,
+        dp.product_sk,
+        dch.channel_sk,
+        dd.date_key                                     as order_date_key,
+
+        -- degenerate dimensions (attributes that don't need their own dim)
+        o.order_status,
+        o.state_name,
+        o.city_name,
+        o.customer_type,                                -- new vs returning
+
+        -- DATE (also store raw date for easy filtering)
+        o.order_date,
+        o.order_year,
+        o.order_month,
+        o.order_week,
+
+        -- MEASURES (all additive)
+        o.revenue_usd,
+        o.discount_usd,
+        o.refund_usd,
+        o.shipping_cost_usd,
+        o.net_revenue_usd,
+        o.total_items,
+        o.unique_products,
+
+        -- derived measures
+        o.revenue_usd - o.discount_usd                 as discounted_revenue_usd,
+        case when o.order_status = 'COMPLETED' then 1 else 0 end as is_completed,
+        case when o.order_status = 'CANCELLED' then 1 else 0 end as is_cancelled
+
+    from orders o
+    left join dim_customers  dc  on o.customer_id   = dc.customer_id
+    left join dim_products   dp  on o.order_id      = dp.order_id
+    left join dim_channels   dch on o.channel       = dch.channel_code
+    left join dim_date       dd  on o.order_date    = dd.full_date
+)
+
+select * from final
+    );
+  
+[0m15:40:18.555598 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:47399bf4-a426-4597-a19e-82f897569b2e&page=queryresults
+[0m15:40:18.758772 [debug] [Thread-3 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:0d7ff0f4-226d-40f4-8811-2341e94bcee6&page=queryresults
+[0m15:40:20.077620 [debug] [Thread-4 (]: SQL status: OK in 1.522 seconds
+[0m15:40:20.558521 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870B22D310>]}
+[0m15:40:20.558521 [info ] [Thread-4 (]: 21 of 22 OK created sql table model metrics.product_performance ................ [[32mCREATE TABLE (5.0k rows, 888.2 KiB processed)[0m in 4.43s]
+[0m15:40:20.558521 [debug] [Thread-4 (]: Finished running node model.ecommerce_analytics.product_performance
+[0m15:40:23.059013 [debug] [Thread-3 (]: SQL status: OK in 4.297 seconds
+[0m15:40:23.602727 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870D2E0230>]}
+[0m15:40:23.604739 [info ] [Thread-3 (]: 20 of 22 OK created sql table model marts.fact_orders .......................... [[32mCREATE TABLE (50.0k rows, 13.6 MiB processed)[0m in 7.48s]
+[0m15:40:23.606752 [debug] [Thread-3 (]: Finished running node model.ecommerce_analytics.fact_orders
+[0m15:40:23.606752 [debug] [Thread-2 (]: Began running node model.ecommerce_analytics.revenue_daily
+[0m15:40:23.608859 [info ] [Thread-2 (]: 22 of 22 START sql table model metrics.revenue_daily ........................... [RUN]
+[0m15:40:23.608859 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.ecommerce_analytics.dim_products, now model.ecommerce_analytics.revenue_daily)
+[0m15:40:23.610869 [debug] [Thread-2 (]: Began compiling node model.ecommerce_analytics.revenue_daily
+[0m15:40:23.618865 [debug] [Thread-2 (]: Writing injected SQL for node "model.ecommerce_analytics.revenue_daily"
+[0m15:40:23.620879 [debug] [Thread-2 (]: Began executing node model.ecommerce_analytics.revenue_daily
+[0m15:40:23.629249 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m15:40:25.120837 [debug] [Thread-2 (]: Writing runtime sql for node "model.ecommerce_analytics.revenue_daily"
+[0m15:40:25.120837 [debug] [Thread-2 (]: On model.ecommerce_analytics.revenue_daily: /* {"app": "dbt", "dbt_version": "1.11.11", "profile_name": "ecommerce_analytics", "target_name": "dev", "node_id": "model.ecommerce_analytics.revenue_daily"} */
+
+  
+    
+
+    create or replace table `genai-copilot-enterprisedata`.`metrics`.`revenue_daily`
+      
+    
+    
+
+    
+    OPTIONS()
+    as (
+      -- Pre-aggregated daily revenue — Streamlit queries this directly
+-- Much cheaper than querying fact_orders every time
+
+with fact as (
+    select * from `genai-copilot-enterprisedata`.`marts`.`fact_orders`
+),
+
+daily as (
+    select
+        order_date,
+        order_year,
+        order_month,
+        order_week,
+
+        -- breakdowns
+        state_name,
+        city_name,
+        customer_type,
+
+        -- channel (join back to get name)
+        dch.channel_name,
+        dch.channel_type,
+
+        -- measures
+        count(distinct order_id)                                                    as total_orders,
+        count(distinct customer_sk)                                                 as unique_customers,
+        sum(case when is_completed = 1 then revenue_usd else 0 end)                 as gross_revenue_usd,
+        sum(case when is_completed = 1 then discount_usd else 0 end)                as total_discounts_usd,
+        sum(case when is_completed = 1 then net_revenue_usd else 0 end)             as net_revenue_usd,
+        sum(total_items)                                                            as total_items_sold,
+        sum(is_cancelled)                                                           as cancelled_orders,
+        SAFE_DIVIDE(COUNT(DISTINCT order_id) - SUM(is_cancelled),COUNT(DISTINCT order_id)) AS order_fullfillment_rate,
+        SAFE_DIVIDE(SUM(total_items), COUNT(DISTINCT order_id)) AS basket_depth,
+        SAFE_DIVIDE(SUM(CASE WHEN is_completed = 1 THEN revenue_usd ELSE 0 END), COUNT(CASE WHEN is_completed = 1 THEN 1 END)) AS avg_order_value
+
+
+    from fact
+    left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk
+    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
+)
+
+select * from daily
+    );
+  
+[0m15:40:25.906431 [debug] [Thread-2 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=genai-copilot-enterprisedata&j=bq:US:c7aced7b-4063-4a34-8690-c0ec0d78951a&page=queryresults
+[0m15:40:29.431585 [debug] [Thread-2 (]: SQL status: OK in 3.529 seconds
+[0m15:40:29.971831 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': 'e1c4c91b-e502-4839-8a73-b782199485b2', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002870CB52840>]}
+[0m15:40:29.971831 [info ] [Thread-2 (]: 22 of 22 OK created sql table model metrics.revenue_daily ...................... [[32mCREATE TABLE (48.5k rows, 10.3 MiB processed)[0m in 6.36s]
+[0m15:40:29.971831 [debug] [Thread-2 (]: Finished running node model.ecommerce_analytics.revenue_daily
+[0m15:40:29.978123 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_staging' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_metrics' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'list_genai-copilot-enterprisedata_marts' was properly closed.
+[0m15:40:30.036338 [debug] [MainThread]: Connection 'model.ecommerce_analytics.customer_ltv' was properly closed.
+[0m15:40:30.042170 [debug] [MainThread]: Connection 'model.ecommerce_analytics.revenue_daily' was properly closed.
+[0m15:40:30.042170 [debug] [MainThread]: Connection 'model.ecommerce_analytics.fact_orders' was properly closed.
+[0m15:40:30.042170 [debug] [MainThread]: Connection 'model.ecommerce_analytics.product_performance' was properly closed.
+[0m15:40:30.042170 [info ] [MainThread]: 
+[0m15:40:30.042170 [info ] [MainThread]: Finished running 11 table models, 11 view models in 0 hours 0 minutes and 44.03 seconds (44.03s).
+[0m15:40:30.050605 [debug] [MainThread]: Command end result
+[0m15:40:30.126310 [debug] [MainThread]: Wrote artifact WritableManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\manifest.json
+[0m15:40:30.126310 [debug] [MainThread]: Wrote artifact SemanticManifest to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\semantic_manifest.json
+[0m15:40:30.145582 [debug] [MainThread]: Wrote artifact RunExecutionResult to D:\JOB\Work\GenAI-Powered Cloud Analytics Copilot for E-Commerce Data Warehousing\dbt\target\run_results.json
+[0m15:40:30.145582 [info ] [MainThread]: 
+[0m15:40:30.147814 [info ] [MainThread]: [32mCompleted successfully[0m
+[0m15:40:30.147814 [info ] [MainThread]: 
+[0m15:40:30.147814 [info ] [MainThread]: Done. PASS=22 WARN=0 ERROR=0 SKIP=0 NO-OP=0 TOTAL=22
+[0m15:40:30.151443 [debug] [MainThread]: Command `dbt run` succeeded at 15:40:30.151443 after 46.75 seconds
+[0m15:40:30.151443 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000028767F4BBC0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287698EA8D0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000287698EAD50>]}
+[0m15:40:32.335955 [debug] [MainThread]: An error was encountered while trying to send an event
+[0m15:40:32.335955 [debug] [MainThread]: Flushing usage events

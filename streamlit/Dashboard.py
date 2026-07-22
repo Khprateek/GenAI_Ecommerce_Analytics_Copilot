@@ -172,7 +172,7 @@ with tab3:
 
         # Top at-risk customers table
         st.subheader("Top 25 High-Risk Customers")
-        display_cols = ['full_name', 'email', 'rfm_segment', 'country_code',
+        display_cols = ['full_name', 'email', 'rfm_segment', 'state_name', 'city_name',
                         'days_since_last_order', 'order_frequency_30d',
                         'lifetime_value_usd', 'churn_probability']
         st.dataframe(
@@ -183,7 +183,8 @@ with tab3:
                 "full_name":             st.column_config.TextColumn("Name"),
                 "email":                 st.column_config.TextColumn("Email"),
                 "rfm_segment":           st.column_config.TextColumn("RFM Segment"),
-                "country_code":          st.column_config.TextColumn("Country"),
+                "state_name":          st.column_config.TextColumn("State"),
+                "city_name":           st.column_config.TextColumn("City"),
                 "days_since_last_order": st.column_config.NumberColumn("Days Since Order", format="%d"),
                 "order_frequency_30d":   st.column_config.NumberColumn("Orders (30d)", format="%d"),
                 "lifetime_value_usd":    st.column_config.NumberColumn("LTV", format="$%.0f"),
