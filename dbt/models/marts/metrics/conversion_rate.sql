@@ -1,4 +1,13 @@
--- Daily funnel: sessions → product views → add to cart → purchase
+-- ============================================================================
+-- conversion_rate.sql
+-- ============================================================================
+-- Daily event funnel: page_view → add_to_cart → reorder_click → purchase.
+-- Adapted for quick-commerce (no session_id or device_type in raw events,
+-- uses customer_id as the session proxy).
+--
+-- Grain: one row per event_date
+-- Depends on: stg_events
+-- ============================================================================
 
 with events as (
     select * from {{ ref('stg_events') }}
@@ -7,32 +16,46 @@ with events as (
 daily_funnel as (
     select
         event_date,
-        device_type,
 
-        count(distinct session_id)                                          as sessions,
+        -- Total events & unique visitors
+        count(*)                                            as total_events,
+        count(distinct customer_id)                         as unique_visitors,
 
+        -- Funnel stages (count distinct customers at each step)
         count(distinct case when event_type = 'page_view'
-            and page like '%product%'
-            then session_id end)                                            as product_views,
+                            then customer_id end)           as page_viewers,
 
         count(distinct case when event_type = 'add_to_cart'
-            then session_id end)                                            as add_to_cart,
+                            then customer_id end)           as add_to_carters,
+
+        count(distinct case when event_type = 'reorder_click'
+                            then customer_id end)           as reorder_clickers,
 
         count(distinct case when event_type = 'purchase'
-            then session_id end)                                            as purchases
+                            then customer_id end)           as purchasers
 
     from events
-    group by 1, 2
+    where customer_id is not null
+      and customer_id != ''
+    group by event_date
 ),
 
 with_rates as (
     select
         *,
-        -- conversion rates
-        round(safe_divide(product_views, sessions) * 100, 2)    as view_rate_pct,
-        round(safe_divide(add_to_cart, sessions) * 100, 2)      as atc_rate_pct,
-        round(safe_divide(purchases, sessions) * 100, 2)        as purchase_rate_pct,
-        round(safe_divide(purchases, add_to_cart) * 100, 2)     as cart_conversion_pct
+
+        -- Conversion rates
+        round(safe_divide(add_to_carters, page_viewers) * 100, 2)
+                                                            as view_to_cart_pct,
+        round(safe_divide(purchasers, page_viewers) * 100, 2)
+                                                            as view_to_purchase_pct,
+        round(safe_divide(purchasers, add_to_carters) * 100, 2)
+                                                            as cart_to_purchase_pct,
+
+        -- Reorder engagement
+        round(safe_divide(reorder_clickers, unique_visitors) * 100, 2)
+                                                            as reorder_click_rate_pct
+
     from daily_funnel
 )
 
