@@ -8,7 +8,7 @@ cleaned as (
             cast(customer_id as string)           as customer_id,
             lower(trim(event_type))               as event_type,
             cast(event_timestamp as timestamp)    as event_timestamp,
-            cast(event_timestamp as date)         as event_date,
+            cast(cast(event_timestamp as timestamp) as date) as event_date,
             current_timestamp()                   as _dbt_loaded_at
 
         from source

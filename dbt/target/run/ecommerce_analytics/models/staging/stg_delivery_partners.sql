@@ -1,6 +1,10 @@
-with source as (
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_delivery_partners`
+  OPTIONS()
+  as with source as (
     select *
-    from {{ source('raw', 'delivery_partners') }}
+    from `genai-copilot-enterprisedata`.`raw`.`delivery_partners`
 ),
 
 cleaned as (
@@ -30,4 +34,5 @@ cleaned as (
 )
 
 select *
-from cleaned
+from cleaned;
+

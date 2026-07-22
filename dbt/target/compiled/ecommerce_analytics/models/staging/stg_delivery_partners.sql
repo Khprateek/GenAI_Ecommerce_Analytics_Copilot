@@ -1,6 +1,6 @@
 with source as (
     select *
-    from {{ source('raw', 'delivery_partners') }}
+    from `genai-copilot-enterprisedata`.`raw`.`delivery_partners`
 ),
 
 cleaned as (

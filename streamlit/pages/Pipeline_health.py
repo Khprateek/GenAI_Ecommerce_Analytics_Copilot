@@ -235,22 +235,23 @@ st.subheader("🔍 Deep-Dive Table Schemas & Checks")
 # Staging Details Expanders
 with st.expander("📝 orders (staging.stg_orders)") as exp:
     st.markdown("""
-    **Description**: Cleaned & structured table representing sales orders. Casts timestamps, enforces types, and removes negative revenues.
+    **Description**: Cleaned & structured table representing sales orders. Casts timestamps, enforces types, and standardizes statuses.
     
     - **Primary Key**: `order_id` (enforced unique)
     - **Staging Schema & Casting Rules**:
       - `order_id` (STRING)
       - `customer_id` (STRING)
       - `order_date` (DATE)
-      - `updated_at` (TIMESTAMP)
-      - `order_status` (STRING) - Standardized (COMPLETED, REFUNDED, CANCELLED)
-      - `revenue_usd` (NUMERIC) - Non-negative constraint
-      - `discount_usd` (NUMERIC)
-      - `shipping_cost_usd` (NUMERIC)
+      - `order_timestamp` (TIMESTAMP)
+      - `order_status` (STRING)
+      - `revenue` (NUMERIC)
+      - `discount` (NUMERIC)
+      - `delivery_fee` (NUMERIC)
+      - `promised_delivery_minutes` (INT64)
+      - `actual_delivery_minutes` (INT64)
     - **Active Validation Rules**:
       - `order_id` must be unique.
-      - `order_id`, `customer_id`, `order_date` must not be null.
-      - `revenue_usd` must be >= 0.
+      - `order_id`, `customer_id`, `order_date`, `revenue` must not be null.
     """)
 
 with st.expander("👤 customers (staging.stg_customers)") as exp:
@@ -263,13 +264,12 @@ with st.expander("👤 customers (staging.stg_customers)") as exp:
       - `first_name` (STRING)
       - `last_name` (STRING)
       - `email` (STRING)
-      - `state_name` (STRING)
-      - `city_name` (STRING)
+      - `home_store_id` (STRING)
+      - `is_pass_member` (BOOL)
       - `signup_date` (DATE)
-      - `days_since_signup` (INT64) - Calculated dynamically
     - **Active Validation Rules**:
       - `customer_id` must be unique.
-      - `customer_id`, `email` must not be null.
+      - `customer_id`, `email`, `signup_date` must not be null.
     """)
 
 with st.expander("📦 order_items (staging.stg_order_items)") as exp:
@@ -282,27 +282,60 @@ with st.expander("📦 order_items (staging.stg_order_items)") as exp:
       - `order_id` (STRING)
       - `product_id` (STRING)
       - `quantity` (INT64)
-      - `unit_price_usd` (NUMERIC)
-      - `line_revenue_usd` (NUMERIC) - Calculated dynamically (`quantity * unit_price_usd`)
+      - `unit_price` (NUMERIC)
+      - `is_substituted` (BOOL)
+      - `line_revenue` (NUMERIC) - Calculated dynamically (`quantity * unit_price`)
     - **Active Validation Rules**:
       - `item_id` must be unique.
-      - `item_id`, `order_id`, `product_id` must not be null.
+      - `item_id`, `order_id`, `product_id`, `quantity`, `unit_price` must not be null.
     """)
 
-with st.expander("↩️ returns (staging.stg_returns)") as exp:
+with st.expander("⚠️ order_issues (staging.stg_order_issues)") as exp:
     st.markdown("""
-    **Description**: Track returns, reasons, and refund sums. Surfaces product defect and service issues.
+    **Description**: Track missing items, defects, and refunds. Surfaces product quality and service issues.
     
-    - **Primary Key**: `return_id` (enforced unique)
+    - **Primary Key**: `issue_id` (enforced unique)
     - **Staging Schema & Casting Rules**:
-      - `return_id` (STRING)
+      - `issue_id` (STRING)
       - `order_id` (STRING)
       - `product_id` (STRING)
-      - `return_date` (DATE)
-      - `return_reason` (STRING)
-      - `refund_amount_usd` (NUMERIC)
+      - `reported_date` (DATE)
+      - `issue_type` (STRING)
+      - `resolution` (STRING)
+      - `refund_amount` (NUMERIC)
     - **Active Validation Rules**:
-      - `return_id` must be unique.
-      - `return_id`, `order_id` must not be null.
-      - *Note: Warning status generated due to simulation of incomplete return reasons in raw files.*
+      - `issue_id` must be unique.
+      - `issue_id`, `order_id`, `product_id`, `reported_date`, `refund_amount` must not be null.
+    """)
+
+with st.expander("🏪 dark_stores (staging.stg_dark_stores)") as exp:
+    st.markdown("""
+    **Description**: Fulfillment centers powering quick commerce.
+    
+    - **Primary Key**: `store_id` (enforced unique)
+    - **Staging Schema & Casting Rules**:
+      - `store_id` (STRING)
+      - `city_name` (STRING)
+      - `sku_capacity` (INT64)
+      - `delivery_radius_km` (NUMERIC)
+      - `launch_date` (DATE)
+    - **Active Validation Rules**:
+      - `store_id` must be unique.
+      - `store_id`, `city_name`, `launch_date` must not be null.
+    """)
+
+with st.expander("🛵 delivery_partners (staging.stg_delivery_partners)") as exp:
+    st.markdown("""
+    **Description**: Delivery fleet profiles.
+    
+    - **Primary Key**: `rider_id` (enforced unique)
+    - **Staging Schema & Casting Rules**:
+      - `rider_id` (STRING)
+      - `full_name` (STRING)
+      - `home_store_id` (STRING)
+      - `vehicle_type` (STRING)
+      - `join_date` (DATE)
+    - **Active Validation Rules**:
+      - `rider_id` must be unique.
+      - `rider_id`, `home_store_id`, `join_date` must not be null.
     """)

@@ -13,10 +13,10 @@ cleaned as (
         trim(home_locality)                     as home_locality,
         UPPER(trim(home_store_id))              as home_store_id,
         cast(is_pass_member as bool)            as is_pass_member, 
-        cast(signup_date    as date)            as signup_date,
+        cast(cast(signup_date as timestamp) as date)            as signup_date,
 
         -- derived: days since signup
-        date_diff(current_date(), cast(signup_date as date), day) as days_since_signup,
+        date_diff(current_date(), cast(cast(signup_date as timestamp) as date), day) as days_since_signup,
         current_timestamp()                     as _dbt_loaded_at
 
     from source

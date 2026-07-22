@@ -8,7 +8,6 @@ PALETTE = px.colors.qualitative.Set2
 
 def revenue_trend_chart(df: pd.DataFrame, granularity: str = "Daily", key="revenue_trend"):
     """Line chart of revenue over time."""
-    # Ensure columns are float to avoid being dropped by numeric_only=True during resample
     if "revenue" in df.columns:
         df["revenue"] = df["revenue"].astype(float)
     if "orders" in df.columns:
@@ -29,7 +28,7 @@ def revenue_trend_chart(df: pd.DataFrame, granularity: str = "Daily", key="reven
         x="order_date",
         y="revenue",
         title=f"{granularity} Revenue",
-        labels={"order_date": "Date", "revenue": "Revenue (USD)"},
+        labels={"order_date": "Date", "revenue": "Revenue (INR)"},
         color_discrete_sequence=["#636EFA"],
     )
 
@@ -41,20 +40,20 @@ def revenue_trend_chart(df: pd.DataFrame, granularity: str = "Daily", key="reven
     st.plotly_chart(fig, use_container_width=True, key=key)
 
 
-def channel_bar_chart(df: pd.DataFrame, key="channel_bar"):
-    """Horizontal bar chart of revenue by channel."""
+def platform_bar_chart(df: pd.DataFrame, key="platform_bar"):
+    """Horizontal bar chart of revenue by platform."""
 
     fig = px.bar(
         df.sort_values("revenue"),
         x="revenue",
-        y="channel_name",
+        y="platform",
         orientation="h",
-        title="Revenue by Channel",
+        title="Revenue by Platform",
         labels={
-            "revenue": "Revenue (USD)",
-            "channel_name": "Channel",
+            "revenue": "Revenue (INR)",
+            "platform": "Platform",
         },
-        color="channel_name",
+        color="platform",
         color_discrete_sequence=PALETTE,
     )
 
@@ -103,28 +102,12 @@ def segment_bar_chart(df: pd.DataFrame, key="segment_bar"):
 
 
 def conversion_funnel_chart(df: pd.DataFrame, key="conversion_funnel"):
-    """Funnel chart."""
-
-    row = df.iloc[0]
-
-    stages = [
-        "Sessions",
-        "Product Views",
-        "Add to Cart",
-        "Purchases",
-    ]
-
-    values = [
-        row["sessions"],
-        row["product_views"],
-        row["add_to_cart"],
-        row["purchases"],
-    ]
+    """Funnel chart dynamically generated from funnel_stages data."""
 
     fig = go.Figure(
         go.Funnel(
-            y=stages,
-            x=values,
+            y=df["stage_name"].tolist(),
+            x=df["user_count"].tolist(),
             textinfo="value+percent initial",
             marker=dict(
                 color=[
@@ -132,7 +115,7 @@ def conversion_funnel_chart(df: pd.DataFrame, key="conversion_funnel"):
                     "#EF553B",
                     "#00CC96",
                     "#AB63FA",
-                ]
+                ][:len(df)]
             ),
         )
     )
@@ -145,20 +128,20 @@ def conversion_funnel_chart(df: pd.DataFrame, key="conversion_funnel"):
     st.plotly_chart(fig, use_container_width=True, key=key)
 
 
-def returns_bar_chart(df: pd.DataFrame, key="returns_bar"):
-    """Top returned products."""
+def issues_bar_chart(df: pd.DataFrame, key="issues_bar"):
+    """Top products with issues."""
 
     fig = px.bar(
-        df.sort_values("return_count"),
-        x="return_count",
+        df.sort_values("total_issues"),
+        x="total_issues",
         y="product_name",
         orientation="h",
-        title="Top Returned Products",
+        title="Top Products with Issues",
         labels={
-            "return_count": "# Returns",
+            "total_issues": "# Issues",
             "product_name": "Product",
         },
-        color="return_count",
+        color="total_issues",
         color_continuous_scale="Reds",
     )
 
@@ -178,7 +161,7 @@ def margin_by_category_chart(df: pd.DataFrame, key="margin_category"):
         df.sort_values("avg_margin_pct", ascending=False),
         x="category",
         y="avg_margin_pct",
-        title="Average Margin by Category",
+        title="Average Realised Margin by Category",
         labels={
             "category": "Category",
             "avg_margin_pct": "Avg Margin (%)",
@@ -224,7 +207,7 @@ def marketing_roi_chart(df: pd.DataFrame, key="marketing_roi"):
         title="Marketing Spend vs Attributed Revenue",
         labels={
             "channel": "Channel",
-            "amount": "USD",
+            "amount": "INR",
             "metric": "",
         },
         color_discrete_sequence=["#EF553B", "#00CC96"],
@@ -261,7 +244,7 @@ def marketing_spend_trend_chart(df: pd.DataFrame, key="marketing_spend_trend"):
     fig.update_layout(
         title="Marketing Spend vs Revenue Trend",
         xaxis_title="Date",
-        yaxis_title="USD",
+        yaxis_title="INR",
         hovermode="x unified",
         height=350,
     )

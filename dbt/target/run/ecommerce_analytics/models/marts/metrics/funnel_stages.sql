@@ -7,35 +7,52 @@
     
     
 
-    
     OPTIONS()
     as (
-      SELECT 
-        event_date, 
-        device_type, 
-        'Sessions' as stage_name, 
-        1 as stage_order, 
-        sessions as count from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
-UNION ALL
-    SELECT 
-        event_date, 
-        device_type, 
-        'Product Views', 
-        2, 
-        product_views from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
-UNION ALL
-    SELECT 
-        event_date,
-        device_type,
-        'Add to Cart',
-        3,
-        add_to_cart from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
-UNION ALL
-    SELECT 
-        event_date, 
-        device_type, 
-        'Purchases', 
-        4, 
-        purchases from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+      -- ============================================================================
+-- funnel_stages.sql
+-- ============================================================================
+-- Unpivoted funnel for Streamlit bar/funnel charts.
+-- Each row = one (date, stage_name, count) tuple for easy plotting.
+--
+-- Grain: one row per (event_date, stage_name)
+-- Depends on: conversion_rate
+-- ============================================================================
+
+select
+    event_date,
+    'Page Views'        as stage_name,
+    1                   as stage_order,
+    page_viewers        as user_count
+from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+
+union all
+
+select
+    event_date,
+    'Add to Cart',
+    2,
+    add_to_carters
+from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+
+union all
+
+select
+    event_date,
+    'Reorder Click',
+    3,
+    reorder_clickers
+from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+
+union all
+
+select
+    event_date,
+    'Purchase',
+    4,
+    purchasers
+from `genai-copilot-enterprisedata`.`metrics`.`conversion_rate`
+
+order by event_date desc, stage_order
     );
   

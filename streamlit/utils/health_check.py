@@ -12,7 +12,7 @@ TABLES_CONFIG = {
     "orders": {
         "staging_table": "staging.stg_orders",
         "pk": "order_id",
-        "null_columns": ["order_id", "customer_id", "order_date", "revenue_usd"],
+        "null_columns": ["order_id", "customer_id", "order_date", "revenue"],
     },
     "customers": {
         "staging_table": "staging.stg_customers",
@@ -22,12 +22,22 @@ TABLES_CONFIG = {
     "order_items": {
         "staging_table": "staging.stg_order_items",
         "pk": "item_id",
-        "null_columns": ["item_id", "order_id", "product_id", "quantity", "unit_price_usd"],
+        "null_columns": ["item_id", "order_id", "product_id", "quantity", "unit_price"],
     },
-    "returns": {
-        "staging_table": "staging.stg_returns",
-        "pk": "return_id",
-        "null_columns": ["return_id", "order_id", "product_id", "return_date", "refund_amount_usd"],
+    "order_issues": {
+        "staging_table": "staging.stg_order_issues",
+        "pk": "issue_id",
+        "null_columns": ["issue_id", "order_id", "product_id", "reported_date", "refund_amount"],
+    },
+    "dark_stores": {
+        "staging_table": "staging.stg_dark_stores",
+        "pk": "store_id",
+        "null_columns": ["store_id", "city_name", "launch_date"],
+    },
+    "delivery_partners": {
+        "staging_table": "staging.stg_delivery_partners",
+        "pk": "rider_id",
+        "null_columns": ["rider_id", "home_store_id", "join_date"],
     }
 }
 

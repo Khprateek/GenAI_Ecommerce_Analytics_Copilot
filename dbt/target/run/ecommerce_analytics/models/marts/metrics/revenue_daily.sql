@@ -7,11 +7,17 @@
     
     
 
-    
     OPTIONS()
     as (
-      -- Pre-aggregated daily revenue — Streamlit queries this directly
--- Much cheaper than querying fact_orders every time
+      -- ============================================================================
+-- revenue_daily.sql
+-- ============================================================================
+-- Pre-aggregated daily revenue & operations metrics.
+-- Streamlit / BI dashboards query this instead of the raw fact table.
+--
+-- Grain: one row per (order_date, store_city, platform, customer_type)
+-- Depends on: fact_orders
+-- ============================================================================
 
 with fact as (
     select * from `genai-copilot-enterprisedata`.`marts`.`fact_orders`
@@ -19,36 +25,80 @@ with fact as (
 
 daily as (
     select
+        -- ── Dimensions ──────────────────────────────────────────────────────
         order_date,
         order_year,
         order_month,
         order_week,
+        order_hour,
 
-        -- breakdowns
-        state_name,
-        city_name,
+        customer_state,
+        customer_city,
+        store_city,
+        store_locality,
+        platform,
+        payment_method,
         customer_type,
+        is_pass_member,
 
-        -- channel (join back to get name)
-        dch.channel_name,
-        dch.channel_type,
+        -- ── Order counts ────────────────────────────────────────────────────
+        count(distinct order_id)                            as total_orders,
+        count(distinct case when is_delivered = 1
+                            then order_id end)              as delivered_orders,
+        sum(is_cancelled)                                   as cancelled_orders,
+        sum(is_failed_delivery)                             as failed_deliveries,
 
-        -- measures
-        count(distinct order_id)                                                    as total_orders,
-        count(distinct customer_sk)                                                 as unique_customers,
-        sum(case when is_completed = 1 then revenue_usd else 0 end)                 as gross_revenue_usd,
-        sum(case when is_completed = 1 then discount_usd else 0 end)                as total_discounts_usd,
-        sum(case when is_completed = 1 then net_revenue_usd else 0 end)             as net_revenue_usd,
-        sum(total_items)                                                            as total_items_sold,
-        sum(is_cancelled)                                                           as cancelled_orders,
-        SAFE_DIVIDE(COUNT(DISTINCT order_id) - SUM(is_cancelled),COUNT(DISTINCT order_id)) AS order_fullfillment_rate,
-        SAFE_DIVIDE(SUM(total_items), COUNT(DISTINCT order_id)) AS basket_depth,
-        SAFE_DIVIDE(SUM(CASE WHEN is_completed = 1 THEN revenue_usd ELSE 0 END), COUNT(CASE WHEN is_completed = 1 THEN 1 END)) AS avg_order_value
+        -- ── Customer activity ───────────────────────────────────────────────
+        count(distinct customer_sk)                         as unique_customers,
 
+        -- ── Financials (INR) ────────────────────────────────────────────────
+        round(sum(case when is_delivered = 1
+                       then revenue else 0 end), 2)         as gross_revenue,
+        round(sum(case when is_delivered = 1
+                       then discount else 0 end), 2)        as total_discount,
+        round(sum(case when is_delivered = 1
+                       then delivery_fee else 0 end), 2)    as total_delivery_fees,
+        round(sum(case when is_delivered = 1
+                       then refund_amount else 0 end), 2)   as total_refunds,
+        round(sum(case when is_delivered = 1
+                       then net_revenue else 0 end), 2)     as net_revenue,
+
+        -- ── Basket ──────────────────────────────────────────────────────────
+        sum(total_items)                                    as total_items_sold,
+        round(safe_divide(
+            sum(total_items),
+            nullif(count(distinct case when is_delivered = 1
+                                      then order_id end), 0)
+        ), 1)                                               as avg_basket_size,
+
+        -- ── AOV ─────────────────────────────────────────────────────────────
+        round(safe_divide(
+            sum(case when is_delivered = 1 then revenue else 0 end),
+            nullif(count(distinct case when is_delivered = 1
+                                      then order_id end), 0)
+        ), 2)                                               as avg_order_value,
+
+        -- ── Delivery performance ────────────────────────────────────────────
+        round(avg(case when is_delivered = 1
+                       then actual_delivery_minutes end), 1)
+                                                            as avg_delivery_minutes,
+        round(safe_divide(
+            countif(is_delivered = 1 and is_on_time),
+            nullif(countif(is_delivered = 1), 0)
+        ) * 100, 2)                                         as on_time_pct,
+
+        -- ── Fulfilment rate ─────────────────────────────────────────────────
+        round(safe_divide(
+            count(distinct case when is_delivered = 1 then order_id end),
+            nullif(count(distinct order_id), 0)
+        ) * 100, 2)                                         as fulfilment_rate_pct,
+
+        -- ── Issues ──────────────────────────────────────────────────────────
+        countif(has_order_issue)                             as orders_with_issues,
+        sum(issue_count)                                    as total_issues
 
     from fact
-    left join `genai-copilot-enterprisedata`.`marts`.`dim_channels` dch on fact.channel_sk = dch.channel_sk
-    group by 1, 2, 3, 4, 5, 6, 7, 8, 9
+    group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 )
 
 select * from daily

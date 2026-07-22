@@ -18,17 +18,16 @@ RAW_DATASET = "raw"
 TABLES = [
     "customers",
     "dark_stores",
-    "deliver_partners",
+    "delivery_partners",
     "events",
     "marketing_spend",
-    "order_issues"
+    "order_issues",
     "order_items",
     "orders",
-    "products",
-    "returns"
+    "products"
 ]
 
-DATA_DIR = Path("data/raw")
+DATA_DIR = Path("data/raw2")
 
 # =====================================================
 # Logging

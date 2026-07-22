@@ -17,7 +17,7 @@ cleaned as (
 
         -- Order Timestamp
         cast(order_datetime as timestamp)                   as order_timestamp,
-        cast(order_datetime as date)                        as order_date,
+        cast(cast(order_datetime as timestamp) as date)     as order_date,
 
         -- Status
         upper(trim(status))                                 as order_status,

@@ -7,30 +7,76 @@
     
     
 
-    
     OPTIONS()
     as (
-      select
+      -- ============================================================================
+-- customer_ltv.sql
+-- ============================================================================
+-- Customer lifetime value summary for BI dashboards.
+-- Flat, wide table of high-value customers with all key dimensions.
+--
+-- Grain: one row per customer_id (only customers with ≥ 1 order)
+-- Depends on: dim_customers
+-- ============================================================================
+
+select
+    -- Identity
     customer_id,
     full_name,
     email,
-    state_name,
+
+    -- Geography
     city_name,
-    acquisition_channel,
+    state_name,
+    home_locality,
+
+    -- Subscription
+    is_pass_member,
+
+    -- Lifecycle
     signup_date,
-    rfm_segment,
-    value_tier,
-    total_orders,
-    lifetime_value_usd,
-    avg_order_value_usd,
-    days_since_last_order,
+    days_since_signup,
     first_order_date,
     last_order_date,
-    preferred_channel,
+    days_since_last_order,
+    customer_tenure_days,
+
+    -- Segmentation
+    rfm_segment,
+    value_tier,
+    churn_risk_tier,
+
+    -- Activity
+    total_orders,
+    avg_basket_size,
+    preferred_payment_method,
+    preferred_platform,
+
+    -- Financials (INR)
+    lifetime_revenue,
+    lifetime_net_revenue,
+    avg_order_value,
+    avg_discount_pct,
+
+    -- Delivery experience
+    avg_delivery_minutes,
+    on_time_pct,
+
+    -- Quality
+    orders_with_issues,
+    issue_rate_pct,
+    cancelled_orders,
+    cancellation_rate_pct,
+
+    -- RFM scores
     recency_score,
     frequency_score,
-    monetary_score
+    monetary_score,
+    orders_last_30d,
+    active_days_last_30d
+
 from `genai-copilot-enterprisedata`.`marts`.`dim_customers`
 where total_orders > 0
+order by lifetime_revenue desc
     );
   

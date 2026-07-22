@@ -5,7 +5,7 @@ with source as (
 cleaned as (
     select
         cast(spend_id as string) as spend_id,
-        cast(date as date) as spend_date,
+        cast(cast(date as timestamp) as date) as spend_date,
         lower(trim(channel)) as channel,
         cast(spend_inr as numeric) as spend_inr,
         cast(impressions as integer) as impressions,

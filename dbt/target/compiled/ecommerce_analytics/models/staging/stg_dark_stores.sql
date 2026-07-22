@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ source('raw', 'dark_stores') }}
+    select * from `genai-copilot-enterprisedata`.`raw`.`dark_stores`
 ),
 
 cleaned as (

@@ -1,5 +1,9 @@
-with source as (
-    select * from {{ source('raw', 'dark_stores') }}
+
+
+  create or replace view `genai-copilot-enterprisedata`.`staging`.`stg_dark_stores`
+  OPTIONS()
+  as with source as (
+    select * from `genai-copilot-enterprisedata`.`raw`.`dark_stores`
 ),
 
 cleaned as (
@@ -24,4 +28,5 @@ cleaned as (
     where store_id is not null
 )
 
-select * from cleaned
+select * from cleaned;
+

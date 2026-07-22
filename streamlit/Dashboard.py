@@ -14,25 +14,25 @@ from utils.churn_model import get_churn_predictions
 from components.kpi_cards import render_monthly_kpi_cards, render_business_kpi_cards
 from components.charts import (
     revenue_trend_chart,
-    channel_bar_chart,
+    platform_bar_chart,
     category_pie_chart,
     segment_bar_chart,
     conversion_funnel_chart,
-    returns_bar_chart, 
+    issues_bar_chart, 
     margin_by_category_chart,
     marketing_roi_chart, 
     marketing_spend_trend_chart,
 )
 
 st.set_page_config(
-    page_title="E-Commerce Analytics",
-    page_icon="📊",
+    page_title="Zepto-Style Quick-Commerce Analytics",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-st.title("📊 E-Commerce Analytics Dashboard")
-st.caption("Phase 1 — Analytics Foundation · BigQuery + dbt + Streamlit")
+st.title("⚡ Quick-Commerce Analytics Dashboard")
+st.caption("End-to-End Modern Data Stack · BigQuery + dbt + Streamlit")
 
 # ── Sidebar filters ──────────────────────────────────────────────────────────
 st.sidebar.header("Filters")
@@ -57,7 +57,7 @@ st.sidebar.caption("Data refreshes every 5 minutes.")
 
 # ── MAIN TABS ─────────────────────────────────────────────────────────────────
 tab0, tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
-    ["🗓️ Monthly Dashboard", "📈 Overview", "🏆 Products & Margin", "👥 Customers", "↩️ Returns", "📣 Marketing", "🔻 Funnel"]
+    ["🗓️ Monthly Dashboard", "📈 Overview", "🏆 Products & Margin", "👥 Customers", "⚠️ Quality & Issues", "📣 Acquisition", "🔻 Funnel"]
 )
 
 with tab0:
@@ -74,25 +74,6 @@ with tab0:
     st.info("Select a different end date in the sidebar to view its monthly dashboard.")
 
 with tab1:
-    col1, col2 = st.columns([2, 1])
-
-    with col1:
-        trend_sql = q.REVENUE_TREND.format(start=start_date, end=end_date)
-        trend_df = run_query(trend_sql)
-        if not trend_df.empty:
-            revenue_trend_chart(trend_df, granularity)
-        else:
-            st.info("No revenue trend data for this period.")
-
-    with col2:
-        channel_sql = q.REVENUE_BY_CHANNEL.format(start=start_date, end=end_date)
-        channel_df = run_query(channel_sql)
-        if not channel_df.empty:
-            channel_bar_chart(channel_df)
-        else:
-            st.info("No channel data for this period.")
-
-    st.markdown("---")
     st.subheader("Business KPIs (Selected Period)")
     biz_sql = q.BUSINESS_KPI_SUMMARY.format(start=start_date, end=end_date)
     biz_df = run_query(biz_sql)
@@ -102,15 +83,33 @@ with tab1:
     else:
         render_business_kpi_cards(biz_df)
 
+    st.markdown("---")
+    
+    col1, col2 = st.columns([2, 1])
+    with col1:
+        trend_sql = q.REVENUE_TREND.format(start=start_date, end=end_date)
+        trend_df = run_query(trend_sql)
+        if not trend_df.empty:
+            revenue_trend_chart(trend_df, granularity)
+        else:
+            st.info("No revenue trend data for this period.")
+
+    with col2:
+        platform_sql = q.REVENUE_BY_PLATFORM.format(start=start_date, end=end_date)
+        platform_df = run_query(platform_sql)
+        if not platform_df.empty:
+            platform_bar_chart(platform_df)
+        else:
+            st.info("No platform data for this period.")
+
 with tab2:
     c3, c4 = st.columns([1.3,1])
     with c3:
         st.subheader("Top 20 Products")
         df = run_query(q.TOP_PRODUCTS)
         st.dataframe(df, use_container_width=True, hide_index=True, column_config={
-            "revenue": st.column_config.NumberColumn("Revenue", format="$%.0f"),
-            "profit": st.column_config.NumberColumn("Profit", format="$%.0f"),
-            "margin_pct": st.column_config.NumberColumn("Margin %", format="%.1f%%"),
+            "revenue": st.column_config.NumberColumn("Revenue", format="₹%.0f"),
+            "margin_pct": st.column_config.NumberColumn("Realised Margin %", format="%.1f%%"),
         })
     with c4:
         df = run_query(q.CATEGORY_BREAKDOWN)
@@ -127,16 +126,16 @@ with tab3:
     with c6:
         if not seg_df.empty:
             st.dataframe(seg_df, use_container_width=True, hide_index=True, column_config={
-                "total_ltv": st.column_config.NumberColumn("Total LTV", format="$%.0f"),
-                "avg_ltv": st.column_config.NumberColumn("Avg LTV", format="$%.2f"),
+                "total_ltv": st.column_config.NumberColumn("Total LTV", format="₹%.0f"),
+                "avg_ltv": st.column_config.NumberColumn("Avg LTV", format="₹%.2f"),
                 "avg_orders": st.column_config.NumberColumn("Avg Orders", format="%.1f"),
             })
 
     st.markdown("---")
     st.subheader("🚨 Churn Risk Prediction")
-    st.caption("Logistic Regression model trained on order recency, 30-day frequency, and AOV trend (scikit-learn)")
+    st.caption("Logistic Regression model trained on 30-day recency, frequency, app engagement, and delivery issue trends.")
 
-    with st.spinner("Training churn model on BigQuery data..."):
+    with st.spinner("Training churn model on BigQuery features..."):
         churn_df = get_churn_predictions()
 
     if not churn_df.empty:
@@ -148,7 +147,7 @@ with tab3:
         k1.metric("🔴 High Risk",   f"{len(high_risk):,}",  f"{len(high_risk)/len(churn_df)*100:.1f}% of customers")
         k2.metric("🟡 Medium Risk", f"{len(med_risk):,}",   f"{len(med_risk)/len(churn_df)*100:.1f}% of customers")
         k3.metric("🟢 Low Risk",    f"{len(low_risk):,}",   f"{len(low_risk)/len(churn_df)*100:.1f}% of customers")
-        k4.metric("💰 At-Risk LTV", f"${high_risk['lifetime_value_usd'].sum():,.0f}")
+        k4.metric("💰 At-Risk LTV", f"₹{high_risk['lifetime_revenue'].sum():,.0f}")
 
         st.markdown("")
 
@@ -172,9 +171,9 @@ with tab3:
 
         # Top at-risk customers table
         st.subheader("Top 25 High-Risk Customers")
-        display_cols = ['full_name', 'email', 'rfm_segment', 'state_name', 'city_name',
-                        'days_since_last_order', 'order_frequency_30d',
-                        'lifetime_value_usd', 'churn_probability']
+        display_cols = ['full_name', 'email', 'is_pass_member', 'rfm_segment', 'city_name',
+                        'days_since_last_order', 'orders_30d',
+                        'lifetime_revenue', 'churn_probability']
         st.dataframe(
             high_risk[display_cols].head(25).reset_index(drop=True),
             use_container_width=True,
@@ -182,12 +181,12 @@ with tab3:
             column_config={
                 "full_name":             st.column_config.TextColumn("Name"),
                 "email":                 st.column_config.TextColumn("Email"),
+                "is_pass_member":        st.column_config.CheckboxColumn("Pass Member?"),
                 "rfm_segment":           st.column_config.TextColumn("RFM Segment"),
-                "state_name":          st.column_config.TextColumn("State"),
-                "city_name":           st.column_config.TextColumn("City"),
+                "city_name":             st.column_config.TextColumn("City"),
                 "days_since_last_order": st.column_config.NumberColumn("Days Since Order", format="%d"),
-                "order_frequency_30d":   st.column_config.NumberColumn("Orders (30d)", format="%d"),
-                "lifetime_value_usd":    st.column_config.NumberColumn("LTV", format="$%.0f"),
+                "orders_30d":            st.column_config.NumberColumn("Orders (30d)", format="%d"),
+                "lifetime_revenue":      st.column_config.NumberColumn("LTV", format="₹%.0f"),
                 "churn_probability":     st.column_config.ProgressColumn(
                     "Churn Risk", format="%.0f%%", min_value=0, max_value=1
                 ),
@@ -197,20 +196,25 @@ with tab3:
         st.warning("Churn model could not be loaded. Check BigQuery connectivity.")
 
 with tab4:
-    ret_df = run_query(q.RETURNS_SUMMARY)
+    st.subheader("Order Quality & Delivery Issues")
+    issues_sql = q.ISSUES_SUMMARY.format(start=start_date, end=end_date)
+    ret_df = run_query(issues_sql)
     if not ret_df.empty:
         r = ret_df.iloc[0]
-        r1, r2, r3 = st.columns(3)
-        r1.metric("Total Returns", f"{int(r['total_returns']):,}" if pd.notna(r['total_returns']) else "0")
-        r2.metric("Total Refunded", f"${r['total_refunded']:,.0f}" if pd.notna(r['total_refunded']) else "$0")
-        r3.metric("Avg Return Rate", f"{r['avg_return_rate']:.1f}%" if pd.notna(r['avg_return_rate']) else "0%")
+        r1, r2, r3, r4 = st.columns(4)
+        r1.metric("Orders with Issues", f"{int(r['total_orders_with_issues']):,}" if pd.notna(r['total_orders_with_issues']) else "0")
+        r2.metric("Total Issues Raised", f"{int(r['total_issues_count']):,}" if pd.notna(r['total_issues_count']) else "0")
+        r3.metric("Total Refunded", f"₹{r['total_refunded_inr']:,.0f}" if pd.notna(r['total_refunded_inr']) else "₹0")
+        r4.metric("Avg Issue Rate", f"{r['avg_issue_rate_pct']:.1f}%" if pd.notna(r['avg_issue_rate_pct']) else "0%")
     st.markdown("---")
-    df = run_query(q.TOP_RETURNED_PRODUCTS)
+    df = run_query(q.TOP_ISSUED_PRODUCTS)
     if not df.empty:
-        returns_bar_chart(df)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        issues_bar_chart(df)
+        st.dataframe(df, use_container_width=True, hide_index=True, column_config={
+            "issue_rate_pct": st.column_config.NumberColumn("Issue Rate %", format="%.1f%%")
+        })
     else:
-        st.info("No return data.")
+        st.info("No issue data.")
 
 with tab5:
     roi_df = run_query(q.MARKETING_ROI.format(start=start_date,end=end_date))
@@ -219,8 +223,8 @@ with tab5:
         with c7: marketing_roi_chart(roi_df)
         with c8:
             st.dataframe(roi_df, use_container_width=True, hide_index=True, column_config={
-                "total_spend": st.column_config.NumberColumn("Spend", format="$%.0f"),
-                "total_revenue": st.column_config.NumberColumn("Revenue", format="$%.0f"),
+                "total_spend": st.column_config.NumberColumn("Spend", format="₹%.0f"),
+                "total_revenue": st.column_config.NumberColumn("Revenue", format="₹%.0f"),
                 "avg_roas": st.column_config.NumberColumn("ROAS", format="%.2f"),
                 "avg_ctr": st.column_config.NumberColumn("CTR %", format="%.2f%%"),
             })
@@ -232,7 +236,7 @@ with tab5:
 
 with tab6:
     funnel_df = run_query(q.CONVERSION_FUNNEL.format(start=start_date,end=end_date))
-    if not funnel_df.empty and funnel_df.iloc[0]["sessions"]:
+    if not funnel_df.empty:
         conversion_funnel_chart(funnel_df)
     else:
         st.info("No funnel data for this period.")

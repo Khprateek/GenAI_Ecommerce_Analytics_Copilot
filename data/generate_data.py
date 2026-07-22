@@ -34,7 +34,7 @@ random.seed(42)
 Faker.seed(42)
 
 BASE_DIR = Path(__file__).resolve().parent
-OUT_DIR = BASE_DIR / "raw"
+OUT_DIR = BASE_DIR / "raw2"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 N_CUSTOMERS = 20_000
