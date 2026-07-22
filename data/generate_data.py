@@ -14,8 +14,7 @@ Tables produced:
   products.csv              5,000 rows
   orders.csv                50,000 rows
   order_items.csv         ~180,000 rows
-  order_issues.csv         ~1,300 rows  (replaces returns.csv - lower rate,
-                                          same-day resolution, no "return shipping")
+  order_issues.csv         ~1,300 rows  (same-day resolution, no "return shipping")
   events.csv               300,000 rows
   marketing_spend.csv       ~9,000 rows
 

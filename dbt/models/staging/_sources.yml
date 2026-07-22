@@ -4,66 +4,92 @@ sources:
   - name: raw
     database: "{{ env_var('GCP_PROJECT_ID', 'genai-copilot-enterprisedata') }}"
     dataset: raw
-    description: "Raw data loaded directly from CSVs via Python ingestion scripts"
-    config:
-      freshness:
-        warn_after: {count: 24, period: hour}
-        error_after: {count: 48, period: hour}
-      loaded_at_field: _loaded_at
+    description: "Raw quick-commerce data loaded directly from CSVs via Python ingestion script"
 
     tables:
+      - name: dark_stores
+        description: "Micro-fulfilment center / dark store locations"
+        columns:
+          - name: store_id
+            description: "Primary key for dark store (e.g. MUM-Andheri)"
+            tests: [not_null, unique]
+
+      - name: delivery_partners
+        description: "Riders handling quick-commerce deliveries"
+        columns:
+          - name: rider_id
+            description: "Primary key for delivery rider"
+            tests: [not_null, unique]
+          - name: store_id
+            description: "Assigned home dark store"
+            tests: [not_null]
+
+      - name: customers
+        description: "Customer profiles and subscription membership"
+        columns:
+          - name: customer_id
+            description: "Primary key for customer"
+            tests: [not_null, unique]
+
+      - name: products
+        description: "Grocery and daily essentials product catalog"
+        columns:
+          - name: product_id
+            description: "Primary key for product SKU"
+            tests: [not_null, unique]
+
       - name: orders
-        description: "Raw orders from e-commerce platform"
+        description: "Quick-commerce order headers"
         columns:
           - name: order_id
+            description: "Primary key for order"
             tests: [not_null, unique]
           - name: customer_id
+            description: "Foreign key to customer"
             tests: [not_null]
-          - name: order_date
+          - name: store_id
+            description: "Fulfilling dark store ID"
             tests: [not_null]
 
       - name: order_items
         description: "Line items within each order"
         columns:
           - name: order_item_id
+            description: "Primary key for line item"
             tests: [not_null, unique]
           - name: order_id
+            description: "Foreign key to order"
             tests: [not_null]
           - name: product_id
+            description: "Foreign key to product"
             tests: [not_null]
 
-      - name: products
-        description: "Product catalog"
+      - name: order_issues
+        description: "Same-day order issue resolution and refunds"
         columns:
-          - name: product_id
+          - name: issue_id
+            description: "Primary key for order issue"
             tests: [not_null, unique]
-
-      - name: customers
-        description: "Customer profiles"
-        columns:
-          - name: customers_id
-            tests: [not_null, unique]
+          - name: order_id
+            description: "Foreign key to order"
+            tests: [not_null]
 
       - name: events
-        description: "Web/app clickstream events"
+        description: "App/Web clickstream user activity"
         columns:
           - name: event_id
+            description: "Primary key for event"
             tests: [not_null, unique]
-
-      - name: returns
-        description: "Product returns and refunds"
-        columns:
-          - name: return_id
-            tests: [not_null, unique]
-          - name: order_id
-            tests: [not_null]
 
       - name: marketing_spend
-        description: "Daily marketing spend by channel"
+        description: "Daily marketing spend across acquisition channels"
         columns:
           - name: spend_id
+            description: "Primary key for spend record"
             tests: [not_null, unique]
           - name: date
+            description: "Spend date"
             tests: [not_null]
           - name: channel
+            description: "Marketing acquisition channel"
             tests: [not_null]

@@ -17,11 +17,14 @@ RAW_DATASET = "raw"
 
 TABLES = [
     "customers",
-    "marketing_spend",
-    "products",
-    "orders",
-    "order_items",
+    "dark_stores",
+    "deliver_partners",
     "events",
+    "marketing_spend",
+    "order_issues"
+    "order_items",
+    "orders",
+    "products",
     "returns"
 ]
 
