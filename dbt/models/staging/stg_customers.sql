@@ -4,7 +4,7 @@ with source as (
 
 cleaned as (
     select
-        cast(customer_id as string)          as customer_id,
+        cast(customer_id as string)             as customer_id,
         trim(split(name, ' ')[safe_offset(0)])  as first_name,
         trim(split(name, ' ')[safe_offset(1)])  as last_name,
         lower(concat(split(email, '@')[safe_offset(0)], '_', cast(customer_id as string), '@', split(email, '@')[safe_offset(1)])) as email,

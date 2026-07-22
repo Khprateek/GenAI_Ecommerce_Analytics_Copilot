@@ -4,13 +4,13 @@ with source as (
 
 cleaned as (
     select
-        cast(order_item_id  as string)  as item_id,
-        cast(order_id       as string)  as order_id,
-        cast(product_id     as string)  as product_id,
+        cast(order_item_id  as string)              as item_id,
+        cast(order_id       as string)              as order_id,
+        cast(product_id     as string)              as product_id,
 
-        cast(quantity       as integer) as quantity,
-        cast(unit_price     as numeric) as unit_price,
-        cast(is_substituted as bool)    as is_substituted,
+        cast(quantity       as integer)             as quantity,
+        cast(unit_price     as numeric)             as unit_price,
+        cast(is_substituted as bool)                as is_substituted,
 
 
         -- derived: actual line revenue
