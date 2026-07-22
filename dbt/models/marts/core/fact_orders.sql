@@ -1,17 +1,36 @@
--- fact_orders: one row per order
--- All foreign keys (SKs) point to dimension tables
--- All measures are additive
+-- ============================================================================
+-- fact_orders.sql
+-- ============================================================================
+-- Central order fact table for the quick-commerce star schema.
+-- One row per order with surrogate-key FKs to all dimension tables.
+-- All monetary measures in INR, all additive.
+--
+-- Grain: one row per order_id
+-- Depends on: int_orders_enriched, dim_customers, dim_products,
+--             dim_dark_stores, dim_delivery_partners, dim_date
+-- ============================================================================
 
 with orders as (
     select * from {{ ref('int_orders_enriched') }}
 ),
 
 dim_customers as (
-    select customer_sk, customer_id from {{ ref('dim_customers') }}
+    select customer_sk, customer_id
+    from {{ ref('dim_customers') }}
 ),
 
-dim_products as (
-    -- We need product_sk per order — use most expensive item as primary product
+dim_dark_stores as (
+    select store_sk, store_id
+    from {{ ref('dim_dark_stores') }}
+),
+
+dim_riders as (
+    select rider_sk, rider_id
+    from {{ ref('dim_delivery_partners') }}
+),
+
+-- Primary product per order: highest line-revenue item
+dim_products_bridge as (
     select
         oi.order_id,
         dp.product_sk
@@ -19,63 +38,116 @@ dim_products as (
     inner join {{ ref('dim_products') }} dp on oi.product_id = dp.product_id
     qualify row_number() over (
         partition by oi.order_id
-        order by oi.line_revenue_usd desc
+        order by oi.line_revenue desc
     ) = 1
 ),
 
-dim_channels as (
-    select channel_sk, channel_code from {{ ref('dim_channels') }}
-),
-
 dim_date as (
-    select date_key, full_date from {{ ref('dim_date') }}
+    select date_key, full_date
+    from {{ ref('dim_date') }}
 ),
 
 final as (
     select
-        -- surrogate key for the fact row
-        {{ dbt_utils.generate_surrogate_key(['o.order_id']) }} as order_sk,
-
-        -- natural key (keep for debugging)
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Surrogate & Natural Keys                                       ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        {{ dbt_utils.generate_surrogate_key(['o.order_id']) }}
+                                                        as order_sk,
         o.order_id,
 
-        -- foreign keys → dimensions
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Foreign Keys → Dimensions                                      ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
         dc.customer_sk,
-        dp.product_sk,
-        dch.channel_sk,
+        ds.store_sk,
+        dr.rider_sk,
+        dpb.product_sk                                  as primary_product_sk,
         dd.date_key                                     as order_date_key,
 
-        -- degenerate dimensions (attributes that don't need their own dim)
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Degenerate Dimensions                                          ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
         o.order_status,
-        o.state_name,
-        o.city_name,
-        o.customer_type,                                -- new vs returning
+        o.payment_method,
+        o.platform,
+        o.customer_type,
+        o.basket_size_tier,
+        o.delivery_time_bucket,
 
-        -- DATE (also store raw date for easy filtering)
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Date & Time                                                    ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.order_timestamp,
         o.order_date,
         o.order_year,
         o.order_month,
         o.order_week,
+        o.order_day_of_week,
+        o.order_hour,
 
-        -- MEASURES (all additive)
-        o.revenue_usd,
-        o.discount_usd,
-        o.refund_usd,
-        o.shipping_cost_usd,
-        o.net_revenue_usd,
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Location                                                       ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.customer_city,
+        o.customer_state,
+        o.store_city,
+        o.store_locality,
+        o.is_home_store_order,
+
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Delivery Performance Measures                                  ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.promised_delivery_minutes,
+        o.actual_delivery_minutes,
+        o.is_on_time,
+        o.delivery_delay_minutes,
+
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Basket Measures                                                ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
         o.total_items,
         o.unique_products,
+        o.substituted_item_count,
+        o.has_substitution,
 
-        -- derived measures
-        o.revenue_usd - o.discount_usd                 as discounted_revenue_usd,
-        case when o.order_status = 'COMPLETED' then 1 else 0 end as is_completed,
-        case when o.order_status = 'CANCELLED' then 1 else 0 end as is_cancelled
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Financial Measures (INR, additive)                             ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.revenue,
+        o.discount,
+        o.delivery_fee,
+        o.refund_amount,
+        o.gross_revenue,
+        o.net_revenue,
+        o.discount_pct,
+
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Issue Measures                                                 ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.issue_count,
+        o.has_order_issue,
+        o.primary_issue_type,
+
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Customer Context                                               ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        o.is_pass_member,
+        o.days_since_signup,
+
+        -- ╔═══════════════════════════════════════════════════════════════════╗
+        -- ║  Convenience Flags (for BI aggregation)                         ║
+        -- ╚═══════════════════════════════════════════════════════════════════╝
+        case when o.order_status = 'DELIVERED'       then 1 else 0 end as is_delivered,
+        case when o.order_status = 'CANCELLED'       then 1 else 0 end as is_cancelled,
+        case when o.order_status = 'FAILED_DELIVERY' then 1 else 0 end as is_failed_delivery
 
     from orders o
-    left join dim_customers  dc  on o.customer_id   = dc.customer_id
-    left join dim_products   dp  on o.order_id      = dp.order_id
-    left join dim_channels   dch on o.channel       = dch.channel_code
-    left join dim_date       dd  on o.order_date    = dd.full_date
+    left join dim_customers       dc  on o.customer_id = dc.customer_id
+    left join dim_dark_stores     ds  on o.store_id    = ds.store_id
+    left join dim_riders          dr  on o.rider_id    = dr.rider_id
+    left join dim_products_bridge dpb on o.order_id    = dpb.order_id
+    left join dim_date            dd  on o.order_date  = dd.full_date
 )
 
 select * from final
