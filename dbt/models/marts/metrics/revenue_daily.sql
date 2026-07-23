@@ -74,13 +74,13 @@ daily as (
         round(safe_divide(
             countif(is_delivered = 1 and is_on_time),
             nullif(countif(is_delivered = 1), 0)
-        ) * 100, 2)                                         as on_time_pct,
+        ), 4)                                               as on_time_pct,
 
         -- ── Fulfilment rate ─────────────────────────────────────────────────
         round(safe_divide(
             count(distinct case when is_delivered = 1 then order_id end),
             nullif(count(distinct order_id), 0)
-        ) * 100, 2)                                         as fulfilment_rate_pct,
+        ), 4)                                               as fulfilment_rate_pct,
 
         -- ── Issues ──────────────────────────────────────────────────────────
         countif(has_order_issue)                             as orders_with_issues,

@@ -8,18 +8,18 @@ and a customer base confined to the metro/tier-1 cities this business model
 actually serves (not all of India).
 
 Tables produced:
-  dark_stores.csv         ~59 rows    (NEW - micro-fulfilment centers)
-  delivery_partners.csv  ~1,500 rows  (NEW - riders)
+  dark_stores.csv         ~59 rows    (micro-fulfilment centers)
+  delivery_partners.csv  ~1,500 rows  (riders)
   customers.csv            20,000 rows
   products.csv              5,000 rows
   orders.csv                50,000 rows
   order_items.csv         ~180,000 rows
   order_issues.csv         ~1,300 rows  (same-day resolution, no "return shipping")
-  events.csv               300,000 rows
+  events.csv              ~300,000 rows (session-based funnel)
   marketing_spend.csv       ~9,000 rows
 
 Run:  python generate_data.py
-Output: ./raw/*.csv
+Output: ./raw2/*.csv
 """
 
 import csv
@@ -40,17 +40,18 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 N_CUSTOMERS = 20_000
 N_PRODUCTS = 5_000
 N_ORDERS = 50_000
-N_EVENTS = 300_000
+N_SESSIONS = 100_000  # each session yields 1-3 events -> ~300k events, same as before
 
 START_DATE = date(2023, 1, 1)
-END_DATE = date(2026, 8, 1)
+
+# TODAY anchors the dataset to "now" so nothing generates into the future.
+# Match this to whatever date your dashboard is meant to represent "as of".
+TODAY = date(2026, 7, 24)
+END_DATE = TODAY  # was date(2026, 8, 1) - capped so no future-dated rows
+
 DATE_RANGE_DAYS = (END_DATE - START_DATE).days
 
 # ── CITIES ───────────────────────────────────────────────────────────────────
-# A representative slice of the metro/tier-1 cities quick commerce actually
-# serves (real networks span 60-70+ cities; this keeps the dataset manageable
-# while staying structurally honest — dense in a handful of cities, not spread
-# thin across all of India).
 CITY_INFO = {
     "Mumbai":     {"code": "MUM", "state": "Maharashtra",    "lat": 19.0760, "lon": 72.8777,
                     "localities": ["Andheri", "Bandra", "Powai", "Malad", "Chembur"]},
@@ -118,7 +119,6 @@ PACK_SIZES_BY_CATEGORY = {
     "Pharmacy & Wellness": ["1 strip", "1 bottle", "1 unit"],
 }
 
-# (min, max) selling price in INR, calibrated to realistic quick-commerce basket sizes
 PRICE_RANGE_BY_CATEGORY = {
     "Fruits & Vegetables": (15, 150),
     "Dairy & Breakfast":   (20, 350),
@@ -151,6 +151,15 @@ BASE_SPEND_INR = {
     "referral_program": 8_000,
     "offline_hyperlocal": 10_000,
 }
+# Rough cost-per-click by channel (INR) - used so clicks scale with spend,
+# not just be drawn from the same fixed range for every channel.
+CPC_RANGE_INR = {
+    "performance_meta": (5, 9),
+    "performance_google": (4, 8),
+    "influencer": (2, 5),
+    "referral_program": (0.5, 2),
+    "offline_hyperlocal": (1, 3),
+}
 
 # Rough hourly demand shape: quiet overnight, breakfast bump, lunch peak, evening peak
 HOUR_WEIGHTS = [
@@ -172,11 +181,49 @@ def random_datetime(start: date, end: date) -> datetime:
     )
 
 
-def peak_weighted_datetime(start: date, end: date) -> datetime:
-    d = random_date(start, end)
+def weighted_hour_time(d: date) -> datetime:
     hour = random.choices(range(24), weights=HOUR_WEIGHTS)[0]
     minute = random.randint(0, 59)
     return datetime.combine(d, datetime.min.time()) + timedelta(hours=hour, minutes=minute)
+
+
+# ── PROMO CALENDAR ──────────────────────────────────────────────────────────
+# Gives discount and order volume a real causal link instead of both being
+# drawn independently. Promo days = payday sales (1st/2nd, 15th/16th),
+# month-end clearance (last 2 days of month), plus a random sprinkle of
+# festival-style flash sales (~3% of days).
+def build_promo_calendar(start: date, end: date) -> set:
+    promo_dates = set()
+    current = start
+    while current <= end:
+        if current.day in (1, 2, 15, 16):
+            promo_dates.add(current)
+        # last 2 days of the month
+        next_month_first = (current.replace(day=28) + timedelta(days=4)).replace(day=1)
+        last_day_of_month = (next_month_first - timedelta(days=1)).day
+        if current.day >= last_day_of_month - 1:
+            promo_dates.add(current)
+        current += timedelta(days=1)
+
+    current = start
+    while current <= end:
+        if random.random() < 0.03:
+            promo_dates.add(current)
+        current += timedelta(days=1)
+
+    return promo_dates
+
+
+PROMO_DATES = build_promo_calendar(START_DATE, END_DATE)
+
+ALL_DATES = [START_DATE + timedelta(days=i) for i in range(DATE_RANGE_DAYS + 1)]
+# Promo days get ~2.2x the odds of an order landing on them - demand surges
+# on sale days, same as real quick-commerce traffic patterns.
+DATE_WEIGHTS = [2.2 if d in PROMO_DATES else 1.0 for d in ALL_DATES]
+
+
+def weighted_order_date() -> date:
+    return random.choices(ALL_DATES, weights=DATE_WEIGHTS, k=1)[0]
 
 
 # ── DARK STORES ────────────────────────────────────────────────────────────
@@ -242,6 +289,7 @@ print("Generating customers...")
 all_store_ids = list(store_lookup.keys())
 customers = []
 for i in range(1, N_CUSTOMERS + 1):
+    # Capped at END_DATE (== TODAY) so no customer signs up "in the future".
     signup = random_date(START_DATE, END_DATE)
     home_store_id = random.choice(all_store_ids)
     store = store_lookup[home_store_id]
@@ -317,7 +365,10 @@ for i in range(1, N_ORDERS + 1):
     else:
         store_id = random.choice(city_store_ids[customer["city"]])
 
-    order_dt = peak_weighted_datetime(START_DATE, END_DATE)
+    order_date = weighted_order_date()
+    is_promo_day = order_date in PROMO_DATES
+    order_dt = weighted_hour_time(order_date)
+
     status = random.choice(ORDER_STATUSES)
     payment_method = random.choice(PAYMENT_METHODS)
     platform = random.choice(PLATFORM)
@@ -332,8 +383,9 @@ for i in range(1, N_ORDERS + 1):
         rider_id = ""
         is_on_time = ""
 
-    n_items = random.randint(1, 6)
-    chosen_products = random.sample(product_ids, n_items)
+    # Basket size grows on promo days - real quick-commerce sale-day behavior.
+    n_items = random.randint(2, 8) if is_promo_day else random.randint(1, 6)
+    chosen_products = random.sample(product_ids, min(n_items, len(product_ids)))
 
     order_revenue = 0.0
     for pid in chosen_products:
@@ -352,7 +404,14 @@ for i in range(1, N_ORDERS + 1):
         order_revenue += qty * unit_price
         item_counter += 1
 
-    discount = round(order_revenue * random.choice([0, 0, 0, 0.05, 0.10]), 2)
+    # Discount rate is now tied to whether this is a promo day: higher and
+    # more frequent discounts on sale days, mostly none on regular days.
+    if is_promo_day:
+        discount_pct = random.choices([0, 0.10, 0.15, 0.20, 0.25], weights=[15, 25, 25, 20, 15])[0]
+    else:
+        discount_pct = random.choices([0, 0.05, 0.10], weights=[70, 20, 10])[0]
+    discount = round(order_revenue * discount_pct, 2)
+
     delivery_fee = 0 if customer["is_pass_member"] else random.choice([0, 15, 25, 29])
 
     orders.append({
@@ -361,6 +420,7 @@ for i in range(1, N_ORDERS + 1):
         "store_id": store_id,
         "rider_id": rider_id,
         "order_datetime": order_dt.isoformat(),
+        "is_promo_day": is_promo_day,
         "status": status,
         "payment_method": payment_method,
         "platform": platform,
@@ -386,8 +446,6 @@ with open(OUT_DIR / "order_items.csv", "w", newline="") as f:
 customer_ids = [c["customer_id"] for c in customers]
 
 # ── ORDER ISSUES (replaces returns.csv) ───────────────────────────────────────
-# Quick commerce doesn't really have "returns" for perishable groceries — issues
-# get reported and resolved same-day, and at a much lower rate than general e-comm.
 print("Generating order issues...")
 delivered_orders = [o for o in orders if o["status"] == "DELIVERED"]
 issue_sample = random.sample(delivered_orders, k=int(len(delivered_orders) * 0.03))  # ~3% issue rate
@@ -418,17 +476,62 @@ with open(OUT_DIR / "order_issues.csv", "w", newline="") as f:
     writer.writeheader()
     writer.writerows(order_issues)
 
-# ── EVENTS ───────────────────────────────────────────────────────────────────
-print("Generating events...")
-event_types = ["page_view", "page_view", "page_view", "add_to_cart", "reorder_click", "purchase"]
+# ── EVENTS (session-based funnel) ────────────────────────────────────────────
+# Each "session" is a page_view that may (or may not) progress to add_to_cart,
+# then may (or may not) progress to purchase. This guarantees the funnel is
+# monotonically decreasing: page_view >= add_to_cart >= purchase, unlike
+# independently-sampled event types which produced an impossible funnel.
+print("Generating events (session-based funnel)...")
+STAGE_CONVERSION = {
+    "add_to_cart": 0.42,   # 42% of sessions add something to cart
+    "reorder_click": 0.12,  # 12% of add-to-cart sessions use the reorder shortcut
+    "purchase": 0.55,      # 55% of add-to-cart sessions go on to purchase
+}
+
 events = []
-for i in range(1, N_EVENTS + 1):
+event_id = 1
+for _ in range(N_SESSIONS):
+    session_customer = random.choice(customer_ids) if random.random() > 0.15 else ""
+    session_date = weighted_order_date()  # sessions also spike on promo days
+    base_ts = weighted_hour_time(session_date)
+
     events.append({
-        "event_id": f"EVT{i:08d}",
-        "customer_id": random.choice(customer_ids) if random.random() > 0.15 else "",  # 15% anonymous
-        "event_type": random.choice(event_types),
-        "event_timestamp": random_datetime(START_DATE, END_DATE).isoformat(),
+        "event_id": f"EVT{event_id:08d}",
+        "customer_id": session_customer,
+        "event_type": "page_view",
+        "event_timestamp": base_ts.isoformat(),
     })
+    event_id += 1
+
+    if random.random() < STAGE_CONVERSION["add_to_cart"]:
+        cart_ts = base_ts + timedelta(minutes=random.randint(1, 6))
+        events.append({
+            "event_id": f"EVT{event_id:08d}",
+            "customer_id": session_customer,
+            "event_type": "add_to_cart",
+            "event_timestamp": cart_ts.isoformat(),
+        })
+        event_id += 1
+
+        if random.random() < STAGE_CONVERSION["reorder_click"]:
+            reorder_ts = cart_ts + timedelta(minutes=random.randint(1, 3))
+            events.append({
+                "event_id": f"EVT{event_id:08d}",
+                "customer_id": session_customer,
+                "event_type": "reorder_click",
+                "event_timestamp": reorder_ts.isoformat(),
+            })
+            event_id += 1
+
+        if random.random() < STAGE_CONVERSION["purchase"]:
+            purchase_ts = cart_ts + timedelta(minutes=random.randint(1, 10))
+            events.append({
+                "event_id": f"EVT{event_id:08d}",
+                "customer_id": session_customer,
+                "event_type": "purchase",
+                "event_timestamp": purchase_ts.isoformat(),
+            })
+            event_id += 1
 
 with open(OUT_DIR / "events.csv", "w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=events[0].keys())
@@ -441,16 +544,24 @@ marketing_spend = []
 spend_id = 1
 current = START_DATE
 while current <= END_DATE:
+    is_promo_day = current in PROMO_DATES
     for channel in MARKETING_CHANNELS:
         base = BASE_SPEND_INR[channel]
-        spend = round(base * random.uniform(0.6, 1.4), 2)
-        clicks = random.randint(500, 8000)
+        # Ad budgets get pushed up around sale days too - campaigns follow demand.
+        spend_multiplier = random.uniform(1.3, 1.8) if is_promo_day else random.uniform(0.6, 1.1)
+        spend = round(base * spend_multiplier, 2)
+
+        cpc_lo, cpc_hi = CPC_RANGE_INR[channel]
+        cpc = random.uniform(cpc_lo, cpc_hi)
+        clicks = max(1, int(spend / cpc))  # clicks now scale with actual spend
         impressions = clicks * random.randint(10, 30)
         app_installs = int(clicks * random.uniform(0.02, 0.08))
+
         marketing_spend.append({
             "spend_id": f"MKT{spend_id:07d}",
             "date": current.isoformat(),
             "channel": channel,
+            "is_promo_day": is_promo_day,
             "spend_inr": spend,
             "impressions": impressions,
             "clicks": clicks,
@@ -474,3 +585,4 @@ print(f"  order_items.csv         {len(order_items):>7,} rows")
 print(f"  order_issues.csv        {len(order_issues):>7,} rows")
 print(f"  events.csv              {len(events):>7,} rows")
 print(f"  marketing_spend.csv     {len(marketing_spend):>7,} rows")
+print(f"  promo days in range     {len(PROMO_DATES):>7,} / {len(ALL_DATES):,}")

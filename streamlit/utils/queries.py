@@ -11,7 +11,7 @@ MONTHLY_KPI_SUMMARY = f"""
 SELECT
     SUM(net_revenue) AS month_revenue,
     SUM(total_orders) AS month_orders,
-    AVG(avg_order_value) AS month_aov,
+    SAFE_DIVIDE(SUM(net_revenue), SUM(total_orders)) AS month_aov,
     SUM(unique_customers) AS month_customers,
     SUM(total_items_sold) AS month_items_sold
 FROM {METRICS}.revenue_daily
@@ -31,7 +31,7 @@ WITH revenue AS (
         SUM(delivered_orders) AS delivered_orders,
         AVG(avg_delivery_minutes) AS avg_delivery_minutes,
         AVG(on_time_pct) AS on_time_pct,
-        AVG(fulfilment_rate_pct) AS fulfilment_rate_pct
+        SAFE_DIVIDE(SUM(delivered_orders), SUM(total_orders)) AS fulfilment_rate_pct
     FROM {METRICS}.revenue_daily
     WHERE order_date BETWEEN DATE('{{start}}') AND DATE('{{end}}')
 )

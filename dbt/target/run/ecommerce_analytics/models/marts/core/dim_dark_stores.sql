@@ -48,7 +48,7 @@ order_stats as (
         round(safe_divide(
             countif(order_status = 'DELIVERED' and is_on_time),
             nullif(countif(order_status = 'DELIVERED'), 0)
-        ) * 100, 2)                                 as on_time_pct,
+        ), 4)                                       as on_time_pct,
         round(sum(revenue), 2)                      as total_revenue,
         min(order_date)                             as first_order_date,
         max(order_date)                             as last_order_date

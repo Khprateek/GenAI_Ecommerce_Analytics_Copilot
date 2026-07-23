@@ -45,16 +45,16 @@ with_rates as (
         *,
 
         -- Conversion rates
-        round(safe_divide(add_to_carters, page_viewers) * 100, 2)
-                                                            as view_to_cart_pct,
-        round(safe_divide(purchasers, page_viewers) * 100, 2)
-                                                            as view_to_purchase_pct,
-        round(safe_divide(purchasers, add_to_carters) * 100, 2)
-                                                            as cart_to_purchase_pct,
+        round(safe_divide(add_to_carters, page_viewers), 4)
+                                                                    as view_to_cart_pct,
+        round(safe_divide(purchasers, page_viewers), 4)
+                                                                    as overall_conversion_pct,
+        round(safe_divide(purchasers, add_to_carters), 4)
+                                                                    as cart_to_purchase_pct,
 
         -- Reorder engagement
-        round(safe_divide(reorder_clickers, unique_visitors) * 100, 2)
-                                                            as reorder_click_rate_pct
+        round(safe_divide(reorder_clickers, unique_visitors), 4)
+                                                                    as reorder_click_rate_pct
 
     from daily_funnel
 )

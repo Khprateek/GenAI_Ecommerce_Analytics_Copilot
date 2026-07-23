@@ -40,7 +40,7 @@ rider_orders as (
         round(safe_divide(
             countif(is_on_time),
             nullif(count(distinct order_id), 0)
-        ) * 100, 2)                                     as on_time_pct,
+        ), 4)                                           as on_time_pct,
         round(sum(revenue), 2)                          as total_order_revenue,
         min(order_date)                                 as first_delivery_date,
         max(order_date)                                 as last_delivery_date,

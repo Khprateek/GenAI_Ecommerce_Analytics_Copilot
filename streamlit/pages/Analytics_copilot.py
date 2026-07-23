@@ -34,14 +34,14 @@ if "messages" not in st.session_state:
 # Sidebar
 # -----------------------------
 examples = [
-    "Show monthly revenue",
-    "Top selling products",
-    "Revenue by category",
+    "Average delivery time by city",
+    "Top dark stores by revenue",
+    "Rider on-time delivery percentage",
     "Customer lifetime value",
-    "Highest margin products",
-    "Marketing ROI",
+    "Order issues by category",
+    "Monthly revenue trend",
     "Customer segments",
-    "Orders by state and city",
+    "Most sold perishable products",
 ]
 
 with st.sidebar:

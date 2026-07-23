@@ -13,9 +13,9 @@ Project:
 genai-copilot-enterprisedata
 
 Dataset:
-marts
+marts & metrics
 
-The warehouse follows a Kimball Star Schema.
+The warehouse follows a Kimball Star Schema optimized for Quick Commerce (e.g. Zepto, Instacart).
 
 ==========================================================
 CENTRAL FACT TABLE
@@ -29,47 +29,32 @@ One row represents one customer order.
 
 Primary Key
 
-order_sk
-
-Natural Key
-
 order_id
 
 Foreign Keys
 
 customer_sk
-product_sk
-channel_sk
+store_sk
+rider_sk
+primary_product_sk
 order_date_key
 
 Degenerate Dimensions
 
-order_status
-state_name
-city_name
-customer_type
+order_status (COMPLETED, CANCELLED, REFUNDED)
+payment_method
+platform
 
-Date Attributes
+Metrics
 
-order_date
-order_year
-order_month
-order_week
-
-Measures
-
-revenue_usd
-discount_usd
-shipping_cost_usd
-net_revenue_usd
-discounted_revenue_usd
-total_items
-unique_products
-
-Flags
-
-is_completed
-is_cancelled
+promised_delivery_minutes
+actual_delivery_minutes
+is_on_time (boolean)
+item_count
+revenue
+discount
+delivery_fee
+net_revenue
 
 ==========================================================
 DIMENSIONS
@@ -77,216 +62,135 @@ DIMENSIONS
 
 marts.dim_customers
 
-Primary Key
+Primary Key: customer_sk
 
-customer_sk
-
-Columns
-
+Columns:
 customer_id
-full_name
+first_name
+last_name
 email
 state_name
 city_name
+home_locality
+home_store_id
+is_pass_member
 signup_date
-acquisition_channel
 days_since_signup
-
-Customer Metrics
-
 total_orders
-lifetime_value_usd
-avg_order_value_usd
-days_since_last_order
-first_order_date
-last_order_date
-preferred_channel
-
-Customer Segmentation
-
-recency_score
-frequency_score
-monetary_score
+total_revenue
+avg_order_value
+is_churned
 rfm_segment
-value_tier
 
 ----------------------------------------------------------
 
 marts.dim_products
 
-Primary Key
+Primary Key: product_sk
 
-product_sk
-
-Columns
-
+Columns:
 product_id
 product_name
-category
-sub_category
-brand
-is_active
-
-Pricing
-
-cost_price_usd
-retail_price_usd
-margin_pct
-price_tier
-
-Performance
-
+category_name
+brand_name
+pack_size
+mrp
+selling_price
+cost_price
+is_perishable
+shelf_life_days
 total_orders
 total_units_sold
-total_revenue_usd
-gross_profit_usd
+total_revenue
+gross_profit
+margin_health
 sales_performance
 
 ----------------------------------------------------------
 
-marts.dim_channels
+marts.dim_dark_stores
 
-Primary Key
+Primary Key: store_sk
 
-channel_sk
+Columns:
+store_id
+city_name
+state_name
+locality
+latitude
+longitude
+sku_capacity
+delivery_radius_km
+launch_date
+days_since_launch
+total_orders_fulfilled
+avg_delivery_time
+on_time_delivery_pct
+total_revenue
 
-Columns
+----------------------------------------------------------
 
-channel_code
-channel_name
-channel_type
-channel_category
-is_digital
+marts.dim_delivery_partners
+
+Primary Key: rider_sk
+
+Columns:
+rider_id
+full_name
+first_name
+last_name
+home_store_id
+city_name
+vehicle_type
+join_date
+days_since_join
+total_deliveries
+avg_delivery_time
+on_time_delivery_pct
+total_revenue_delivered
 
 ----------------------------------------------------------
 
 marts.dim_date
 
-Primary Key
+Primary Key: date_key
 
-date_key
-
-Columns
-
+Columns:
 full_date
 year
-quarter_number
-quarter_name
-month_number
+month
 month_name
-month_short
-iso_week_number
-day_of_week
+day
 day_name
-day_short
-day_of_month
-day_of_year
 is_weekend
-fiscal_year
-fiscal_quarter
-year_month
-year_week
+
+==========================================================
+AGGREGATED METRICS TABLES (PREFER THESE WHEN POSSIBLE)
+==========================================================
+
+For daily trends, prefer:
+metrics.revenue_daily (Columns: order_date, total_orders, total_items, total_revenue, total_discount, total_delivery_fee, net_revenue, avg_order_value)
+
+For product ranking, prefer:
+metrics.product_performance (Pre-aggregated product metrics)
+
+For customer lifetime value, prefer:
+metrics.customer_ltv
+
+For marketing spend and conversion, prefer:
+metrics.marketing_performance
+metrics.conversion_rate
+metrics.funnel_stages
 
 ==========================================================
 RELATIONSHIPS
 ==========================================================
 
-fact_orders.customer_sk
-=
-dim_customers.customer_sk
-
-fact_orders.product_sk
-=
-dim_products.product_sk
-
-fact_orders.channel_sk
-=
-dim_channels.channel_sk
-
-fact_orders.order_date_key
-=
-dim_date.date_key
-
-==========================================================
-BUSINESS METRICS
-==========================================================
-
-Total Revenue
-
-SUM(revenue_usd)
-
-Net Revenue
-
-SUM(net_revenue_usd)
-
-Discount
-
-SUM(discount_usd)
-
-Shipping Revenue
-
-SUM(shipping_cost_usd)
-
-Orders
-
-COUNT(DISTINCT order_id)
-
-Customers
-
-COUNT(DISTINCT customer_sk)
-
-Average Order Value
-
-SUM(revenue_usd)
-/ COUNT(DISTINCT order_id)
-
-Completed Orders
-
-SUM(is_completed)
-
-Cancelled Orders
-
-SUM(is_cancelled)
-
-Average Margin
-
-AVG(margin_pct)
-
-Lifetime Value
-
-AVG(lifetime_value_usd)
-
-==========================================================
-COMMON ANALYTICAL QUESTIONS
-==========================================================
-
-Revenue Trend
-
-Revenue by Month
-
-Revenue by Category
-
-Revenue by Brand
-
-Revenue by Customer Segment
-
-Revenue by Acquisition Channel
-
-Top Products
-
-Top Customers
-
-RFM Analysis
-
-Sales Performance
-
-Customer Lifetime Value
-
-Average Order Value
-
-Order Status Distribution
-
-Weekend vs Weekday Sales
+fact_orders.customer_sk = dim_customers.customer_sk
+fact_orders.primary_product_sk = dim_products.product_sk
+fact_orders.store_sk = dim_dark_stores.store_sk
+fact_orders.rider_sk = dim_delivery_partners.rider_sk
+fact_orders.order_date_key = dim_date.date_key
 
 ==========================================================
 SQL GENERATION RULES
@@ -297,12 +201,10 @@ Generate ONLY BigQuery Standard SQL.
 Always use fully-qualified table names.
 
 Example:
+genai-copilot-enterprisedata.marts.fact_orders
+genai-copilot-enterprisedata.metrics.revenue_daily
 
-analytics.fact_orders
-
-Always prefer joins using surrogate keys.
-
-Use dimensions whenever descriptive attributes are needed.
+Always prefer joins using the surrogate keys (e.g. store_sk, customer_sk).
 
 Never invent columns.
 
@@ -312,23 +214,7 @@ Never use SELECT *.
 
 Only generate SELECT statements.
 
-Never generate:
-
-INSERT
-
-UPDATE
-
-DELETE
-
-DROP
-
-ALTER
-
-CREATE
-
-MERGE
-
-TRUNCATE
+Never generate: INSERT, UPDATE, DELETE, DROP, ALTER, CREATE, MERGE, TRUNCATE
 
 Return SQL only.
 
